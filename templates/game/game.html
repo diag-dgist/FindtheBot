@@ -1,0 +1,306 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>Find the Bot!</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/title.css">
+    <link rel="stylesheet" href="/static/css/top.css">
+    <link rel="stylesheet" href="/static/css/content.css">
+    <link rel="stylesheet" href="/static/css/bottom.css">
+    <link rel="stylesheet" href="/static/css/animation.css">
+
+
+</head>
+
+
+
+<body id="game_body">
+    <!--lobby page-->
+    <div class="page" id="lobby">
+        <div class="title" id="lobby_title">LOBBY</div>
+        <div class="top" id="lobby_top">TOP</div>
+        <div class="content" id="lobby_content">
+            <br>
+            <span>
+                <div class="profile" id="profile_1">
+                    <div class="profile_name" id="profile_name_1">&nbsp;</div>
+                    <div class="profile_info" id="profile_info_1">&nbsp;</div>
+                </div>
+            </span>
+            <span>
+                <div class="profile" id="profile_2">
+                    <div class="profile_name" id="profile_name_2">&nbsp;</div>
+                    <div class="profile_info" id="profile_info_2">&nbsp;</div>
+                </div>
+            </span>
+            <br><br>
+            <span>
+                <div class="profile" id="profile_3">
+                    <div class="profile_name" id="profile_name_3">&nbsp;</div>
+                    <div class="profile_info" id="profile_info_3">&nbsp;</div>
+                </div>
+            </span>
+            <span>
+                <div class="profile" id="profile_4">
+                    <div class="profile_name" id="profile_name_4">&nbsp;</div>
+                    <div class="profile_info" id="profile_info_4">&nbsp;</div>
+                </div>
+            </span>
+        </div>
+        <div class="bottom" id="lobby_bottom">
+            <button class="btn blink shadow" id="ready_btn" type="button">READY</button>
+        </div>
+    </div>
+    <!--End | lobby page-->
+
+    <!--round start page e.g. 1라운드: 행복-->
+    <div class="page" id="round_start">
+        <div class="title" id="round_start_title"></div>
+        <div class="top" id="round_start_top"></div>
+        <div class="content" id="round_start_content">
+            <div style='padding: 30px;'>
+                <img id='large_emotion' src='' style='width: 76px; height: 76px;' loading="lazy" onerror="img_error();"/>
+            </div>
+            <span class='round_emt'>
+                <hr class='hrs'>
+                <button type="button" id="round_emt" class="shadow"> <span id="rn">1</span>Round : <span class="emotion_name">감정</span></button><br>
+            </span>
+            <div style='padding-top: 20px;'>
+                <span id='emotion_instruction' style="font-size: 12px; color: rgb(136, 136, 136);">감정 설명하기</span><br><br>
+                <img src='/static/images/warning.png' style='padding-top: 20px; width: 29px; height: 24px;'>
+            </div>
+            <p style="color: #b48282; padding-top: 1px; ">
+                Click all the images containing ‘<span class="emotion_name" style="color: #03b50c;">감정</span>'<br>within the 10-second time limit!
+            </p>
+        </div>
+        <div class="bottom" id="round_start_bottom"></div>
+    </div>
+    <!--End | round start page-->
+
+    <!--labeling page e.g. '행복'이 포함된 사진을 모두 클릭하세요!-->
+    <div class="page" id="labeling">
+        <div class="title" id="labeling_title"></div>
+        <div class="top" id="labeling_top"></div>
+        <div class="content" id="labeling_content">
+            <div>
+                <div class='notice' style='top: 140px;'>
+                    <img id='alert' src='/static/images/alert.png'>
+                    <div class='notice_back shadow' style='width: 255px; height: 50px; border:2px solid #f1ce6c'>
+                        <p style="font-size: 13px;">Select all the images containing '<span id="emotion_name" style="color: #03b50c;">감정</span>'<br>
+                            </p>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <div id="labeling_img_container" style="padding: 20px;"></div>
+        </div>
+        <div class="bottom" id="labeling_bottom">
+            <button type="button" class="btn" id="labeling_done">DONE</button>
+        </div>
+    </div>
+    <!--End | labeling page-->
+
+    <!--waiting page e.g. 다른 플레이어들이 선택을 완료할 때까지 조금만 기다려주세요.-->
+    <div class="page" id="waiting">
+        <div class="title" id="waiting_title"></div>
+        <div class="top" id="waiting_top"></div>
+        <div class="content" id="waiting_content">
+            <br>
+            <span>
+                <div class="profile" id="wait_1">
+                    <div class="profile_name" id="waits_name_1"></div>
+                    <img id="tombstone_1" src="" class="profile_img">
+                </div>
+            </span>
+            <span>
+                <div class="profile" id="wait_2">
+                    <div class="profile_name" id="waits_name_2"></div>
+                    <img id="tombstone_2" src="" class="profile_img">
+                </div>
+            </span>
+            <br><br>
+            <span>
+                <div class="profile" id="wait_3">
+                    <div class="profile_name" id="waits_name_3"></div>
+                    <img id="tombstone_3" src="" class="profile_img">
+                </div>
+            </span>
+            <span>
+                <div class="profile" id="wait_4">
+                    <div class="profile_name" id="waits_name_4"></div>
+                    <img id="tombstone_4" src="" class="profile_img">
+                </div>
+            </span>
+        </div>
+        <div class="bottom dot-pulse" style="margin: auto;" id="waiting_bottom">
+            <div class="dot-pulse__dot" style="margin: auto; text-align: center;"></div>
+        </div>
+    </div>
+    <!--End | waiting page-->
+
+    <!--after selection -->
+    <div class="page" id="after_selection" style="background-color: black;">
+        <div class="title" id="after_selection_title"></div>
+        <div class="top" id="after_selection_top"></div>
+        <div class="content" id="after_selection_content">
+            <div style="padding-top: 90px;"><img src='/static/images/warning.png' style='width: 29px; height: 24px;'>
+            </div>
+            <div>
+                <div class="notice_back" style="margin:auto; width: 300px; height: 80px; font-size: small;">
+                    Examine responses of the players,<br>and find the bot hidden among the people!
+                </div>
+            </div>
+        </div>
+        <div class="bottom" id="round_start_bottom"></div>
+    </div>
+    <!--End | after selection-->
+
+    <!--glance e.g. 익명 1은 사람일까요?-->
+    <div class="page" id="glance">
+        <div class="title" id="glance_title" style="display: flex;"></div>
+        <div class="top" id="glance_top"></div>
+        <div class="content" id="glance_content"></div>
+        <div class="bottom" id="glance_bottom"></div>
+    </div>
+    <!--End | glance-->
+
+    <!--find bot page e.g. 익명의 누군가가 봇을 지목 중입니다.../투표해주세요/최후의 변론을 진행합니다/봇을 지목하세요-->
+    <div class="page" id="find_bot">
+        <div class="title" id="find_bot_title"></div>
+        <div class="top" id="find_bot_top"></div>
+        <div class="content" id="find_bot_content">
+            <div id="anonymous_btns" style="height: 32px;"></div>
+            <div id="find_bot_img_container" style="padding-top: 10px; height: 278px;"></div>
+            <div id="game_caption"></div>
+            <div id="elect_result_set"></div>
+            <div id="find_bot_timer" style="height: 44px;"></div>
+        </div>
+        <div class="bottom" id="find_bot_bottom">
+            <div id="mini_user_info" style="background-color: white; border: solid 1px #EBC489;">
+                <div style="align-self: center;">
+                    <div>{{ username }}</div>
+                    <div id="mini_user_level" style="font-size: 11px;">Lv. 1</div>
+                </div>
+                <div style="align-self: center;">
+                    <div id="mini_user_chip"><img src="/static/images/chip.png" style="height:20px;"></div>
+                    <div style="font-size: 10px;">{{ user_money }}KRW</div>
+                </div>
+            </div>
+            <div id="point_pass_yes_no_area"></div>
+        </div>
+    </div>
+    <!--End | find bot-->
+
+</body>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+    var xhr = new XMLHttpRequest(); //로그 기록을 위한 global object 정의
+    var urls = "https://fergame.diag.kr/game/log.php?";
+    var log_text = "";
+
+    var room_number = '{{ room_num }}'; //현 채널 번호
+    var username = '{{ username }}'; //유저 이름
+    var teamid = '{{ team_id }}'; //유저의 team id
+
+    console.log("this is teamid!!!! : ", teamid);
+
+    var user_money = '{{ user_money }}';
+    var user_level = '{{ user_level }}';
+
+    // var xhr = new XMLHttpRequest();
+    // xhr.open("GET", "https://fergame.diag.kr/game/log.php?username=" + username, true);
+    // xhr.send();
+</script>
+
+<script type="text/javascript" src="/static/js/channels.js?ver=1"></script>
+
+<script>
+    if ('{{ players }}' == 'full') {
+        alert("채널이 꽉찼습니다. 다른 채널을 선택해주세요.");
+        window.location.href = '/game/channels/' + '?username=' + username;
+    }
+    if ('{{ players }}' == 'ping') {
+        alert("접속이 원활하지 않습니다. 인터넷 환경을 점검해주세요.");
+        window.location.href = '/game/channels/' + '?username=' + username;
+    }
+
+    var players = JSON.parse("{{ players | escapejs }}"); //원래 채널에 있는 멤버들
+    var ready = JSON.parse("{{ ready | escapejs }}"); //채널에 있는 멤버들이 준비 상태인지 체크
+
+    var profiles = [];
+    var profiles_name = [];
+    var profiles_info = [];
+    var waits = [];
+    var waits_name = [];
+    var rankings = {};
+
+    for (var i = 1; i < 5; i++) {
+        var arg0 = 'profile_' + i + '';
+        var arg1 = 'profile_name_' + i + '';
+        var arg2 = 'profile_info_' + i + '';
+        var arg3 = 'wait_' + i + '';
+        var arg4 = 'waits_name_' + i + '';
+        profile = document.getElementById(arg0);
+        profile_name = document.getElementById(arg1);
+        profile_info = document.getElementById(arg2);
+        wait = document.getElementById(arg3);
+        wait_name = document.getElementById(arg4);
+        profiles.push(profile);
+        profiles_name.push(profile_name);
+        profiles_info.push(profile_info);
+        waits.push(wait);
+        waits_name.push(wait_name);
+    }
+
+    var recieved_rankings = [
+        {% for rank in ranking %}
+        {  
+            name: "{{ rank.mem_name }}",
+        },
+        {% endfor %}
+    ]
+    
+    function top_five(){
+        for(var i=0; i<5; i++){
+            rankings[recieved_rankings[i].name] = (i+1);
+        }
+    }
+    top_five();
+
+    /*뒤로가기 컨트롤*/
+    history.pushState(null, null, location.href);
+    window.onpopstate = function(){
+        history.go(-1);
+    }
+
+    function img_error(){
+    console.error("이미지 로딩 에러 났습니다!");
+    }
+
+</script>
+
+<!--round.js는 한 라운드에서 사용할 js 모아둔 곳-->
+<script>
+    document.getElementById("lobby").style.display = "block";
+    document.getElementById("round_start").style.display = "none";
+    document.getElementById("labeling").style.display = "none";
+    document.getElementById("waiting").style.display = "none";
+    document.getElementById("after_selection").style.display = "none";
+    document.getElementById("glance").style.display = "none";
+    document.getElementById("find_bot").style.display = "none";
+
+</script>
+
+<!--static/js/channels.js: websocket 통신을 위한 코드-->
+<!-- <script type="text/javascript" src="/static/js/channels.js?ver=1"></script> -->
+<script type="text/javascript" src="/static/js/layout.js?ver=1"></script>
+<script type="text/javascript" src="/static/js/round.js?ver=1"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+</html>

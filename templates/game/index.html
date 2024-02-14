@@ -1,0 +1,78 @@
+{% load static %}
+
+<html xmlns="http://www.w3.org/1999/html" translate="no">
+
+<head>
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>LOGIN</title>
+    <!--id 입력창 꾸미기 첫번째꺼는 닉네임 입력창, 두번째는 중심으로 옮기는 거-->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/animation.css">
+
+    <style>
+        @font-face {
+            font-family: 'Ycomputer-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/Ycomputer-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            font-family: 'Ycomputer-Regular';
+        }
+
+        #nickname {
+            border: solid 23px #3E3C3C;
+            border-radius: 10px;
+            height: 70px;
+            width: 80%;
+        }
+
+        #login {
+            background-color: #EBC604;
+            border: 0px;
+            font-weight: bold;
+            font-size: medium;
+            width: 70%;
+            border-radius: 8px;
+            height: 45px;
+        }
+
+        
+
+    </style>
+</head>
+
+<body>
+    {% for message in messages %}
+    <script>alert('{{ message }}')</script> <!--일치하는 닉네임 없을 때 오류 메세지-->
+    {% endfor %}
+
+    <div class="page">
+        <div class="title"></div>
+        <div class="top">
+            <img src="/static/images/mafia.png" class="icon" style="width: 100px;">
+        </div>
+        <div class="content typewriter">
+            <br>
+            <p style="font-size:37px; font-weight: 900; margin: 20px;">FIND THE BOT!</p>
+            <br><br><br>
+            <div id="go_login">
+                <input id="nickname" class='shadow' type="text" autofocus name="user_name" placeholder="Nickname">
+                <br><br><br>
+                <button id="login" class='shadow' onclick="send();">Login</button>
+            </div>
+        </div>
+        <div class="bottom"></div>
+    </div>
+</body>
+<script>
+    function send() {
+        let user_name = document.getElementById('nickname').value;
+        window.location.href = '/game/info/' + '?username=' + user_name;
+    }
+
+
+</script>
+
+</html>

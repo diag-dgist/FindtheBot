@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>Channels</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/animation.css">
+    <style>
+        button[type="button"] {
+            border: 0px;
+            font-weight: bold;
+            width: 200px;
+            height: 50px;
+            border-radius: 5px;
+        }
+
+        .wrapper {
+            display: grid;
+            place-items: center;
+        }
+
+        .channel_enter {
+            font-family: 'Ycomputer-Regular';
+            background-color: #EBC604;
+            box-shadow: 0px 3px 3px rgb(0,0,0,0.3);
+        }
+
+        #channels_1 {
+            background-color: #FC865A;
+        }
+
+        #channels_2 {
+            background-color: #FAC025;
+        }
+
+        #channels_3 {
+            background-color: #F9DF56;
+        }
+
+        #channels_4 {
+            background-color: #9BDDF9;
+        }
+
+        .gry {
+            filter: grayscale(100%);
+            opacity: 0.5;
+        }
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="page" id="channel_page">
+        <div class="title"></div>
+        <div class="top">
+            <h1 style="margin:auto;">Channels</h1>
+        </div>
+        <div class="content" id="channel_content">
+            <div class="wrapper" id="channel_wrapper">
+                <div class="select_channel" id="buttons"></div>
+            </div>
+            <div id="channel_load"></div>
+        </div>
+        <div class="bottom"></div>
+    </div>
+</body>
+
+<script>
+    const buttons = document.getElementById('buttons');
+    for (var i = 1; i < 5; i++) {
+        let insertButton = '<button type="button" class="channel_enter" id="channels_' + i + '" onclick="send(' + i + ')"><span class="channel_blink">Channel ' + i + '</span></button><br>';
+        buttons.insertAdjacentHTML("beforeend", insertButton);
+        buttons.insertAdjacentHTML("beforeend", '<span style="line-height:200%"><br></span>');
+    };
+
+    function send(room_num) {
+        let user_name = '{{ username }}';
+        document.getElementById('channel_load').innerHTML = "<div class='loading-spinner'></div>";
+        document.getElementById('channel_wrapper').classList.add("gry");
+        setTimeout(()=>{
+            window.location.href = '/game/main/' + room_num + "?username=" + user_name;
+            document.getElementById('channel_wrapper').classList.remove("gry");
+            document.getElementById('channel_load').innerHTML = "";
+        },2500);
+        // window.location.href = '/game/main/' + room_num + "?username=" + user_name;
+    }
+</script>
+
+</html>

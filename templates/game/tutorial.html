@@ -1,0 +1,299 @@
+{% load static %}
+<html translate="no">
+
+<head>
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>튜토리얼</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/top.css">
+    <link rel="stylesheet" href="/static/css/animation.css">
+    <style>
+    .top_block {
+    margin: 0 auto;
+    /* grid-template-columns: 5fr; */
+    top: 10%;
+    width: 78%;
+    }
+
+    .block_content {
+    width: 280px;
+    height: 40px;
+    background-color: #f1d134 ;
+    border-radius: 10px;
+    /* border: 2px solid #f1ce6c; */
+
+    /* color: #000; */
+    color: white;
+    font-size: 20pt;
+    justify-content: center;
+    padding-top: 12px;
+    align-items: center;
+    }
+
+    /* .msg_content{
+    width: 280px;
+    height: 50px;
+    background-color: #f1d134 ;
+    border-radius: 10px;
+    /* border: 2px solid #f1ce6c; 
+
+    color: white;
+    font-size: 20pt;
+    justify-content: center;
+    padding-top: 12px;
+    align-items: center;
+    } */
+
+    .msg_content {
+    width: 280px;
+    height: 40px;
+    font-size: 9pt;
+    background-color: #fcf8d6 ;
+    border-radius: 5px;
+    border: 2px solid #f1ce6c;
+
+    color: #000;
+    justify-content: center;
+    padding-top: 14px;
+    align-items: center;
+    }
+
+    .scripts {
+        background-color: rgb(252, 250, 232);
+        height: 330px;
+        width: 280px;
+        margin: 0 auto;
+        border-radius: 5px;
+        border: 2px solid #f1ce6c;
+
+
+        /* display: flex; */
+        align-items: center;
+        justify-content: center;
+        padding: 30px 20px;
+        font-size: 10pt;
+    }
+
+    #paging{
+        font-size: 9pt;
+    }
+    </style>
+
+</head>
+
+<body style="background-color: white;">
+    <div class="page" id="tutorial" style="background-color: white;">
+        <div class="title" id="tutorial_title"></div>
+        <div class="top" id="tutorial_top">
+            <div class="top_block" id="msg_tap">
+                <div class="block_content shadow blink">게임 방법</div>
+            </div>
+        </div>
+        <div class="content">
+            <div id="script_page" class="scripts">설명</div>
+        </div>
+        <div class="bottom" id="tutorial_bottom"></div>
+        <button onclick="go_before()"> < </button>
+        <span id="paging">Page <span id="now_page">1</span>/28</span>
+        <button onclick="go_after()"> > </button>
+    </div>
+</body>
+
+<script>
+    var now_pageNum = 1;
+    
+    function go_before(){
+        console.log("call go_before");
+        now_pageNum--;
+        if(now_pageNum<1){
+            now_pageNum = 1;
+        }
+        console.log(now_pageNum);
+        draw_page(now_pageNum);
+
+    }
+
+    function go_after(){
+        console.log("call go_after");
+        now_pageNum++;
+        if(now_pageNum>28){
+            now_pageNum = 28;
+        }
+        console.log(now_pageNum);
+        draw_page(now_pageNum);
+    }
+
+
+    function draw_page(pageNum){
+        var now_script = document.getElementById('script_page');
+        var now_page = document.getElementById('now_page');
+        var msg_tap = document.getElementById('msg_tap');
+        now_script.innerHTML = "";
+        now_page.innerHTML = pageNum;
+
+        switch (pageNum) {
+            case 1:
+                msg_tap.innerHTML = "<div class='block_content shadow blink'>GAMEPLAY</div>";
+                now_script.style.backgroundColor = 'rgb(252, 250, 232)';
+                now_script.innerHTML = "<br><br><br><br><span style='color: blue;'>Players</span><br><br><br>";
+                now_script.innerHTML += "<span style='font-size: 8pt;'>4 human players + an AI bot</span><br><br><br><br><br>\
+                <span style='color:green;'>Game goal</span><br><br><br><span style='font-size:8pt;'><b style='text-decoration:underline;'>The bot's </b>emotional recognition ability <b style='color:red; text-decoration:underline;'>has some rough edges. </b>\
+                    <br><br>Examine the responses of the players and find the bot hiding among the people <b style='text-decoration:underline;'>within 4 rounds!</b></span>";
+                
+                break;
+            case 2:
+                msg_tap.innerHTML = "<div class='block_content shadow blink'>GAMEPLAY</div>";
+                now_script.style.backgroundColor = 'rgb(252, 250, 232)';
+                now_script.innerHTML = "<span style='color: blue;'>Rules</span><br><br><br>";
+                now_script.innerHTML += "<span style='font-size:8pt;'>This game is based on the rules of the Mafia game,<br>\
+                    and the process is as follows:<br><br><br><br><span style='font-size:8pt; color: green;'>1) Labeling</span><br><br>Sellect all the images that display the given emotion keyword. \
+                    <br><br><span style='font-size:8pt; color: red;'>2) Pointing out</span><br><br>Scan through the choices of each player and point out the player suspected to be a bot along with their selection. \
+                    <br><br><span style='font-size:8pt; color: green;'>3) Voting</span><br><br>You can deactivate the player suspected to be a bot with majority approval.<br><br>\
+                    <span style='font-size:8pt; color: orange;'>4) Last defense</span><br><br>If you are suspected to be a bot, you can avoid deactivation by identifying the choices that other players are suspicious of.</span>";
+                break;
+            case 3:
+                msg_tap.innerHTML = "<div class='msg_content shadow'>One emotion keyword is<br>randomly presented in each round.</div>";
+                now_script.style.backgroundColor = 'white';
+                now_script.innerHTML = "<img src='/static/images/s1.jpg' style='width:230px;'>";
+                break;
+            case 4:
+            msg_tap.innerHTML = "<div class='msg_content shadow'>Please select all the images that <br><b style='color:red;'>include the given emotion </b>within the time limit!</div>";
+            now_script.innerHTML = "<img src='/static/images/s2.jpg' style='width:230px;'>";
+            break;
+            case 5:
+            msg_tap.innerHTML = "<div class='msg_content shadow'>After reviewing the responses of other players, try to guess who might be <b style='color:red;'>the bot.</b></div>";
+            now_script.innerHTML = "<img src='/static/images/s3.jpg' style='width:230px;'>";
+            break;
+            case 6:
+            msg_tap.innerHTML = "<div class='msg_content shadow'>After reviewing the responses of other players, try to guess who might be <b style='color:red;'>the bot.</b></div>";
+            now_script.innerHTML = "<img src='/static/images/s4.jpg' style='width:230px;'>";
+            break;
+            case 7:
+            msg_tap.innerHTML = "<div class='msg_content shadow'>After reviewing the responses of other players, try to guess who might be <b style='color:red;'>the bot.</b></div>";
+            now_script.innerHTML = "<img src='/static/images/s5.jpg' style='width:230px;'>";
+            break;
+            case 8:
+            msg_tap.innerHTML = "<div class='msg_content shadow'>After reviewing the responses of other players, try to guess who might be <b style='color:red;'>the bot.</b></div>";
+            now_script.innerHTML = "<img src='/static/images/s6.jpg' style='width:230px;'>";
+            break;
+            case 9:
+            msg_tap.innerHTML = "<div class='msg_content shadow'>After reviewing the responses of other players, try to guess who might be <b style='color:red;'>the bot.</b></div>";
+            now_script.innerHTML = "<img src='/static/images/s7.jpg' style='width:230px;'>";
+            break;
+            case 10:
+            msg_tap.innerHTML = "<div class='msg_content shadow'><b style='color:blue;'>[지목]단계</b>에서는 봇으로 의심되는 플레이어의<br><b style='color:red;'>증거사진</b>을 골라야 합니다.</div>";
+            now_script.innerHTML = "<img src='/static/images/s8.jpg' style='width:230px;'>";
+            break;
+            case 11:
+            msg_tap.innerHTML = "<div class='msg_content shadow'>만약 봇으로 의심되는 플레이어가 없다면<br><b style='color:blue;'>기권</b>할 수 있습니다.</div>";
+            now_script.innerHTML = "<img src='/static/images/s8.jpg' style='width:230px;'>";
+            break;
+            case 12:
+            msg_tap.innerHTML = "<div class='msg_content shadow'>다른 플레이어가 <b style='color:blue;'>지목 중</b>일때는<br>응답을 둘러보며 기다릴 수 있습니다.</div>";
+            now_script.innerHTML = "<img src='/static/images/s9.jpg' style='width:230px;'>";
+            break;
+            case 13:
+            msg_tap.innerHTML = "<div class='msg_content shadow'>만약 누군가 의심되는 증거를 지목했다면,<br>다른 플레이어들은 <b style='color:blue; text-decoration:underline;'>봇일지 사람일지</b> 투표합니다.</div>";
+            now_script.innerHTML = "<img src='/static/images/s10.png' style='width:230px;'>";
+            break;
+            case 14:
+            msg_tap.innerHTML = "<div class='msg_content shadow'><b style='color:red;'>과반수</b>가 이 증거를 봇의 응답으로 의심한다면,<br>지목된 플레이어는 <b style='color:blue;'>[최후의변론]</b>을 해야합니다.</div>";
+            now_script.innerHTML = "<img src='/static/images/s11.jpg' style='width:230px;'>";
+            break;
+            case 15:
+            msg_tap.innerHTML = "<div class='msg_content shadow'>지목당한 플레이어는 <b style='color:blue;'>[최후의변론]</b>에서<br>어떤 응답이 <b style='color:red; text-decoration:underline;'>의심</b>받고 있는지 찾아야 합니다.</div>";
+            now_script.innerHTML = "<img src='/static/images/s12.jpg' style='width:230px;'>";
+            break;
+            case 16:
+            msg_tap.innerHTML = "<div class='msg_content shadow'>만약 의심받고 있는 응답을 찾았다면<br>무사히 <b style='color:green;'>생존</b>하게 되지만,</div>";
+            now_script.innerHTML = "<img src='/static/images/s13.jpg' style='width:230px;'>";
+            break;
+            case 17:
+            msg_tap.innerHTML = "<div class='msg_content shadow'>의심받고 있는 응답을 찾지 못했다면<br>게임에서 <b style='color:red;'>중도탈락</b>하게 됩니다.</div>";
+            now_script.innerHTML = "<img src='/static/images/s14.jpg' style='width:230px;'>";
+            break;
+            case 18:
+            msg_tap.innerHTML = "<div class='msg_content shadow'>탈락자는 <b style='color:red;'>패널티</b>로 게임종료까지 <b style='text-decoration:underline;'>관전</b>해야하며<br>획득 보상 또한 <b style='color:blue;'>감소</b>합니다.</div>";
+            now_script.innerHTML = "<img src='/static/images/s15.jpg' style='width:230px;'>";
+            break;
+            case 19:
+            msg_tap.innerHTML = "<div class='msg_content shadow'>이 과정은 모두가 <b style='color:blue;'>[지목]</b>을 <b style='text-decoration:underline;'>기권</b>할 때까지<br>반복하게 됩니다.</div>";
+            now_script.innerHTML = "<img src='/static/images/s16.jpg' style='width:230px;'>";
+            break;
+            case 20:
+            msg_tap.innerHTML = "<div class='msg_content shadow'>만약 모든 플레이어가 기권한다면,<br><b style='color:green;'>다음 라운드</b>로 넘어갑니다.</div>";
+            now_script.innerHTML = "<img src='/static/images/s17.jpg' style='width:230px;'>";
+            break;
+            case 21:
+            msg_tap.innerHTML = "<div class='block_content shadow blink'>게임 종료</div>";
+            now_script.innerHTML = "<br><br><br><br><span style='color: blue;'>[승리 조건]</span><br><br><br>";
+            now_script.innerHTML += "<span style='font-size: 8pt;'><b style='color:green;'>4라운드</b> 안에 봇을 찾아라!<br>(일찍 잡을수록 보상🔺)</span><br><br><br><br><br><br>\
+                <span style='color:red;'>[패배 조건]</span><br><br><br><span style='font-size:8pt;'>(1)4라운드 안에 봇을 찾지 못하거나,<br>\
+                    <br><br>(2)사람이 <b style='color:red;'>2명</b> 죽으면 패배!<br>(보상❌ 경험치⭕️)</span>";
+            break;
+            case 22:
+            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>감정 : 경멸</div>";
+            now_script.innerHTML = "<br><br><img src='/static/images/contempt.png' style='width:100px; padding:5px 80px;'><br><br>";
+            now_script.innerHTML += "<br><br>\
+                <span style='color:blue;'>정의</span><br><br><span style='font-size:8pt;'>대상을 깔봄으로써 우월감을 느끼는 감정</span>\
+                <br><br><br><br><span style='color:green;'>상황</span><br><br><span style='font-size:8pt;'>🟢 회의에서 웃으며 조롱하는 상황<br><br>\
+                    🟢 학교에서 다른 학생을 비하하는 상황</span>";
+            break;
+            case 23:
+            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>감정 : 혐오</div>";
+            now_script.innerHTML = "<br><br><img src='/static/images/disgust.png' style='width:100px; padding:5px 80px;'><br><br>";
+            now_script.innerHTML += "<br><br>\
+                <span style='color:blue;'>정의</span><br><br><span style='font-size:8pt;'>불쾌한 냄새,소리,사건 등을 피하고 싶은 감정</span>\
+                <br><br><br><br><span style='color:green;'>상황</span><br><br><span style='font-size:8pt;'>🟢 외과수술 장면을 목격한 상황<br><br>\
+                    🟢 토사물이나 체액을 목격한 상황</span>";
+            break;
+            case 24:
+            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>감정 : 분노</div>";
+            now_script.innerHTML = "<br><br><img src='/static/images/angry.png' style='width:100px; padding:5px 80px;'><br><br>";
+            now_script.innerHTML += "<br><br>\
+                <span style='color:blue;'>정의</span><br><br><span style='font-size:8pt;'>짜증, 격노 등을 아우르는 감정</span>\
+                <br><br><br><br><span style='color:green;'>상황</span><br><br><span style='font-size:8pt;'>🟢 지속적으로 부당한 대우를 받는 상황<br><br>\
+                    🟢 신뢰하던 사람에게 배신 당하는 상황</span>";
+            break;
+            case 25:
+            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>감정 : 공포</div>";
+            now_script.innerHTML = "<br><br><img src='/static/images/fear.png' style='width:100px; padding:5px 80px;'><br><br>";
+            now_script.innerHTML += "<br><br>\
+                <span style='color:blue;'>정의</span><br><br><span style='font-size:8pt;'>신체적, 심리적 위협의 상황에서 느끼는 감정</span>\
+                <br><br><br><br><span style='color:green;'>상황</span><br><br><span style='font-size:8pt;'>🟢 자연재해와 같은 생명의 위협을 느끼는 상황<br><br>\
+                    🟢 사회적,장소적으로 고립되어 있는 상황</span>";
+            break;
+            case 26:
+            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>감정 : 놀람</div>";
+            now_script.innerHTML = "<br><br><img src='/static/images/surprise.png' style='width:100px; padding:5px 80px;'><br><br>";
+            now_script.innerHTML += "<br><br>\
+                <span style='color:blue;'>정의</span><br><br><span style='font-size:8pt;'>기대치 않던 상태에서 돌발적인 일을 겪었을 때 느끼는 감정</span>\
+                <br><br><br><br><span style='color:green;'>상황</span><br><br><span style='font-size:8pt;'>🟢 예상치 못할 정도로 뛰어한 퍼포먼스를 본 상황<br><br>\
+                    🟢 예기치 않은 사고를 당한 상황</span>";
+            break;
+            case 27:
+            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>감정 : 행복</div>";
+            now_script.innerHTML = "<br><br><img src='/static/images/happy.png' style='width:100px; padding:5px 80px;'><br><br>";
+            now_script.innerHTML += "<br><br>\
+                <span style='color:blue;'>정의</span><br><br><span style='font-size:8pt;'>오감에 의한 쾌감,재미,만족,흥분 등 기분이 좋은 상태</span>\
+                <br><br><br><br><span style='color:green;'>상황</span><br><br><span style='font-size:8pt;'>🟢 친구들과 재미있게 노는 상황<br><br>\
+                    🟢 목표를 성취한 상황</span>";
+            break;
+            case 28:
+            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>감정 : 슬픔</div>";
+            now_script.innerHTML = "<br><br><img src='/static/images/sad.png' style='width:100px; padding:5px 80px;'><br><br>";
+            now_script.innerHTML += "<br><br>\
+                <span style='color:blue;'>정의</span><br><br><span style='font-size:8pt;'>상실에서 유발되는 체념과 무력감의 상태</span>\
+                <br><br><br><br><span style='color:green;'>상황</span><br><br><span style='font-size:8pt;'>🟢 연인에게 거부 당한 상황<br><br>\
+                    🟢 목표를 달성하지 못한 상황</span>";
+            break;
+        }
+    }
+
+    draw_page(now_pageNum);
+
+
+</script>
+
+</html>

@@ -1,0 +1,78 @@
+/*
+##########################################
+
+@ TOP component에 해당하는 css
+
+*알림판
+*타이머
+
+##########################################
+*/
+
+/* 알림판 */
+#alert {
+    width: 35px; /*원래 31px. 늘렸음.*/
+    align-self: center;
+    justify-self: end;
+}
+
+.notice {
+    position: absolute;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    gap: 10px;
+    
+    top: 10%;
+}
+
+.notice_back {
+    display: flex;
+    width: 260px;
+    height: 55px;
+    background-color: #feffd4 ;
+    border-radius: 5px;
+    border: 2px solid #f1ce6c;
+
+    color: #000;
+    justify-content: center;
+    align-items: center;
+}
+
+.turn_for_glance {
+    border: 2.1px solid black;
+    background-color: white;
+}
+
+.turn_for_original {
+    background-color: #feffd4 ;
+    border: 2px solid #f1ce6c;
+}
+
+/**/
+
+/*타이머*/
+#timers {
+    margin: auto;
+    margin-top: 10px;
+}
+#Bar {
+    margin: auto;
+    width: 262px;
+    background-color: white;
+    display: inline-block;
+    border-radius: 20px;
+    border: solid 2px;
+}
+#timeBar {
+    margin-left: 0px;
+    width: 262px;
+    height: 20px;
+    /* background: linear-gradient( to right, #0770f0, #ffffffdc); */
+    background-color: #14E91D;
+    border-radius: 20px;
+}
+/**/
+
+
+
+

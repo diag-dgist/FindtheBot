@@ -1,0 +1,67 @@
+/*
+##########################################
+@ MAIN FRAME에 해당하는 css
+##########################################
+*/
+
+
+/* 글씨체 */
+@font-face {
+    font-family: 'Ycomputer-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/Ycomputer-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'DungGeunMo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  body {
+    font-family: 'DungGeunMo';
+  }
+/**/
+
+/* 기본 틀 */
+.page {
+    width: 360px;
+    height: 568px;
+    margin: auto;
+    background-color: white;
+    text-align: center;
+}
+
+.title {
+    height: 60px;
+    display: flex;
+}
+
+.top {
+    height: 79px;
+    position: relative;
+}
+
+.content {
+    height: 354px;
+}
+
+.bottom {
+    height: 75px;
+}
+
+#line {
+    width: 360px;
+    height: 50px;
+    vertical-align: middle;
+
+}
+
+.shadow {
+    /*width: 500px;
+    height: 280px;*/
+    box-shadow: 5px 5px 10px grey;
+  }
+/**/

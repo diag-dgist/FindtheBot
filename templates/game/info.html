@@ -1,0 +1,339 @@
+{% load static %}
+
+<html translate="no">
+
+<head>
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>LOGIN</title>
+    <!--id 입력창 꾸미기 첫번째꺼는 닉네임 입력창, 두번째는 중심으로 옮기는 거-->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/animation.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+
+    <style>
+        @font-face {
+            font-family: 'DungGeunMo';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'DungGeunMo';
+        }
+
+        .wrapper {
+            display: grid;
+            place-items: center;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 150px;
+        }
+
+
+        .profile {
+            display: grid;
+            width: 90%;
+            font-size: large;
+            grid-template-columns: 3fr 1fr 0.7fr 1.5fr;
+            grid-template-rows: 30px 15px 30px;
+            background-color: #FFFACD;
+            border-radius: 10%;
+            padding: 13px;
+
+
+            grid-column-start: 1;
+            grid-column-end: 3;
+
+
+        }
+
+        .ranking {
+            width: 90%;
+            font-size: medium;
+            background-color: whitesmoke;
+            border-color: #2E64FE;
+            border-style: solid;
+            border-radius: 10%;
+            padding: 13px;
+
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+
+        .leaderboard {
+            border-spacing: 15px;
+            border-collapse: separate;
+        }
+
+        table td {
+            width: 70px;
+            font-size: small;
+        }
+
+        .pro_username {
+            justify-self: start;
+            text-decoration: underline;
+        }
+
+
+        .pro_money {
+            justify-self: end;
+        }
+
+        .pro_exp {
+            grid-column-start: 1;
+            grid-column-end: 5;
+            font-size: small;
+            justify-self: start;
+        }
+
+        .pro_bar {
+            grid-column-start: 1;
+            grid-column-end: 5;
+            width: 100%;
+            justify-self: start;
+        }
+
+        #tutorial {
+            background-color: #C6C6C6;
+            color: #464648;
+            border: 0px;
+            font-family: DungGeunMo;
+            font-size: medium;
+            font-weight: bold;
+            width: 130px;
+            border-radius: 10px;
+            height: 50px;
+            padding: 10px;
+            grid-column-start: 1;
+            grid-column-end: 2;
+        }
+
+        #channel {
+            background-color: #EBC604;
+            color: #464648;
+            border: 0px;
+            font-family: DungGeunMo;
+            font-size: medium;
+            font-weight: bold;
+            width: 130px;
+            border-radius: 10px;
+            height: 50px;
+            padding: 5px;
+            grid-column-start: 2;
+            grid-column-end: 3;
+        }
+
+        .item {
+            opacity: 0;
+            transition: 0.3s ease-in;
+        }
+
+        .item.active {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+
+<body>
+    <span style="line-height:160%"><br></span>
+    <div class="page">
+        <div class="content">
+            <div class="wrapper">
+
+                <div class="profile shadow">
+                    <div class="pro_username"><span id="only_username">{{ username }}</span><b id="only_level" style="color: blue; font-size: medium;"> &nbsp;Lv.{{ user_level }}</b></div>
+                    <div></div>
+                    <img class="pro_money" id="coin" src="/static/images/coin.png" style="width: 23px;">
+                    <div class="pro_money">{{ user_point }}KRW</div>
+                    <div class="pro_exp">EXP {{ user_exp }} / 2000 (exp)</div>
+                    <div class="progress pro_bar" style="height: 17px;">
+                        <div id="exp_bar" class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                            aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" id="tutorial" class="shadow" onclick="go_tutorial();"><span
+                        id="text_tutorial">Tutorial</span></button>
+
+                <button type="button" id="channel" class="shadow" onclick="channel_access();"><span
+                        id="text_channel">Channel Access</span></button>
+
+                <span style="line-height:170%"><br></span>
+
+                <div class="ranking shadow">
+                    <table class="leaderboard">
+                        <div id="rank_text" style="font-size: large; font-weight: bold; color: #2E64FE;">Leaderboard</div>
+                        <tr class="item">
+                            <td style="font-size: medium; font-weight: bold;">Rank</td>
+                            <td style="font-size: medium; font-weight: bold;">Nickname</td>
+                            <td style="font-size: medium; font-weight: bold;">Points</td>
+                            <td style="font-size: medium; font-weight: bold;">Level</td>
+                        </tr>
+
+                        <tr class="item">
+                            <td style="color: red;">1st</td>
+                            <td id="name_1"></td>
+                            <td id="point_1"></td>
+                            <td id="level_1"></td>
+                        </tr>
+                        <tr class="item">
+                            <td style="color: orange;">2nd</td>
+                            <td id="name_2"></td>
+                            <td id="point_2"></td>
+                            <td id="level_2"></td>
+                        </tr>
+                        <tr class="item">
+                            <td style="color: green;">3rd</td>
+                            <td id="name_3"></td>
+                            <td id="point_3"></td>
+                            <td id="level_3"></td>
+                        </tr>
+                        <tr class="item">
+                            <td>4th</td>
+                            <td id="name_4"></td>
+                            <td id="point_4"></td>
+                            <td id="level_4"></td>
+                        </tr>
+                        <tr class="item">
+                            <td>5th</td>
+                            <td id="name_5"></td>
+                            <td id="point_5"></td>
+                            <td id="level_5"></td>
+                        </tr>
+                    </table>
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="bottom"></div>
+    </div>
+
+
+
+</body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+<script>
+    var user_exp = '{{ user_exp }}';
+    var username = '{{ username }}';
+
+    if(username.length > 3){
+        document.getElementById('only_username').style.fontSize = '12pt';
+    }
+    if(username.length > 6){
+        document.getElementById('only_username').style.fontSize = '9pt';
+        document.getElementById('only_level').style.fontSize = '10pt';
+    }
+
+    
+
+    function channel_access() {
+        let user_name = '{{ username }}';
+        window.location.href = '/game/channels/' + '?username=' + user_name;
+
+        /*loging 페이지
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://fergame.diag.kr/game/log.php?username=" + user_name + "&x=" + event.clientX + "&y=" + event.clientY, true);
+        xhr.send();*/
+
+        /*let progress_bar1 = document.styleSheets[1].cssRules[26];
+        let progress_bar2 = document.styleSheets[1].cssRules[27];
+        progress_bar1.cssText = '@-webkit-keyframes progress-bar { from { width: 0%; } to { width: 50%; }}';
+        progress_bar2.cssText = '@keyframes progress-bar { from { width: 0%; } to { width: 50%; }}';*/
+
+    }
+
+    function go_tutorial() {
+        window.location.href = '/game/tutorial/';
+
+    }
+
+
+    function cal_raking() {
+        let rankings = [
+        {% for rank in ranking %}
+        {  
+            name: "{{ rank.mem_name }}",
+            point: "{{ rank.mem_point }}",
+            level: "{{ rank.mem_level }}"
+        },
+        {% endfor %}
+        ]
+
+        for (var i = 0; i < 5; i++) {
+            var name_seg = 'name_' + String(i + 1);
+            var point_seg = 'point_' + String(i + 1);
+            var level_seg = 'level_' + String(i + 1);
+
+            document.getElementById(name_seg).innerHTML = rankings[i].name;
+            document.getElementById(point_seg).innerHTML = rankings[i].point;
+            document.getElementById(point_seg).innerHTML += ' KRW';
+            document.getElementById(level_seg).innerHTML = rankings[i].level;
+
+        }
+    }
+    cal_raking();
+
+    var exp_percent = 0;
+
+    function cal_exp() {
+        var my_exp = '{{ user_exp }}';
+        exp_percent = Math.ceil(my_exp / 2000 * 100);
+    }
+    cal_exp();
+
+
+    var delay = 500;
+    var user_exp = 80;
+    document.getElementById('exp_bar').innerHTML = exp_percent + '%';
+    $(".progress-bar").each(function (i) {
+        $(this).delay(delay * i).animate({ width: exp_percent + '%' }, delay);
+
+        $(this).prop('Counter', 0).animate({
+            Counter: $(this).text()
+        }, {
+            duration: delay,
+            easing: 'swing',
+            step: function (now) {
+                $(this).text(Math.ceil(now) + '%');
+            }
+        });
+    });
+
+    var item = document.querySelectorAll('.item');
+    var cnt = 0;
+    var addActive;
+
+function activeFunc() {
+    if (cnt < 6) {
+        item[cnt].classList.add('active');
+        cnt++;
+        if (cnt >= item.length) {
+            clearInterval(addActive);
+        }
+    }
+}
+
+setTimeout(function () {
+    addActive = setInterval(activeFunc, 200);
+}, 800);
+
+
+    setTimeout(function () {
+        document.getElementById('text_channel').classList.add("blink");
+        document.getElementById('text_tutorial').classList.add("blink");
+    }, 1800);
+  /*var addActive = setInterval(activeFunc, 200);*/
+</script>
+
+</html>

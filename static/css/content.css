@@ -1,0 +1,291 @@
+/*
+##########################################
+@ CONTENT component에 해당하는 css
+*프로필
+*round_start page
+*labeling page
+*after_selection page
+##########################################
+*/
+
+/* lobby_page 관련 */
+.profile {
+    background-color: #dddddd;
+    width: 135px;
+    height: 115px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.profile_name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+}
+
+.profile_info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    font-size: 8pt;
+}
+
+.profile_img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:50px;
+    margin-left: 42px;
+}
+
+/**/
+
+/* round_start page 디자인 관련 */
+.round_emt {
+    position: relative;
+}
+#round_emt{
+    background-color: #EBC604;
+    border: 0px;
+    width: 230px;
+    height: 68px;
+    border-radius: 5px;
+    color: white;
+    position: absolute;
+    font-size: 20px;
+    text-align: center;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'DungGeunMo';
+}
+.hrs{
+    height: 1px;
+    width: 300px;
+    background-color: #EBC604;
+}
+
+#photo{
+    height: 76px;
+    width: 76px;
+}
+
+ /**/
+
+
+
+
+/* labeling page css*/
+.label_images {
+    background-color: #dddddd;
+    padding-top: 5px;
+    width: 115px;
+    height: 115px;
+    border: none;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.labeled {
+    background-color: #a8eb81;
+}
+
+.img {
+    width: 100px;
+    height: 100px;
+}
+
+/**/
+
+/* glance page css */
+.glance_images {
+    background-color: #dddddd;
+    width: 115px;
+    height: 115px;
+    border: none;
+    border-radius: 12px;
+    display: inline-block;
+    padding-top: 5px;
+}
+/**/
+
+
+/* find_bot page */
+.anonymous {
+    font-family: 'DungGeunMo';
+    font-size: 12px;
+    width: 54px;
+    height: 26px;
+    background-color: #dddddd;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
+    border: none;
+    border-radius: 5px;
+    margin: 3px;
+}
+
+.anonymous:active {
+    background-color: #d3d3d3;
+    box-shadow: 0px 1.5px 3px rgba(0, 0, 0, 0.3);
+    transform: translateY(1px);
+}
+
+.point_images {
+    background-color: #dddddd;
+    width: 115px;
+    height: 115px;
+    border: none;
+    border-radius: 12px;
+    display: inline-block;
+    padding-top: 5px;
+}
+
+.clicked {
+    background-color: #EBC604;
+}
+
+.pointed {
+    -webkit-filter: grayscale(99%);
+    filter: grayscale(99%);
+}
+
+.last_pointed {
+    -webkit-filter: grayscale(99%);
+    filter: grayscale(99%);
+}
+
+.point_pass_yes_no {
+    font-family: 'DungGeunMo';
+    font-size: medium;
+    display: inline-block;
+    border: none;
+    transform: translateY(25%);
+    margin-left: 15px;
+    width: 60px;
+    height: 49px;
+    background-color: #dddddd;
+    border-radius: 5px;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
+}
+.point_pass_yes_no2 {
+    font-family: 'DungGeunMo';
+    font-size: medium;
+    display: inline-block;
+    border: none;
+    margin-left: 15px;
+    width: 60px;
+    height: 49px;
+    background-color: #dddddd;
+    border-radius: 5px;
+    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
+}
+
+.voted {
+    background-color: #EBC604; /*테마색 조정*/
+}
+
+.grayscale {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+.nonepoint {
+    pointer-events: none;
+}
+
+
+.elect_result {
+    display: inline-block;
+}
+
+.to_compare {
+    display: inline-block;
+}
+
+.last_mention_pick {
+    box-shadow: 0 0 0 3px #000 inset;
+}
+
+#survival_ment { /*@@이거뭐지*/
+    display: inline-block;
+    font-size: larger;
+    font-family: Arial, Helvetica, sans-serif; 
+    font-weight: 900;
+    width: 60px;
+}
+
+#game_caption{
+    font-size: 12px;
+    color: rgb(66, 66, 66);
+
+}
+
+/* 타이머 2 나중에 합칠 수 있으면 그냥 타이머랑 합치기*/
+#timers2 {
+    margin: auto;
+}
+#Bar2 {
+    margin: auto;
+    width: 180px;
+    background-color: white;
+    display: inline-block;
+    border-radius: 20px;
+    border: solid 2px;
+}
+#timeBar2 {
+    margin-left: 0px;
+    width: 180px;
+    height: 15px;
+    background: linear-gradient( to right, #0770f0, #6ba8f3);
+    border-radius: 20px;
+}
+/**/
+
+/*after_selection page : turn boddy color*/
+.turn_black{
+    background-color: black;
+}
+
+.turn_white{
+    background-color: white;
+}
+
+.turn_yellow{
+    background-color: #FEFFC7;
+}
+
+.turn_grey{
+    background-color: #f2eeee;
+}
+
+.turn_red{
+    background-color: rgb(249, 219, 219);
+}
+/**/
+
+/*game_caption 관련 class*/
+.turn_caption_yellow{
+    color: #EBC604;
+}
+
+.turn_caption_red{
+    color: rgb(248, 41, 41);
+}
+
+.turn_caption_green{
+    color: rgb(7, 102, 7);
+}
+
+/*유령 이미지 배치*/
+#rip_id{
+    width: 90px;
+    position: absolute;
+    transform: translateX(-30%);
+}
+
+#ghost_id{
+    width: 60px;
+    position: absolute;
+    transform: translateX(-30%);
+}
