@@ -104,23 +104,19 @@
     var now_pageNum = 1;
     
     function go_before(){
-        console.log("call go_before");
         now_pageNum--;
         if(now_pageNum<1){
             now_pageNum = 1;
         }
-        console.log(now_pageNum);
         draw_page(now_pageNum);
 
     }
 
     function go_after(){
-        console.log("call go_after");
         now_pageNum++;
         if(now_pageNum>28){
             now_pageNum = 28;
         }
-        console.log(now_pageNum);
         draw_page(now_pageNum);
     }
 

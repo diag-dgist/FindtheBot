@@ -273,6 +273,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
                     pre[i] = round(pre[i], 3)
                 bot_prediction.append(pre)
 
+            print("최종 bot_prediction: ", bot_prediction)
             new_data = {}
             new_data['command'] = command
             new_data['assigned_imagesets'] = assigned_imagesets

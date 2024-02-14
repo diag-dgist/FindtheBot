@@ -61,7 +61,7 @@ def room(request, room_num):
 
     game/channels.html에서 채널 선택 시 입장 및 웹소켓 연결을 위한 데이터 전달 및 렌더링.
     """
-    print("@@@@@@@@views.py room 함수 실행합니다!!!!!!!!!")
+
     username = request.GET.get('username')
     member_info = Member.objects.get(mem_name = username)
     user_money = member_info.mem_point
@@ -77,24 +77,7 @@ def room(request, room_num):
         channel_obj = Channel_3.objects
     elif room_num == '4':
         channel_obj = Channel_4.objects
-
-    # result = subprocess.run(['ping', '-c', '1', 'fergame.diag.kr'], stdout=subprocess.PIPE, encoding='cp949')
-    # output = result.stdout
-    # start = output.find('time=') + len('time=')
-    # end = output.find('ms', start)
-    # if start != -1 and end != -1:
-    #     ping_time = float(output[start:end])
-    #     print(f"The current ping is {ping_time} ms.")
-    # else:
-    #     ping_time = -1
-    #     print("Could not extract ping time from output:", output) #예외처리
-
-    # if ping_time > 1: # 제한 속도 만족 못하면 차단
-    #     players = 'ping'
-    #     context = { 'room_num': room_num, 'username': username, 'players': players}
-    #     return render(request, 'game/game.html', context)
     
-
 
     if channel_obj.all().count() >= 4 : #현재 채널 내 접속 중인 플레이어 수가 4명 이상이면,
         players = 'full'

@@ -92,9 +92,7 @@ function round_init() {
 
 /* init 함수 : 게임 시작 전 필요한 정보 초기화 - 4라운드에 해당하는 감정들 셔플*/
 function init(){
-    //let emotions = range(0,8);
-    let emotions = [0,4,5,6,7];
-    //let emotions = [7];
+    let emotions = range(0,8);
     shuffle(emotions);
     emotion_order = emotions.slice(0,4);
 }
