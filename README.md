@@ -42,7 +42,14 @@ Django == 3.2.16
 channels == 3.0.4
 cntk == 2.7
 ```
-Please ensure you adhere to the **specified versions** of `Python`, `Django` and other Python `libraries`, as they have interdependencies that are crucial for the setup. A detailed list of dependencies in our virtual environment for running the code is included in `requirements.txt`.
+
+```python
+# Caution: If you have completed the installation of CNTK 2.7, please upgrade it to the 'gpu version'!
+
+$pip install --upgrade --no-deps cntk-gpu
+```
+
+Ensure you adhere to the **specified versions** of `Python`, `Django` and other Python `libraries`, as they have interdependencies that are crucial for the setup. A detailed list of dependencies in our virtual environment for running the code is included in `requirements.txt`.
 
 <br>
 <h4>Step 1. Preparing facial expression images </h4>
