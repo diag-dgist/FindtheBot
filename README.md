@@ -76,11 +76,42 @@ Third, you need to place the actual images in the `\static\images\sampling` and 
 3. 24-bit depth
 ```
 
-<h4>Step 2. Creating entires model objects </h4>
+<br>
+<h4>Step 2. Creating <i>Entries</i> model objects </h4>
 
+We implemented a model `Entries` in Django to ensure that each image appears as evenly as possible, in accordance with our DB storage policy, despite the images being assigned randomly. Thus, you only need to create the `Entries` objects once at the beginning by running the `\game\create_objects.py` file.
+
+```
+python create_objects.py
+```
+
+By default, all images are displayed up to <ins>three times</ins>. If you wish to increase the display chances, please modify the code in `\game\models.py` and `\game\consumers.py`. 
+<br><br><br>
 
 <h4> Step 3. Running the codes </h4>
 
+* <b>Server-side:</b>
+Once all the initial setup is complete, you can run the game in a <ins>local environment</ins> by executing `\manage.py`.
+
+```
+python manage.py runserver
+```
+
+* <b>Client-side (Player):</b>
+Access the follwing URL through your local web brower.
+
+```
+http://localhost:8000/game/
+```
+
+* <b>Client-side (Admin):</b>
+Access the following URL if you need to manage user registration, game channel access status, etc. 
+
+```
+http://localhost:8000/admin/
+```
+
+<br><br>
 
 <h3>👨‍👩‍👧‍👦 External server ver. </h3>
 
