@@ -49,7 +49,32 @@ Please ensure you adhere to the **specified versions** of `Python`, `Django` and
 First, you need to prepare facial expression images for use in the game. In our paper, we utilized the <a href="http://mohammadmahoor.com/affectnet/">AffectNet</a> dataset; however, due to licensing issues, we are unable to upload the actual images to the repository. If you have a specific set of facial expression images you wish to use, that would be a suitable option.
 <br><br>
 
-Second, you need to modify the `\static\sampling_300.csv` file to match the images you have. 
+Second, you need to modify the `\static\sampling_300.csv` file to match the images you have. We have uploaded a sample csv file that we used. The format of the CSV file is as belows:
+| image file name | emotion label |
+|-----------------|---------------|
+|img_12           |0              |
+|img_40           |2              |
+|...              |...            |
+
+In each game round, 4 players and the bot are assigned four images from the list in the `\static\sampling_300.csv` file. `emotion label` in the csv file is provided as a hint for the players. Default emotions and their label codes are as follows:
+|emotion |label|
+|--------|-----|
+|Neutral |0    |
+|Happy   |1    |
+|Sad     |2    |
+|Surprise|3    |
+|Fear    |4    |
+|Disgust |5    |
+|Anger   |6    |
+|Contempt|7    |
+
+
+Third, you need to place the actual images in the `\static\images\sampling` and `\static\images\sampling_bot`. The original image files should be located in the `\static\images\sampling` folder, while preprocessed versions for the <a href="https://github.com/Microsoft/FERPlus">DCNN model</a> (the bot 🤖) belong in the `\static\images\sampling_bot` folder. To be input into the model, facial expression images must adhere to the following format:
+```
+1. 48 x 48 PNG files
+2. Grayscale image
+3. 24-bit depth
+```
 
 <h4>Step 2. Creating entires model objects </h4>
 
