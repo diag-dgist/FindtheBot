@@ -198,20 +198,12 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
-    var xhr = new XMLHttpRequest(); //로그 기록을 위한 global object 정의
-    var urls = "https://fergame.diag.kr/game/log.php?";
-    var log_text = "";
-
     var room_number = '{{ room_num }}'; //현 채널 번호
     var username = '{{ username }}'; //유저 이름
     var teamid = '{{ team_id }}'; //유저의 team id
 
     var user_money = '{{ user_money }}';
     var user_level = '{{ user_level }}';
-
-    // var xhr = new XMLHttpRequest();
-    // xhr.open("GET", "https://fergame.diag.kr/game/log.php?username=" + username, true);
-    // xhr.send();
 </script>
 
 <script type="text/javascript" src="/static/js/channels.js?ver=1"></script>

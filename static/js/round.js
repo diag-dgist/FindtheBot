@@ -187,10 +187,6 @@ function ready_btn_handler() {
             socket.send(JSON.stringify({
                 data
             }));
-
-            log_text = urls +"ClientID="+ username + "&Session=channel" + "&channel_name=" + room_number + "&state=ready"; 
-            xhr.open("GET", log_text, true);
-            xhr.send();
         }
         else { //(2) 준비취소 버튼 누른다면,
             layout2('click_ready');
@@ -208,10 +204,6 @@ function ready_btn_handler() {
             socket.send(JSON.stringify({
                 data
             }));
-
-            log_text = urls +"ClientID="+ username + "&Session=channel" + "&channel_name=" + room_number + "&state=unready"; 
-            xhr.open("GET", log_text, true);
-            xhr.send();
         }
     };
 }
@@ -243,10 +235,6 @@ function round() {
             else{
                 document.getElementById('rn').innerText = current_round;
             }
-
-            log_text = urls +"ClientID="+ username + "&Session=round_start" + "&current_round=" + current_round + "&current_emotion=" + current_emotion; 
-            xhr.open("GET", log_text, true);
-            xhr.send();
             
             setTimeout(() => {
                 go_next_page('round_start', 'labeling'); //5초 후 labeling 시작.
@@ -265,9 +253,6 @@ function round() {
             document.querySelectorAll('.waiting_box').forEach((each_box) => {
                 each_box.style.backgroundColor = '#dddddd';
             });
-            log_text = urls +"ClientID="+ username + "&Session=waiting" + "&state=start"; 
-            xhr.open("GET", log_text, true);
-            xhr.send();
 
             layout1('round_title', 'waiting');  
             layout2('wait_labeling');
@@ -285,9 +270,6 @@ function round() {
             console.log(all_labeling_set); //모두의 예측값 잘 들어왔는지 테스트. 
 
             setTimeout(() => {
-                log_text = urls +"ClientID="+ username + "&Session=after_selection" + "&all_imageid_set=" + JSON.stringify(all_imageid_set) + "&all_labeling_set=" + JSON.stringify(all_labeling_set); 
-                xhr.open("GET", log_text, true);
-                xhr.send();
                 go_next_page('after_selection', 'glance'); //3초 후 glance page로 전환.
                 round();
             }, 3500);
@@ -390,9 +372,6 @@ function labeling() {
         socket.send(JSON.stringify({
             data
         }));
-        log_text = urls +"ClientID="+ username + "&Session=labeling" + "&state=dropouts" + "&current_round=" + current_round + "&current_emotion=" + current_emotion; 
-        xhr.open("GET", log_text, true);
-        xhr.send();
         
     } else {        
         document.getElementById("labeling_img_container").innerHTML = '\
@@ -404,10 +383,6 @@ function labeling() {
     
         timer_start(10);
         //사진 클릭시 색 변환
-        log_text = urls +"ClientID="+ username + "&Session=labeling" + "&state=start" + "&current_round=" + current_round + "&current_emotion=" + current_emotion + "&assigned_images=" + all_imageid_set[username]; 
-        xhr.open("GET", log_text, true);
-        xhr.send();
-
         var done_flag = false; 
         image_btn = document.querySelectorAll('.label_images');
         image_btn.forEach((target) => target.addEventListener("click", () => {
@@ -415,23 +390,14 @@ function labeling() {
             now_img_id = now_img_tag.src.split('/').pop().split('.')[0];
             if (target.classList.contains("labeled")) {
                 target.classList.remove("labeled");
-                log_text = urls +"ClientID="+ username + "&Session=labeling" + "&state=unclick_img" + "&image_id=" + now_img_id;
-                xhr.open("GET", log_text, true);
-                xhr.send();
             } else {
                 target.classList.add("labeled");
-                log_text = urls +"ClientID="+ username + "&Session=labeling" + "&state=click_img" + "&image_id=" + now_img_id;
-                xhr.open("GET", log_text, true);
-                xhr.send();
             }
         }));
         
         // var update_label = setTimeout(update_labeling, 11000);
         var update_label = setTimeout(()=>{
             update_labeling();
-            log_text = urls +"ClientID="+ username + "&Session=labeling" + "&state=end" + "&how=time_out";
-            xhr.open("GET", log_text, true);
-            xhr.send();
         }, 11000);
 
         
@@ -440,13 +406,6 @@ function labeling() {
             clearTimeout(update_label);
             update_labeling();
             done_flag = true;
-            log_text = urls +"ClientID="+ username + "&Session=labeling" + "&state=click_done";
-            xhr.open("GET", log_text, true);
-            xhr.send();
-
-            log_text = urls +"ClientID="+ username + "&Session=labeling" + "&state=end" + "&how=click_done";
-            xhr.open("GET", log_text, true);
-            xhr.send();
         }
         
     
@@ -527,16 +486,10 @@ function glance_content(order) {
     console.log("(###glance###) real_order=" , real_order);
     console.log("(###glance###) name=" , name);
 
-    log_text = urls +"ClientID="+ username + "&Session=glance" + "&anonymous_number="+ real_order + "&user=" + name + "&assigned_images=" + all_imageid_set[name] + "&labeling=" + all_labeling_set[name];
-    xhr.open("GET", log_text, true);
-    xhr.send();
-
     if (name == username) {
         notice('I\'am anonymous ' + real_order, 'glance', '20px');
         document.getElementById('glance').classList.add('turn_yellow');
         document.getElementById('game_body').classList.add('turn_yellow');
-        
-
         bottom_area.innerHTML = "This is my labeling."; 
 
     } else {
@@ -581,9 +534,6 @@ function glance() {
             clearInterval(glance_interval);
             document.getElementById('glance').classList.remove('turn_yellow');
             document.getElementById('game_body').classList.remove('turn_yellow');
-            log_text = urls +"ClientID="+ username + "&Session=find_the_bot" + "&current_round=" + current_round + "&current_emotion=" + current_emotion + "&current_survivors=" + survivors + "&dropouts=" + dropouts;
-            xhr.open("GET", log_text, true);
-            xhr.send();
             go_next_page('glance', 'find_bot');
             round();
         } else {
@@ -721,10 +671,6 @@ function button_pointing_or_pass() {
         var target_name = anonymous_user[target_num];
         var target_choice = all_labeling_set[target_name];
 
-        log_text = urls +"ClientID="+ username + "&Session=pointing_myturn" + "&state=click" + "&button=namebtn" + "&whom=" + anonymous_user[idxNum];
-        xhr.open("GET", log_text, true);
-        xhr.send();
-
         show(target_name, target_choice, 'find_bot');
 
         //이미지 골라진 거에 clicked 클래스 추가 
@@ -746,10 +692,6 @@ function button_pointing_or_pass() {
 
             now_img_tag = target.querySelector('.img');
             now_img_id = now_img_tag.src.split('/').pop().split('.')[0];
-
-            log_text = urls +"ClientID="+ username + "&Session=pointing_myturn" + "&state=click" + "&button=imagebtn" + "&whom=" + anonymous_user[idxNum]+ "&image_id=" + now_img_id;
-            xhr.open("GET", log_text, true);
-            xhr.send();
         }));
 
 
@@ -775,10 +717,6 @@ function button_pointing_or_pass() {
             }
 
             if(point_flag == true){
-                log_text = urls +"ClientID="+ username + "&Session=pointing_myturn" + "&state=click" + "&button=pointbtn" + "&pointed_user=" + anonymous_user[idxNum] + "&pointed_image=" + all_imageid_set[anonymous_user[idxNum]][pointed_img_idx];
-                xhr.open("GET", log_text, true);
-                xhr.send();
-
                 document.getElementById('point_done').style.backgroundColor = "#EBC604";
                 clearTimeout(go_elect);
                 document.getElementById('point_done').disabled = true;
@@ -792,10 +730,6 @@ function button_pointing_or_pass() {
                 socket.send(JSON.stringify({
                     data
                 }));
-
-                log_text = urls +"ClientID="+ username + "&Session=pointing_myturn" + "&state=end" + "&how=click_done";
-                xhr.open("GET", log_text, true);
-                xhr.send();
             }
 
         } catch {
@@ -816,23 +750,11 @@ function button_pointing_or_pass() {
         socket.send(JSON.stringify({
             data
         }));
-
-        log_text = urls +"ClientID="+ username + "&Session=pointing_myturn" + "&state=click" + "&button=passbtn";
-        xhr.open("GET", log_text, true);
-        xhr.send();
-
-        log_text = urls +"ClientID="+ username + "&Session=pointing_myturn" + "&state=end" + "&how=click_pass";
-        xhr.open("GET", log_text, true);
-        xhr.send();
     });
 
     var go_elect = setTimeout(() => {
         document.getElementById('point_done').disabled = true;
         document.getElementById('pass').click();
-
-        log_text = urls +"ClientID="+ username + "&Session=pointing_myturn" + "&state=end" + "&how=time_out";
-        xhr.open("GET", log_text, true);
-        xhr.send();
     }, 16000);
 
     //15초 지나면 elect 창으로
@@ -874,17 +796,11 @@ function next_point_out_bot() {
             get_money /= 2; // 관전자는 절반 획득.
             flag_die = true;
         }
-        log_text = urls +"ClientID="+ username + "&Session=game_win" + "&user=" + username + "&get_exp=" + get_exp + "&get_money=" + get_money + "&current_survivors=" + survivors + "&dropouts=" + dropouts + "&current_round=" + now_round + "&current_emotion=" + current_emotion;
-        xhr.open("GET", log_text, true);
-        xhr.send();
 
         window.location.href = '/game/ending/' + '?username=' + username + "&result=" + res + "&money=" + get_money + "&exp=" + get_exp +"&flag=" + flag_die + "&rsn=" + lose_reason + "&rnd=" + now_round;
     }
     else if (res == 'lose') {
         gamestart = false;
-        log_text = urls +"ClientID="+ username + "&Session=game_lose" + "&user=" + username + "&lose_reason=" + lose_reason + "&get_exp=" + get_exp + "&get_money=" + get_money + "&current_survivors=" + survivors + "&dropouts=" + dropouts + "&current_round=" + now_round + "&current_emotion=" + current_emotion;
-        xhr.open("GET", log_text, true);
-        xhr.send();
 
         window.location.href = '/game/ending/' + '?username=' + username + "&result=" + res + "&money=" + get_money + "&exp=" + get_exp +"&flag=" + flag_die + "&rsn=" + lose_reason + "&rnd=" + now_round;
     }
@@ -912,27 +828,6 @@ function elect(current_selector, current_chosen) {
     set_anonymous_btn();
     if (current_chosen != username) {
         document.getElementById('anonymous_' + pointed_info['target_num']).style.backgroundColor = 'rgb(235, 198, 4)';
-        if(dropouts.includes(username)){
-            log_text = urls +"ClientID="+ username + "&Session=electing" + "&state=start" + "&position=dropout" + "&pointed_user=" + current_chosen + "&pointed_image=" + all_imageid_set[current_chosen][pointed_info['pointed_img_idx']] + "&pointed_label=" + all_labeling_set[current_chosen][pointed_info['pointed_img_idx']] + "&current_emotion=" + current_emotion;
-            xhr.open("GET", log_text, true);
-            xhr.send();
-        }
-        else if(current_selector == username){
-            log_text = urls +"ClientID="+ username + "&Session=electing" + "&state=start" + "&position=pointer" + "&pointed_user=" + current_chosen + "&pointed_image=" + all_imageid_set[current_chosen][pointed_info['pointed_img_idx']] + "&pointed_label=" + all_labeling_set[current_chosen][pointed_info['pointed_img_idx']] + "&current_emotion=" + current_emotion;
-            xhr.open("GET", log_text, true);
-            xhr.send();
-        }
-        else{
-            log_text = urls +"ClientID="+ username + "&Session=electing" + "&state=start" + "&position=elector"+ "&pointed_user=" + current_chosen + "&pointed_image=" + all_imageid_set[current_chosen][pointed_info['pointed_img_idx']] + "&pointed_label=" + all_labeling_set[current_chosen][pointed_info['pointed_img_idx']] + "&current_emotion=" + current_emotion;
-            xhr.open("GET", log_text, true);
-            xhr.send();
-        }
-
-    }
-    else{
-        log_text = urls +"ClientID="+ username + "&Session=electing" + "&state=start" + "&position=pointed" + "&pointed_user=" + current_chosen + "&pointed_image=" + all_imageid_set[current_chosen][pointed_info['pointed_img_idx']] + "&pointed_label=" + all_labeling_set[current_chosen][pointed_info['pointed_img_idx']] + "&current_emotion=" + current_emotion;
-        xhr.open("GET", log_text, true);
-        xhr.send();
     }
     // // 여기까지 왔으면 pass_count 하나 늘리기
     // pass_count++; //@@@ 투표는 패스로 치지 않음.
@@ -1022,9 +917,6 @@ function elect(current_selector, current_chosen) {
                 else{
                     btn_name = "botbtn";
                 }
-                log_text = urls +"ClientID="+ username + "&Session=electing" + "&state=click" + "&button=" + btn_name;
-                xhr.open("GET", log_text, true);
-                xhr.send();
             }));
 
             setTimeout(() => {
@@ -1075,10 +967,6 @@ function show_elect_result(current_chosen) {
         elect_death_flag = false;
         elect_word = 'maybe man';
     }
-
-    log_text = urls +"ClientID="+ username + "&Session=elect_result" + "&man=" + elect_result['thumb_up']+  "&bot=" + elect_result['thumb_down'] + "&result=" + elect_word + "&pointed_user=" + current_chosen + "&pointed_image=" + all_imageid_set[current_chosen][pointed_info['pointed_img_idx']] +"&pointed_label=" + all_labeling_set[current_chosen][pointed_info['pointed_img_idx']] + "&current_emotion=" + current_emotion;
-    xhr.open("GET", log_text, true);
-    xhr.send();
 
     if (elect_death_flag == true) { //투표 결과 : 죽이자 라면,
         thumb_backcolor[1] = '#EBC604';
@@ -1213,31 +1101,6 @@ function ready_last_mention(current_chosen) {
             <p id='answer_corrent' style='color:"+color+";'>"+ ox + "</p></div><div id='survival_ment'></div>\
             <div class='to_compare'>Last defense<br><div id='evidence_img_id' class='point_images' style='margin-top: 5px;'>\
             <img id='last_mention_image' src='/static/images/question_mark.png' style='width:100px;'></div><p id='last_correct'>&nbsp;</p></div>";
-    //@@@innerHTML 에 줄맞춤 위해 NBSP 추가.
-    
-    if(current_chosen != username){
-        if(dropouts.includes(username)){
-            log_text = urls +"ClientID="+ username + "&Session=last_mentioning" + "&state=start" + "&position=dropout" + "&pointed_user=" + current_chosen + "&pointed_image=" + all_imageid_set[current_chosen][pointed_info['pointed_img_idx']] + "&pointed_label=" + all_labeling_set[current_chosen][pointed_info['pointed_img_idx']] + "&current_emotion=" + current_emotion;
-            xhr.open("GET", log_text, true);
-            xhr.send();
-        }
-        else if(pointed_info['selector'] == username){
-            log_text = urls +"ClientID="+ username + "&Session=last_mentioning" + "&state=start" + "&position=pointer" + "&pointed_user=" + current_chosen + "&pointed_image=" + all_imageid_set[current_chosen][pointed_info['pointed_img_idx']] + "&pointed_label=" + all_labeling_set[current_chosen][pointed_info['pointed_img_idx']] + "&current_emotion=" + current_emotion;
-            xhr.open("GET", log_text, true);
-            xhr.send();
-        }
-        else{
-            log_text = urls +"ClientID="+ username + "&Session=last_mentioning" + "&state=start" + "&position=elector"+ "&pointed_user=" + current_chosen + "&pointed_image=" + all_imageid_set[current_chosen][pointed_info['pointed_img_idx']] + "&pointed_label=" + all_labeling_set[current_chosen][pointed_info['pointed_img_idx']] + "&current_emotion=" + current_emotion;
-            xhr.open("GET", log_text, true);
-            xhr.send();               
-        }
-    }
-    else{
-        log_text = urls +"ClientID="+ username + "&Session=last_mentioning" + "&state=start" + "&position=pointed" + "&pointed_user=" + current_chosen + "&pointed_image=" + all_imageid_set[current_chosen][pointed_info['pointed_img_idx']] + "&pointed_label=" + all_labeling_set[current_chosen][pointed_info['pointed_img_idx']] + "&current_emotion=" + current_emotion;
-        xhr.open("GET", log_text, true);
-        xhr.send();
-    }
-
 
     if (current_chosen == username) {
         document.getElementById('game_body').classList.add("turn_red");
@@ -1270,10 +1133,6 @@ function ready_last_mention(current_chosen) {
 
             now_img_tag = target.querySelector('.img');
             now_img_id = now_img_tag.src.split('/').pop().split('.')[0];
-
-            log_text = urls +"ClientID="+ username + "&Session=last_mentioning" + "&state=click" + "&image_id=" + now_img_id + "&labeling=" + all_labeling_set[current_chosen][cur_idx];
-            xhr.open("GET", log_text, true);
-            xhr.send();
         }));
 
         setTimeout(() => {
@@ -1301,10 +1160,6 @@ function ready_last_mention(current_chosen) {
             socket.send(JSON.stringify({
                 data
             }));
-
-            log_text = urls +"ClientID="+ username + "&Session=last_mentioning" + "&state=end";
-            xhr.open("GET", log_text, true);
-            xhr.send();
         }, 6500);
     }
     else if(current_chosen == '봇' && memlist[0] == username){ //
@@ -1381,10 +1236,6 @@ function last_mention(current_chosen, last_mention_idx) {
             last_mention_success = 'fail';
         }
 
-        log_text = urls +"ClientID="+ username + "&Session=last_mention_result" + "&result=" + last_mention_success + "&pointed_user=" + current_chosen + "&answer_image=" + img_evidence_id + "&answer_label=" + all_labeling_set[current_chosen][pointed_info['pointed_img_idx']] + "&selected_image=" + img_last_mention_id + "&selected_label=" + all_labeling_set[current_chosen][last_mention_idx] + "&current_emotion=" + current_emotion;
-        xhr.open("GET", log_text, true);
-        xhr.send();
-
         if (img_evidence.src == img_last_mention.src) {
             // notice(who + " 최후의 변론을 성공하여<br>무사히 생존했습니다!", 'find_bot', 'small');
             layout3('last_mention_success');
@@ -1455,10 +1306,6 @@ function show_identity(whom){
     if(whom == '봇'){
         identity_result = 'bot';
     }
-
-    log_text = urls +"ClientID="+ username + "&Session=who" + "&pointed_user=" + anonymous_user[pointed_info['target_num']] + "&identity=" + identity_result + "&current_survivors=" + survivors + "&dropouts=" + dropouts;
-    xhr.open("GET", log_text, true);
-    xhr.send();
     
     setTimeout(()=>{
         if(whom == '봇'){ //정체가 봇이라면,
@@ -1524,20 +1371,12 @@ function history(){
     notice('Helpful Tips!', 'find_bot', '20px');
 
     if(hint.length == 1){ // 전문가의 응답
-        log_text = urls +"ClientID="+ username + "&Session=history" + "&state=expert" + "&fail_img=" + all_imageid_set[anonymous_user[pointed_info['target_num']]][pointed_info['pointed_img_idx']] + "&hint=" + hint;
-        xhr.open("GET", log_text, true);
-        xhr.send();
-        // console.log(hint[0]);
-        // console.log(emotion_name[hint[0]]);
         document.getElementById('find_bot_img_container').innerHTML = "<br><br>표정 전문가의 의견: <b style='color:#2E64FE;'>" + emotion_name[hint[0]] + "</b>";
         document.getElementById('find_bot_img_container').innerHTML += "<br><br><span><img id='preview' src='"+ all_image_set[anonymous_user[pointed_info['target_num']]][pointed_info['pointed_img_idx']]+"'\
          style='width:120px;'></span>";
         layout3('history_expert');
     }
     else{ // 플레이어들의 응답
-        log_text = urls +"ClientID="+ username + "&Session=history" + "&state=players" + "&fail_img=" + all_imageid_set[anonymous_user[pointed_info['target_num']]][pointed_info['pointed_img_idx']] + "&hint=" + hint;    xhr.open("GET", log_text, true);
-        xhr.open("GET", log_text, true);
-        xhr.send();
         document.getElementById('find_bot_img_container').innerHTML = "<br><span><img id='preview' src='"+ all_image_set[anonymous_user[pointed_info['target_num']]][pointed_info['pointed_img_idx']]+"'\
          style='width:70px;'></span>";
         document.getElementById('find_bot_img_container').innerHTML += "<canvas id='myChart'></canvas>";
@@ -1679,10 +1518,6 @@ function go_next_round() {
             "start"
         )
 
-    log_text = urls +"ClientID="+ username + "&Session=next_round" + "&next_round=" +  current_round;
-    xhr.open("GET", log_text, true);
-    xhr.send();
-
     setTimeout(() => {
         // 여기가 약간 init 느낌
         vacate_find_bot_content();
@@ -1739,10 +1574,6 @@ function point_out_bot(current_selector) {
             var flag_die = false;
             var now_round = current_round-1;
 
-            log_text = urls +"ClientID="+ username + "&Session=game_lose" + "&user=" + username + "&lose_reason=" + lose_reason + "&get_exp=" + get_exp + "&get_money=" + get_money + "&current_survivors=" + survivors + "&dropouts=" + dropouts + "&current_round=" + now_round + "&current_emotion=" + current_emotion;
-            xhr.open("GET", log_text, true);
-            xhr.send();
-
             window.location.href = '/game/ending/' + '?username=' + username + "&result=" + res + "&money=" + get_money + "&exp=" + get_exp +"&flag=" + flag_die + "&rsn=" + lose_reason + "&rnd=" + now_round;
         }
         else if (res != 'lose' && flag == false) {
@@ -1778,16 +1609,10 @@ function point_out_bot(current_selector) {
         if (current_selector == username) {
             notice('Pointing out', 'find_bot', '20px'); 
             layout3('pointing');
-            log_text = urls +"ClientID="+ username + "&Session=pointing_myturn" + "&state=start";
-            xhr.open("GET", log_text, true);
-            xhr.send();
             button_pointing_or_pass();
         } else {
             notice('Browse!', 'find_bot', '17px'); 
             layout3('wait_pointing');
-            log_text = urls +"ClientID="+ username + "&Session=pointing_notmyturn" + "&state=start";
-            xhr.open("GET", log_text, true);
-            xhr.send();
 
             /*기다리는 동안 훑어보기*/
             set_anonymous_btn();
@@ -1802,10 +1627,6 @@ function point_out_bot(current_selector) {
                 target_num = target.id.charAt(target.id.length - 1);
                 var target_name = anonymous_user[target_num];
                 var target_choice = all_labeling_set[target_name];
-
-                log_text = urls +"ClientID="+ username + "&Session=pointing_notmyturn" + "&state=click" + "&button=namebtn" + "&whom=" + target_name + "&assigned_images=" + all_imageid_set[target_name];
-                xhr.open("GET", log_text, true);
-                xhr.send();
 
                 show(target_name, target_choice, 'find_bot');
             }));

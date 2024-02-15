@@ -240,17 +240,6 @@
     function channel_access() {
         let user_name = '{{ username }}';
         window.location.href = '/game/channels/' + '?username=' + user_name;
-
-        /*loging 페이지
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "https://fergame.diag.kr/game/log.php?username=" + user_name + "&x=" + event.clientX + "&y=" + event.clientY, true);
-        xhr.send();*/
-
-        /*let progress_bar1 = document.styleSheets[1].cssRules[26];
-        let progress_bar2 = document.styleSheets[1].cssRules[27];
-        progress_bar1.cssText = '@-webkit-keyframes progress-bar { from { width: 0%; } to { width: 50%; }}';
-        progress_bar2.cssText = '@keyframes progress-bar { from { width: 0%; } to { width: 50%; }}';*/
-
     }
 
     function go_tutorial() {

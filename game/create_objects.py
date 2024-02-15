@@ -1,8 +1,6 @@
 import os
 import sys
 import django
-import random
-from django.conf import settings
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
@@ -11,7 +9,7 @@ sys.path.append(parent_dir)
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 django.setup()
 
-from game.models import Member, Channel_1, Channel_2, Channel_3, Channel_4, Entries
+from game.models import Entries
 import csv
 
 path = '../static/sampling_300.csv'

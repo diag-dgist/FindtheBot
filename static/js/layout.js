@@ -40,11 +40,6 @@ function check_ready(){
         ready_btn.disabled = true;
 
         sync_userlist(); //memlist 소켓 통해 동기화.
-
-        log_text = urls +"ClientID="+ username + "&Session=channel" + "&channel_name=" + room_number + "&state=start"; 
-        xhr.open("GET", log_text, true);
-        xhr.send();
-
     }
 }
 
@@ -63,9 +58,6 @@ function check_wait(){
         setTimeout(function(){ //3.5초 뒤 화면 전환
             go_next_page('waiting','after_selection');
             round();
-            log_text = urls +"ClientID="+ username + "&Session=waiting" + "&state=end"; 
-            xhr.open("GET", log_text, true);
-            xhr.send();
         }, 3500);
     }
 }

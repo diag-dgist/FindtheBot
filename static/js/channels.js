@@ -39,25 +39,10 @@ socket.onmessage = function (e) {
         profile_in(data.payload.username); //입장 유저의 프로필을 띄워준다.
         emotion_order = data.payload.emotions;//라운드 별 감정 순서
         current_emotion = emotion_order[current_round-1]; //현재의 감정.
-
-        if(data.payload.username == username){
-            log_text = urls +"ClientID="+ username + "&Session=channel" + "&channel_name=" + room_number + "&state=connect"; 
-            xhr.open("GET", log_text, true);
-            xhr.send();
-        }
-
     }
     else if(data.payload.command == 'disconnect'){ 
         profile_out(data.payload.username);//퇴장 유저의 프로필을 삭제한다.
-        
         console.log("*disconnect result: ", "(out user) ", data.payload.username);
-
-        if(data.payload.username == username){
-            log_text = urls +"ClientID="+ username + "&Session=channel" + "&channel_name=" + room_number + "&state=disconnect"; 
-            xhr.open("GET", log_text, true);
-            xhr.send();
-        }
-
         if(gamestart == true){
             alert("다른 플레이어의 연결 상태가 불안정하여 강제 종료합니다.");
             window.location.href = '/game/channels/' + '?username=' + username;
@@ -149,10 +134,6 @@ socket.onmessage = function (e) {
         current_chosen = anonymous_user[pointed_info['target_num']];
         console.log("*point result: ", "(pointed_info) 지목자: ",pointed_info['selector']);
         console.log(current_chosen, "의 ", pointed_info['pointed_img_idx'], " 가 의심된다고 지목했습니다.");
-
-        log_text = urls +"ClientID="+ username + "&Session=pointed" + "&pointer_user=" + data.payload.selector+ "&pointed_user=" + current_chosen + "&pointed_image=" + all_imageid_set[current_chosen][data.payload.pointed_img_idx] + "&pointed_label=" + all_labeling_set[current_chosen][data.payload.pointed_img_idx] + "&current_emotion=" + current_emotion;
-        xhr.open("GET", log_text, true);
-        xhr.send();
         
         set_postposition(pointed_info['target_num']);
         elect(pointed_info['selector'], current_chosen);
@@ -164,10 +145,6 @@ socket.onmessage = function (e) {
         pass_count++;
         pointed_info['selector'] = data.payload.selector;
         pass_flag[pointed_info['selector']] = 'true';
-
-        log_text = urls +"ClientID="+ username + "&Session=pass" + "&current_pass_count=" + pass_count + "&survivor_count=" + survivor_count; 
-        xhr.open("GET", log_text, true);
-        xhr.send();
 
         console.log("*pass result: ", "(pass user) ", pointed_info['selector']);
         console.log("now pass count: ", pass_count);
@@ -192,9 +169,6 @@ socket.onmessage = function (e) {
             console.log("*elect_result: 사람이 지목당해서, ", "(살리자): ", elect_result['thumb_up'],"(죽이자): ",elect_result['thumb_down']);
             show_elect_result(current_chosen);
         }
-        log_text = urls +"ClientID="+ username + "&Session=electing" + "&state=end";
-        xhr.open("GET", log_text, true);
-        xhr.send();
         console.log("*elect_result: ", "show_elect_result function call");
 
     }

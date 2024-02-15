@@ -5,16 +5,12 @@ Websocket 통신을 위한 Channels 라이브러리 사용 시 필요한 consume
 
 """
 from channels.generic.websocket import AsyncWebsocketConsumer #websocket 사용 위한 consumer import
-from .models import Channel_1,Channel_2, Channel_3, Channel_4, Member, Entries #models import
+from .models import Channel_1,Channel_2, Channel_3, Channel_4, Entries #models import
 from channels.db import database_sync_to_async #websocket에서 db 비동기 접근 위해 import
 import json #consumer와 html 간 데이터는 json 포맷이므로 import
 from channels.layers import get_channel_layer
 from django.utils import timezone
 
-import sys
-import time
-import os
-import math
 import csv
 import random
 import numpy as np
@@ -22,7 +18,6 @@ import cntk as ct
 from datetime import datetime
 
 from PIL import Image
-import game.rect_util
 from .rect_util import Rect
 import game.img_util as imgu
 
