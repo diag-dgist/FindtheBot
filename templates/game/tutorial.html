@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport"
         content="width=device-width,initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-    <title>튜토리얼</title>
+    <title>TUTORIAL</title>
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/top.css">
     <link rel="stylesheet" href="/static/css/animation.css">
@@ -87,11 +87,11 @@
         <div class="title" id="tutorial_title"></div>
         <div class="top" id="tutorial_top">
             <div class="top_block" id="msg_tap">
-                <div class="block_content shadow blink">게임 방법</div>
+                <div class="block_content shadow blink">GAME RULES</div>
             </div>
         </div>
         <div class="content">
-            <div id="script_page" class="scripts">설명</div>
+            <div id="script_page" class="scripts">Descriptions</div>
         </div>
         <div class="bottom" id="tutorial_bottom"></div>
         <button onclick="go_before()"> < </button>
@@ -178,111 +178,111 @@
             now_script.innerHTML = "<img src='/static/images/s7.jpg' style='width:230px;'>";
             break;
             case 10:
-            msg_tap.innerHTML = "<div class='msg_content shadow'><b style='color:blue;'>[지목]단계</b>에서는 봇으로 의심되는 플레이어의<br><b style='color:red;'>증거사진</b>을 골라야 합니다.</div>";
+            msg_tap.innerHTML = "<div class='msg_content shadow'>You have to pick <br><b style='color:red;'>the evidence image</b> of the player who is suspicious as a bot in <b style='color:blue;'>[Pointing out]step</b></div>";
             now_script.innerHTML = "<img src='/static/images/s8.jpg' style='width:230px;'>";
             break;
             case 11:
-            msg_tap.innerHTML = "<div class='msg_content shadow'>만약 봇으로 의심되는 플레이어가 없다면<br><b style='color:blue;'>기권</b>할 수 있습니다.</div>";
+            msg_tap.innerHTML = "<div class='msg_content shadow'>If you don't have any plyer who is suspicious as a bot, you can <br><b style='color:blue;'>give up</b> to point out the bot.</div>";
             now_script.innerHTML = "<img src='/static/images/s8.jpg' style='width:230px;'>";
             break;
             case 12:
-            msg_tap.innerHTML = "<div class='msg_content shadow'>다른 플레이어가 <b style='color:blue;'>지목 중</b>일때는<br>응답을 둘러보며 기다릴 수 있습니다.</div>";
+            msg_tap.innerHTML = "<div class='msg_content shadow'>You'd wait for the next step by seeing around others' <br>responses while other players are <b style='color:blue;'>pointing out</b> the evidence.</div>";
             now_script.innerHTML = "<img src='/static/images/s9.jpg' style='width:230px;'>";
             break;
             case 13:
-            msg_tap.innerHTML = "<div class='msg_content shadow'>만약 누군가 의심되는 증거를 지목했다면,<br>다른 플레이어들은 <b style='color:blue; text-decoration:underline;'>봇일지 사람일지</b> 투표합니다.</div>";
+            msg_tap.innerHTML = "<div class='msg_content shadow'>If someone pointed out a player with evidence, <br>other players would vote <b style='color:blue; text-decoration:underline;'>wheter he would be a bot or human</b>.</div>";
             now_script.innerHTML = "<img src='/static/images/s10.png' style='width:230px;'>";
             break;
             case 14:
-            msg_tap.innerHTML = "<div class='msg_content shadow'><b style='color:red;'>과반수</b>가 이 증거를 봇의 응답으로 의심한다면,<br>지목된 플레이어는 <b style='color:blue;'>[최후의변론]</b>을 해야합니다.</div>";
+            msg_tap.innerHTML = "<div class='msg_content shadow'>If <b style='color:red;'>a majority of players</b> doubt this evidence as a response of the bot, <br>the pointed player should do <b style='color:blue;'>[Last defense]</b>.</div>";
             now_script.innerHTML = "<img src='/static/images/s11.jpg' style='width:230px;'>";
             break;
             case 15:
-            msg_tap.innerHTML = "<div class='msg_content shadow'>지목당한 플레이어는 <b style='color:blue;'>[최후의변론]</b>에서<br>어떤 응답이 <b style='color:red; text-decoration:underline;'>의심</b>받고 있는지 찾아야 합니다.</div>";
+            msg_tap.innerHTML = "<div class='msg_content shadow'>The pointed player has to figure out <br>which image is <b style='color:red; text-decoration:underline;'>suspicious</b> by other players in the <b style='color:blue;'>[Last defence]</b>.</div>";
             now_script.innerHTML = "<img src='/static/images/s12.jpg' style='width:230px;'>";
             break;
             case 16:
-            msg_tap.innerHTML = "<div class='msg_content shadow'>만약 의심받고 있는 응답을 찾았다면<br>무사히 <b style='color:green;'>생존</b>하게 되지만,</div>";
+            msg_tap.innerHTML = "<div class='msg_content shadow'>If you success to find the suspicious evidence out, you can <b style='color:green;'>survive</b><br>safely.</div>";
             now_script.innerHTML = "<img src='/static/images/s13.jpg' style='width:230px;'>";
             break;
             case 17:
-            msg_tap.innerHTML = "<div class='msg_content shadow'>의심받고 있는 응답을 찾지 못했다면<br>게임에서 <b style='color:red;'>중도탈락</b>하게 됩니다.</div>";
+            msg_tap.innerHTML = "<div class='msg_content shadow'>If you failed to find the suspicious evidence out, you would be <b style='color:red;'>out of the way</b> in the <br>game.</div>";
             now_script.innerHTML = "<img src='/static/images/s14.jpg' style='width:230px;'>";
             break;
             case 18:
-            msg_tap.innerHTML = "<div class='msg_content shadow'>탈락자는 <b style='color:red;'>패널티</b>로 게임종료까지 <b style='text-decoration:underline;'>관전</b>해야하며<br>획득 보상 또한 <b style='color:blue;'>감소</b>합니다.</div>";
+            msg_tap.innerHTML = "<div class='msg_content shadow'> The eleminated people have to <b style='text-decoration:underline;'>watch</b> the rest of game procedure as a <b style='color:red;'>penalty</b> and would <b style='color:blue;'>lose</b><br>the acquried rewards at same time as well.</div>";
             now_script.innerHTML = "<img src='/static/images/s15.jpg' style='width:230px;'>";
             break;
             case 19:
-            msg_tap.innerHTML = "<div class='msg_content shadow'>이 과정은 모두가 <b style='color:blue;'>[지목]</b>을 <b style='text-decoration:underline;'>기권</b>할 때까지<br>반복하게 됩니다.</div>";
+            msg_tap.innerHTML = "<div class='msg_content shadow'>This process will be <br>repeated till every players <b style='text-decoration:underline;'>give up</b><b style='color:blue;'>[pointing out]</b>.</div>";
             now_script.innerHTML = "<img src='/static/images/s16.jpg' style='width:230px;'>";
             break;
             case 20:
-            msg_tap.innerHTML = "<div class='msg_content shadow'>만약 모든 플레이어가 기권한다면,<br><b style='color:green;'>다음 라운드</b>로 넘어갑니다.</div>";
+            msg_tap.innerHTML = "<div class='msg_content shadow'>If every players give up, you could move to the <br><b style='color:green;'>next round</br>.</div>";
             now_script.innerHTML = "<img src='/static/images/s17.jpg' style='width:230px;'>";
             break;
             case 21:
-            msg_tap.innerHTML = "<div class='block_content shadow blink'>게임 종료</div>";
-            now_script.innerHTML = "<br><br><br><br><span style='color: blue;'>[승리 조건]</span><br><br><br>";
-            now_script.innerHTML += "<span style='font-size: 8pt;'><b style='color:green;'>4라운드</b> 안에 봇을 찾아라!<br>(일찍 잡을수록 보상🔺)</span><br><br><br><br><br><br>\
-                <span style='color:red;'>[패배 조건]</span><br><br><br><span style='font-size:8pt;'>(1)4라운드 안에 봇을 찾지 못하거나,<br>\
-                    <br><br>(2)사람이 <b style='color:red;'>2명</b> 죽으면 패배!<br>(보상❌ 경험치⭕️)</span>";
+            msg_tap.innerHTML = "<div class='block_content shadow blink'>Game Over</div>";
+            now_script.innerHTML = "<br><br><br><br><span style='color: blue;'>[Victory condition]</span><br><br><br>";
+            now_script.innerHTML += "<span style='font-size: 8pt;'>Find the bot within <b style='color:green;'>round 4</b><br>(The sonner you catch it, The more you get the rewards🔺)</span><br><br><br><br><br><br>\
+                <span style='color:red;'>[Losing condition]</span><br><br><br><span style='font-size:8pt;'> Defeat!(1)If you don't figure out the bot within round 4,<br>\
+                    <br><br>(2)If <b style='color:red;'>two</b> out of the human players are killed by<br>(Rewards❌ EXP⭕️)</span>";
             break;
             case 22:
-            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>감정 : 경멸</div>";
+            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>Emotion : Contempt</div>";
             now_script.innerHTML = "<br><br><img src='/static/images/contempt.png' style='width:100px; padding:5px 80px;'><br><br>";
             now_script.innerHTML += "<br><br>\
-                <span style='color:blue;'>정의</span><br><br><span style='font-size:8pt;'>대상을 깔봄으로써 우월감을 느끼는 감정</span>\
-                <br><br><br><br><span style='color:green;'>상황</span><br><br><span style='font-size:8pt;'>🟢 회의에서 웃으며 조롱하는 상황<br><br>\
-                    🟢 학교에서 다른 학생을 비하하는 상황</span>";
+                <span style='color:blue;'>Definition</span><br><br><span style='font-size:8pt;'>A feeling of superiority by looking down on an object</span>\
+                <br><br><br><br><span style='color:green;'>Situation</span><br><br><span style='font-size:8pt;'>🟢 Laughing and mocking at a meeting <br><br>\
+                    🟢 Humbling another student in the school</span>";
             break;
             case 23:
-            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>감정 : 혐오</div>";
+            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>Emotion : Disgust</div>";
             now_script.innerHTML = "<br><br><img src='/static/images/disgust.png' style='width:100px; padding:5px 80px;'><br><br>";
             now_script.innerHTML += "<br><br>\
-                <span style='color:blue;'>정의</span><br><br><span style='font-size:8pt;'>불쾌한 냄새,소리,사건 등을 피하고 싶은 감정</span>\
-                <br><br><br><br><span style='color:green;'>상황</span><br><br><span style='font-size:8pt;'>🟢 외과수술 장면을 목격한 상황<br><br>\
-                    🟢 토사물이나 체액을 목격한 상황</span>";
+                <span style='color:blue;'>Definition</span><br><br><span style='font-size:8pt;'>Feelings of wanting to avoid unpleasant smells, sounds, events, etc</span>\
+                <br><br><br><br><span style='color:green;'>Situation</span><br><br><span style='font-size:8pt;'>🟢 A sighting of surgical operation<br><br>\
+                    🟢 A witnessing vomit of bodily fluids</span>";
             break;
             case 24:
-            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>감정 : 분노</div>";
+            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>Emotion : Anger</div>";
             now_script.innerHTML = "<br><br><img src='/static/images/angry.png' style='width:100px; padding:5px 80px;'><br><br>";
             now_script.innerHTML += "<br><br>\
-                <span style='color:blue;'>정의</span><br><br><span style='font-size:8pt;'>짜증, 격노 등을 아우르는 감정</span>\
-                <br><br><br><br><span style='color:green;'>상황</span><br><br><span style='font-size:8pt;'>🟢 지속적으로 부당한 대우를 받는 상황<br><br>\
-                    🟢 신뢰하던 사람에게 배신 당하는 상황</span>";
+                <span style='color:blue;'>Definition</span><br><br><span style='font-size:8pt;'>Feelings of irritation, rage, etc</span>\
+                <br><br><br><br><span style='color:green;'>Situation</span><br><br><span style='font-size:8pt;'>🟢 Constantly being treated unfaily <br><br>\
+                    🟢 Betrayed by someone you trust</span>";
             break;
             case 25:
-            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>감정 : 공포</div>";
+            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>Emotion : Fear</div>";
             now_script.innerHTML = "<br><br><img src='/static/images/fear.png' style='width:100px; padding:5px 80px;'><br><br>";
             now_script.innerHTML += "<br><br>\
-                <span style='color:blue;'>정의</span><br><br><span style='font-size:8pt;'>신체적, 심리적 위협의 상황에서 느끼는 감정</span>\
-                <br><br><br><br><span style='color:green;'>상황</span><br><br><span style='font-size:8pt;'>🟢 자연재해와 같은 생명의 위협을 느끼는 상황<br><br>\
-                    🟢 사회적,장소적으로 고립되어 있는 상황</span>";
+                <span style='color:blue;'>Definition</span><br><br><span style='font-size:8pt;'>Emotion that you feel in the physical and psychological threats.</span>\
+                <br><br><br><br><span style='color:green;'>Situation</span><br><br><span style='font-size:8pt;'>🟢 Feels like hreatened by life, such as a natural disaster<br><br>\
+                    🟢 A socially and placeally isolated situation</span>";
             break;
             case 26:
-            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>감정 : 놀람</div>";
+            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>Emotion : Surprise</div>";
             now_script.innerHTML = "<br><br><img src='/static/images/surprise.png' style='width:100px; padding:5px 80px;'><br><br>";
             now_script.innerHTML += "<br><br>\
-                <span style='color:blue;'>정의</span><br><br><span style='font-size:8pt;'>기대치 않던 상태에서 돌발적인 일을 겪었을 때 느끼는 감정</span>\
-                <br><br><br><br><span style='color:green;'>상황</span><br><br><span style='font-size:8pt;'>🟢 예상치 못할 정도로 뛰어한 퍼포먼스를 본 상황<br><br>\
-                    🟢 예기치 않은 사고를 당한 상황</span>";
+                <span style='color:blue;'>Definition</span><br><br><span style='font-size:8pt;'>Emotions that you feel when you go through something unexpected</span>\
+                <br><br><br><br><span style='color:green;'>Situation</span><br><br><span style='font-size:8pt;'>🟢 When you see the amazing performance unexpectly<br><br>\
+                    🟢 An unexpected accident</span>";
             break;
             case 27:
-            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>감정 : 행복</div>";
+            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>Emotion : Happiness</div>";
             now_script.innerHTML = "<br><br><img src='/static/images/happy.png' style='width:100px; padding:5px 80px;'><br><br>";
             now_script.innerHTML += "<br><br>\
-                <span style='color:blue;'>정의</span><br><br><span style='font-size:8pt;'>오감에 의한 쾌감,재미,만족,흥분 등 기분이 좋은 상태</span>\
-                <br><br><br><br><span style='color:green;'>상황</span><br><br><span style='font-size:8pt;'>🟢 친구들과 재미있게 노는 상황<br><br>\
-                    🟢 목표를 성취한 상황</span>";
+                <span style='color:blue;'>Definition</span><br><br><span style='font-size:8pt;'>A state of feeling good, such as pleasure, fun, satisfaction, and excitement caused by the five senses</span>\
+                <br><br><br><br><span style='color:green;'>Situation</span><br><br><span style='font-size:8pt;'>🟢 Enjoying with firneds<br><br>\
+                    🟢 Achiving the goals</span>";
             break;
             case 28:
-            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>감정 : 슬픔</div>";
+            msg_tap.innerHTML = "<div class='block_content shadow blink' style='background-color:green;'>Emotion : Sadness</div>";
             now_script.innerHTML = "<br><br><img src='/static/images/sad.png' style='width:100px; padding:5px 80px;'><br><br>";
             now_script.innerHTML += "<br><br>\
-                <span style='color:blue;'>정의</span><br><br><span style='font-size:8pt;'>상실에서 유발되는 체념과 무력감의 상태</span>\
-                <br><br><br><br><span style='color:green;'>상황</span><br><br><span style='font-size:8pt;'>🟢 연인에게 거부 당한 상황<br><br>\
-                    🟢 목표를 달성하지 못한 상황</span>";
+                <span style='color:blue;'>Definition</span><br><br><span style='font-size:8pt;'>A state of resignation and helplessness casued by loss</span>\
+                <br><br><br><br><span style='color:green;'>Situation</span><br><br><span style='font-size:8pt;'>🟢 A situation of being rejected by one's partner <br><br>\
+                    🟢 A failure to achieve one's goal</span>";
             break;
         }
     }
