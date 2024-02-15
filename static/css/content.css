@@ -1,6 +1,6 @@
 /*
 ##########################################
-@ CONTENT component에 해당하는 css
+@ [ny]CONTENT component에 해당하는 css
 *프로필
 *round_start page
 *labeling page
@@ -8,7 +8,7 @@
 ##########################################
 */
 
-/* lobby_page 관련 */
+/* [ny]lobby_page 관련 */
 .profile {
     background-color: #dddddd;
     width: 135px;
@@ -42,7 +42,7 @@
 
 /**/
 
-/* round_start page 디자인 관련 */
+/* [ny]round_start page 디자인 관련 */
 .round_emt {
     position: relative;
 }
@@ -182,7 +182,7 @@
 }
 
 .voted {
-    background-color: #EBC604; /*테마색 조정*/
+    background-color: #EBC604; /*[ny]테마색 조정*/
 }
 
 .grayscale {
@@ -207,7 +207,7 @@
     box-shadow: 0 0 0 3px #000 inset;
 }
 
-#survival_ment { /*@@이거뭐지*/
+#survival_ment {
     display: inline-block;
     font-size: larger;
     font-family: Arial, Helvetica, sans-serif; 
@@ -221,7 +221,6 @@
 
 }
 
-/* 타이머 2 나중에 합칠 수 있으면 그냥 타이머랑 합치기*/
 #timers2 {
     margin: auto;
 }
@@ -264,7 +263,7 @@
 }
 /**/
 
-/*game_caption 관련 class*/
+/*[ny]game_caption 관련 class*/
 .turn_caption_yellow{
     color: #EBC604;
 }
@@ -277,7 +276,7 @@
     color: rgb(7, 102, 7);
 }
 
-/*유령 이미지 배치*/
+/*[ny]유령 이미지 배치*/
 #rip_id{
     width: 90px;
     position: absolute;

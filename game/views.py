@@ -11,7 +11,7 @@ import json
 
 def index(request):
     """
-    index 함수.
+    [ds]index 함수.
 
     game/index.html 로그인 창을 렌더링. 
     """
@@ -20,7 +20,7 @@ def index(request):
 
 def info(request):
     """
-    info 함수.
+    [ds]info 함수.
 
     로그인 정보를 받아서 game/info.html로 username과 point 전달 및 렌더링.
     """
@@ -43,7 +43,7 @@ def info(request):
 
 def channels(request):
     """
-    channels 함수.
+    [ds]channels 함수.
 
     game/info.html에서 채널입장 버튼 클릭하면 username을 game/channels.html로 전달 및 렌더링.
     """
@@ -54,7 +54,7 @@ def channels(request):
 
 def room(request, room_num):
     """
-    room 함수.
+    [ds]room 함수.
 
     game/channels.html에서 채널 선택 시 입장 및 웹소켓 연결을 위한 데이터 전달 및 렌더링.
     """
@@ -96,7 +96,7 @@ def room(request, room_num):
 
 def ending(request):
     """
-    ending 함수. 
+    [ds]ending 함수. 
     
     game/ending.html 에 데이터 전달 및 렌더링.
     """
@@ -136,9 +136,11 @@ def ending(request):
 
 
 def tutorial(request):
+    #[ds]
     return render(request, 'game/tutorial.html')
 
 def ajax_method(request):
+    # [ds]
     receive_message = request.POST.get('send_data')
     send_message = {'send_data' : "I received"}
     return JsonResponse(send_message)

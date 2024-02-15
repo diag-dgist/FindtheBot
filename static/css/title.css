@@ -1,7 +1,7 @@
 /*
 ##########################################
 
-@ TITLE component에 해당하는 css
+@ [ny]TITLE component에 해당하는 css
 
 *현재 생존자 수, 봇 수
 *채널 배너
@@ -12,7 +12,7 @@
 */
 
 
-/* 표(bot, 인간표시) - layout1*/
+/* [ny]표(bot, 인간표시) - layout1*/
 .table{
     
     border-spacing: 10px;
@@ -32,7 +32,7 @@
 }
 /**/
 
-/* 맨 처음 채널 나타나내는 배너  - layout1 */
+/*[ny]맨 처음 채널 나타나내는 배너  - layout1 */
 #channel{
     margin: auto;
     margin-right: 100px;
@@ -57,7 +57,7 @@
 
 /**/
 
-/* 감정 버튼 - layout1 */
+/* [ny]감정 버튼 - layout1 */
 #emotion{
     background-color: #EBC604;
     border: 0px;
@@ -72,7 +72,7 @@
 }
 /**/
 
-/* 라운드 버튼  - layout1*/
+/* [ny]라운드 버튼  - layout1*/
 #round{
     background-color: black;
     border: 0px;

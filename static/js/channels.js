@@ -9,7 +9,7 @@
 let socket = new WebSocket('ws://127.0.0.1:8000/ws/game/' + room_number+ '/' + username + '/' + teamid);
 
 
-/*웹소켓이 연결되면 호출되는 onopen 이벤트 함수*/
+/*[ny]웹소켓이 연결되면 호출되는 onopen 이벤트 함수*/
 socket.onopen = function (e) {
 
     var data = {                        //[ny]consumer에 전달할 데이터들
@@ -24,7 +24,7 @@ socket.onopen = function (e) {
 }
 
 
-/*consumer에서 메세지가 도착하면 호출되는 onmessage 이벤트 함수*/ 
+/*[ny]consumer에서 메세지가 도착하면 호출되는 onmessage 이벤트 함수*/ 
 socket.onmessage = function (e) {
     const data = JSON.parse(e.data);    //[ny]수신받은 데이터를 json.parse
     console.log("%c[channels.js] socket.onmessage:",'color: green; font-size:15px;');
@@ -199,7 +199,7 @@ socket.onmessage = function (e) {
 }
     
 
-/*웹소켓이 끊어지면 호출되는 onclose 이벤트 함수*/ 
+/*[ny]웹소켓이 끊어지면 호출되는 onclose 이벤트 함수*/ 
 socket.onclose = function (e) {
     alert("[ny]연결이 끊겼습니다. 다시 시도해주세요.");
     console.log(username, " 's websocket disconnect");

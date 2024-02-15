@@ -23,7 +23,7 @@ import game.img_util as imgu
 
 class RoomConsumer(AsyncWebsocketConsumer):
     """
-    RoomConsumer define
+    [ds]RoomConsumer define
 
     채널 접속 시 game/game.html과 ws 통신을 위한 consumer class. 
 
@@ -39,7 +39,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
     """
     async def connect(self):
         """
-        RoomConsumer.connect(self)
+        [ds]RoomConsumer.connect(self)
 
         ws 접속 시 비동기적으로 호출되는 함수.
 
@@ -92,7 +92,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     async def disconnect(self, close_code):
         """
-        RoomConsumer.disconnect(self, close_code)
+        [ds]RoomConsumer.disconnect(self, close_code)
 
         ws 끊기면 비동기적으로 호출되는 함수.
 
@@ -127,7 +127,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     async def receive(self, text_data):
         """
-        RoomConsumer.receive(self, text_data)
+        [ds]RoomConsumer.receive(self, text_data)
 
         ws 통해 메세지 받으면 비동기적으로 호출되는 함수.
 
@@ -433,7 +433,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     async def user_in(self, event):
         """
-        RoomConsumer.user_in(self, event)
+        [ds]RoomConsumer.user_in(self, event)
 
         receive()에서 채널 내 모든 플레이어들에게 입장유저와 라운드별 감정 전송하는 함수.
 
@@ -456,7 +456,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     async def user_out(self, event):
         """
-        RoomConsumer.user_out(self, event)
+        [ds]RoomConsumer.user_out(self, event)
 
         disconnect()에서 채널 내 모든 플레이어들에게 퇴장유저 전송하는 함수.
 
@@ -473,7 +473,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     async def init_and_predict(self, event):
         """
-        RoomConsumer.init_and_predict(self, event)
+        [ds]RoomConsumer.init_and_predict(self, event)
 
         최종적으로 할당된 이미지셋 id list와 봇의 예측값을 모두에게 전송하는 함수.
 
@@ -491,7 +491,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     async def ready(self, event):
         """
-        RoomConsumer.ready(self, event)
+        [ds]RoomConsumer.ready(self, event)
 
         준비 버튼을 누가 눌렀는지 브라우저에 전송하는 함수.
 
@@ -509,7 +509,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     async def notready(self, event):
         """
-        RoomConsumer.ready(self, event)
+        [ds]RoomConsumer.ready(self, event)
 
         준비 취소 버튼을 누가 눌렀는지 브라우저에 전송하는 함수.
 
@@ -527,7 +527,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     async def lobby_flag(self, event):
         """
-        RoomConser.lobby_flag(self, event)
+        [ds]RoomConser.lobby_flag(self, event)
 
         로비에 사람 다 모이면 딱 한명이 시작하라고 group send 해주는 함수. 
         
@@ -541,7 +541,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     async def labeling(self, event):
         """
-        RoomConsumer.labeling(self, event)
+        [ds]RoomConsumer.labeling(self, event)
 
         레이블링 완료 버튼을 누가 눌렀는지 브라우저에 전송하는 함수.
 
@@ -555,7 +555,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     async def selection(self, event):
         """
-        RoomConsumer.selection(self, event)
+        [ds]RoomConsumer.selection(self, event)
 
         어떤 유저가 어떤 이미지셋을 랜덤 할당 받았고, 어떤 사진을 클릭했는지 브라우저에 전송하는 함수.
         
@@ -570,7 +570,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     async def arranged_order(self, event):
         """
-        RoomConsumer.arranged_order(self, event)
+        [ds]RoomConsumer.arranged_order(self, event)
         
         memlist의 몇 번째 사람이 익명 1,2,3,4 인지를 알려주는 리스트 anonymous_user를 브라우저에 전송하는 함수.
 
@@ -584,7 +584,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     async def point(self, event):
         """
-        RoomConsumer.point(self, event)
+        [ds]RoomConsumer.point(self, event)
 
         어떤 유저가 몇 번째 익명의 어떤 사진을 클릭했는지 브라우저에 전송하는 함수.
     
@@ -598,7 +598,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     async def history(self, event):
         """
-        RoomConsumer.history(self, event)
+        [ds]RoomConsumer.history(self, event)
 
         죽은 유저의 증거에 대한 피드백을 주기 위해 전문가/대다수의 플레이어들이 추론한 표정 전송하는 함수.
 
@@ -612,7 +612,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     def db_history(self):
         """
-        RoomConsumer.db_history(self)
+        [ds]RoomConsumer.db_history(self)
 
         지목당한 사진에 대해 힌트가 될 감정 가져오는 함수.
 
@@ -692,7 +692,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
             
     def db_add_user(self):
         """
-        RoomConsumer.db_add_user(self)
+        [ds]RoomConsumer.db_add_user(self)
 
         ws 연결 시 db에 플레이어를 등록하는 함수.
         
@@ -719,7 +719,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     def db_remove_user(self):
         """
-        RoomConsumer.db_remove_user(self)
+        [ds]RoomConsumer.db_remove_user(self)
 
         ws 끊길 시 db에서 플레이어를 제거하는 함수.
 
@@ -740,7 +740,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     def db_search_user(self):
         """
-        RoomConsumer.db_search_user(self)
+        [ds]RoomConsumer.db_search_user(self)
 
         db에 접근해서 채널에 있는 모든 유저 리스트 받아오는 함수. 
 
@@ -761,7 +761,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
     
     def db_update_ready(self):
         """
-        RoomConsumer.db_update_ready(self)
+        [ds]RoomConsumer.db_update_ready(self)
 
         db에 접근해서 준비 버튼을 누른 유저의 ready 속성을 true로 변환해주는 함수.
 
@@ -784,7 +784,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     def db_update_notready(self):
         """
-        RoomConsumer.db_update_notready(self)
+        [ds]RoomConsumer.db_update_notready(self)
 
         db에 접근해서 준비취소 버튼을 누른 유저의 ready 속성을 false로 변환해주는 함수.
         
@@ -809,7 +809,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     def priorities(self):
         """
-        RoomConsumer.priorities(self)
+        [ds]RoomConsumer.priorities(self)
 
         db에 접근해서 entry 아무것도 안찬 이미지 뽑아오기
 
@@ -828,7 +828,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     def db_entry_enable(self):
         """
-        RoomConsumer.db_entry_enable(self)
+        [ds]RoomConsumer.db_entry_enable(self)
 
         db에 접근해서 이미지 샘플링해도 되는지 검사하는 함수. 
         (1) Entry 3까지 다 찼는지 검사.
@@ -853,7 +853,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     def db_update_labeling(self):
         """
-        RoomConsumer.db_update_labeling(self)
+        [ds]RoomConsumer.db_update_labeling(self)
 
         db에 접근해서 유저들의 초기 레이블링 정보를 업데이트 하는 함수. 
         (1) flag = true
@@ -901,7 +901,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     def db_update_pointing(self):
         """
-        RoomConsumer.db_update_pointing(self)
+        [ds]RoomConsumer.db_update_pointing(self)
 
         db에 접근해서 봇 지목 시 레이블링 정보를 업데이트 하는 함수
         (1) implicit
@@ -935,7 +935,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
     
     def db_update_roundend(self):
         """
-        RoomConsumer.db_update_roundend(self)
+        [ds]RoomConsumer.db_update_roundend(self)
 
         라운드 종료 시 db에 접근해서 빈 implicit labeling 정보를 업데이트 하는 함수 
         (1) implicit
@@ -971,7 +971,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     def db_delete_roundstop(self):
         """
-        RoomConsumer.db_delete_roundstop(self)
+        [ds]RoomConsumer.db_delete_roundstop(self)
 
         라운드 중 게임이 종료될 경우, 검수를 마치지 못한 이미지 entry 비워주는 함수
         (1) 봇이 죽어서 게임 승리했을 경우
@@ -1024,7 +1024,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     def db_delete_deathuser(self):
         """
-        RoomConsumer.db_delete_deathuser(self)
+        [ds]RoomConsumer.db_delete_deathuser(self)
 
         라운드 중 사람이 죽어서, 그 유저의 검수를 마치지 못한 이미지 entry 비워주는 함수
         (1) 사람이 죽을 경우 (no mention / fail mention)
@@ -1069,7 +1069,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     def get_time(self):
         """
-        timestamp 출력을 위해 작성한 함수. 
+        [ds]timestamp 출력을 위해 작성한 함수. 
         """
         self.now = datetime.now()
         self.timestamp = self.now.strftime("%Y-%m-%d %H:%M:%S")

@@ -1,7 +1,7 @@
 from django.db import models
 
 class Member(models.Model):
-    '''Table 설명
+    '''[ds]Table 설명
         sql에서 만든 table
 
     Attribites:
@@ -30,7 +30,7 @@ class Member(models.Model):
 
 class Channel_1(models.Model):
     '''
-    Channel_1 table
+    [ds]Channel_1 table
     
     채널 1에 실시간 접속 중인 플레이어들을 저장한 테이블
 
@@ -49,7 +49,7 @@ class Channel_1(models.Model):
 
 class Channel_2(models.Model):
     '''
-    Channel_2 table
+    [ds]Channel_2 table
     
     채널 2에 실시간 접속 중인 플레이어들을 저장한 테이블
 
@@ -70,7 +70,7 @@ class Channel_2(models.Model):
 
 class Channel_3(models.Model):
     '''
-    Channel_3 table
+    [ds]Channel_3 table
     
     채널 3에 실시간 접속 중인 플레이어들을 저장한 테이블
 
@@ -91,7 +91,7 @@ class Channel_3(models.Model):
 
 class Channel_4(models.Model):
     '''
-    Channel_4 table
+    [ds]Channel_4 table
     
     채널 4에 실시간 접속 중인 플레이어들을 저장한 테이블
 

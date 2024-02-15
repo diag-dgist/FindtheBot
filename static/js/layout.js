@@ -20,13 +20,13 @@
 ####################################################################
 */ 
 
-/* go_next_page 함수 : 다음 페이지로 화면 전환시키는 함수 */
+/*[ds] go_next_page 함수 : 다음 페이지로 화면 전환시키는 함수 */
 function go_next_page(now_page, next_page) {
     document.getElementById(now_page).style.display = "none";
     document.getElementById(next_page).style.display = "block";
 }
 
-/* check_ready 함수 : 4명 모두가 준비 완료 상태라면 화면 전환하는 함수 */ 
+/*[ds] check_ready 함수 : 4명 모두가 준비 완료 상태라면 화면 전환하는 함수 */ 
 function check_ready(){
     all_ready = true;
     for(var i=0; i<4; i++){
@@ -43,7 +43,7 @@ function check_ready(){
     }
 }
 
-/* check_wait 함수 : 4명 모두가 대기 완료라면 화면 전환하는 함수 */ 
+/*[ds] check_wait 함수 : 4명 모두가 대기 완료라면 화면 전환하는 함수 */ 
 function check_wait(){
     all_wait = true;
     for(var i=0; i<4; i++){
@@ -62,7 +62,7 @@ function check_wait(){
     }
 }
 
-/* change_to_ready 함수 : 준비버튼을 누른 someone의 프로필 활성화. */ 
+/*[ds] change_to_ready 함수 : 준비버튼을 누른 someone의 프로필 활성화. */ 
 function change_to_ready(someone){ 
     for (var i=0; i<4; i++){
         if(someone != username){
@@ -76,7 +76,7 @@ function change_to_ready(someone){
     check_ready();      //[ny]전원 준비 완료 했는지 체크.
 }
 
-/* change_to_notready 함수 : 준비취소버튼을 누른 someone의 프로필 비활성화. */
+/*[ds] change_to_notready 함수 : 준비취소버튼을 누른 someone의 프로필 비활성화. */
 function change_to_notready(someone){ 
     for (var i=0; i<4; i++){
         if(someone != username){
@@ -88,7 +88,7 @@ function change_to_notready(someone){
     }
 }
 
-/* profile_in 함수 : 파라미터 someone의 프로필을 띄워주는 함수 */ 
+/*[ds] profile_in 함수 : 파라미터 someone의 프로필을 띄워주는 함수 */ 
 function profile_in(someone){ 
     var rank_color = ['black', 'red', 'orange','green', 'black', 'black'];
     for (var i=0; i<4; i++){
@@ -106,7 +106,7 @@ function profile_in(someone){
     }
 }
 
-/*profile_out 함수 : 파라미터 someone의 프로필을 제거하는 함수 */ 
+/*[ds]profile_out 함수 : 파라미터 someone의 프로필을 제거하는 함수 */ 
 function profile_out(someone){
     for(var i=0; i<4; i++){
         if(profiles_name[i].innerText == someone){
@@ -118,7 +118,7 @@ function profile_out(someone){
     }
 }
 
-/*입장 전부터 채널에 접속해있던 플레이어들의 프로필과 준비상태를 띄워주는 함수*/ 
+/*[ds]입장 전부터 채널에 접속해있던 플레이어들의 프로필과 준비상태를 띄워주는 함수*/ 
 function init_profile(){
     var rank_color = ['black', 'red', 'orange','green', 'black', 'black'];
     for (var i=0; i<players.length; i++){
@@ -138,7 +138,7 @@ function init_profile(){
     }
 }
 
-/* init_wait 함수 : 이전부터 대기 중이었던 플레이어들의 프로필 전부 띄워주는 함수 */
+/*[ds] init_wait 함수 : 이전부터 대기 중이었던 플레이어들의 프로필 전부 띄워주는 함수 */
 function init_wait(){
     for (var i=0; i<4; i++){
         waits_name[i].innerText = memlist[i];   //[ny]memlist 순서대로 비활성화 프로필 초기화한다.
@@ -160,7 +160,7 @@ function init_wait(){
     }
 }
 
-/* profile_wait 함수 : 레이블링 끝내고 대기하는 플레이어 someone을 대기 프로필에 추가로 띄워주는 함수 */
+/*[ds] profile_wait 함수 : 레이블링 끝내고 대기하는 플레이어 someone을 대기 프로필에 추가로 띄워주는 함수 */
 function profile_wait(someone){
     wait_queue.push(someone);                   //[ny]wait_queue에 파라미터 someone을 추가한다.
     for (var i=0; i<4; i++){
@@ -180,8 +180,7 @@ function profile_wait(someone){
     check_wait(); // [ny]전원 레이블링 완료했는지 체크한다.
 }
 
-/* timer_start 함수 : top에 타이머 추가 */
-
+/*[ds] timer_start 함수 : top에 타이머 추가 */
 function timer_start(time) {
     document.getElementById('labeling_top').innerHTML = '<div id="timers"><img src="/static/images/stopwatch.png" width="28px" height="28px">&emsp;<div id="Bar"><div id="timeBar"></div></div></div><div id="digit"></div></div>';
     var digit = document.getElementById("digit");
@@ -214,7 +213,7 @@ function timer_start(time) {
     }
 }
 
-/* timer_start2 함수 : find_bot 페이지의 타이머, 나중에 timer_start랑 parameter 조정해서 합치기 [ah] 사용하는 함수인지 확인하기!!*/
+/*[ds] timer_start2 함수 : find_bot 페이지의 타이머, 나중에 timer_start랑 parameter 조정해서 합치기*/
 function timer_start2(position, time) {
     document.getElementById(position).innerHTML = '<div id="timers2"><img src="/static/images/stopwatch.png" width="22px" height="22px">&emsp;<div id="Bar2"><div id="timeBar2"></div></div></div>';
     var timebar = document.getElementById("timeBar2");
@@ -235,7 +234,7 @@ function timer_start2(position, time) {
     }
 }
 
-/* 알림 함수 : 알림란에 메세지 띄움 */
+/*[ds] 알림 함수 : 알림란에 메세지 띄움 */
 function notice(message, page_name, font_size) {
     var notice_area = document.getElementById(page_name+"_top");
     var img_src = '/static/images/alert.png';
@@ -278,7 +277,7 @@ function notice(message, page_name, font_size) {
 
 }
 
-/* layout1 함수 : title component 조정함. */
+/*[ds] layout1 함수 : title component 조정함. */
 function layout1(param, page_name) {
     switch (param) {
         case 'round_title':
@@ -326,7 +325,7 @@ function layout1(param, page_name) {
     }
 }
 
-/* layout2 함수 : top component 조정함. */
+/* [ds]layout2 함수 : top component 조정함. */
 function layout2(param) { 
     switch(param) {
         case 'click_ready':
@@ -341,6 +340,7 @@ function layout2(param) {
     }
 }
 
+//[ds]
 function change_fontsize(param){
     this_component = document.getElementById(param);
 
@@ -352,7 +352,7 @@ function change_fontsize(param){
 
 }
 
-/*layout3 함수 : content 하단에서 instruction 주는 레이아웃.*/
+/*[ds]layout3 함수 : content 하단에서 instruction 주는 레이아웃.*/
 function layout3(mode){
     var caption = document.getElementById('game_caption');
 

@@ -64,7 +64,7 @@ var lobby_flag = false;
 var gamestart = false;
 var hint = [];
 
-/* round_init 함수 : 각round 진행에 필요한 모든 변수 초기화, 랜덤화 */
+/*[ds] round_init 함수 : 각round 진행에 필요한 모든 변수 초기화, 랜덤화 */
 function round_init() {
     /*
     -레벨에 맞춰 모두에게 랜덤으로 이미지 할당
@@ -90,14 +90,14 @@ function round_init() {
 
 }
 
-/* init 함수 : 게임 시작 전 필요한 정보 초기화 - 4라운드에 해당하는 감정들 셔플*/
+/* [ds]init 함수 : 게임 시작 전 필요한 정보 초기화 - 4라운드에 해당하는 감정들 셔플*/
 function init(){
     let emotions = range(0,8);
     shuffle(emotions);
     emotion_order = emotions.slice(0,4);
 }
 
-/* sync_userlist 함수 : 소켓에게 userlist를 db에서 비동기적으로 가져오도록 요청. */
+/*[ds] sync_userlist 함수 : 소켓에게 userlist를 db에서 비동기적으로 가져오도록 요청. */
 function sync_userlist() {
     var data = {                //[ny]consumer에 전달할 데이터들
         'username': username,
@@ -108,7 +108,7 @@ function sync_userlist() {
     }));
 }
 
-/* sync_selection 함수 : 소켓에게 {누가(username), 어떤 레이블링(labeling_set)} 했는지 알림. */
+/*[ds] sync_selection 함수 : 소켓에게 {누가(username), 어떤 레이블링(labeling_set)} 했는지 알림. */
 function sync_selection() {
     var data = {
         'username': username,
@@ -120,7 +120,7 @@ function sync_selection() {
     }));
 }
 
-/* init_labels 함수 : 소켓으로부터 전달받은 {username, labeling_set} 정보를 전역변수에 넣어서 
+/* [ds]init_labels 함수 : 소켓으로부터 전달받은 {username, labeling_set} 정보를 전역변수에 넣어서 
 모든 유저들이 어떤 레이블링을 했는지 초기화한다. */
 function init_labels(someone, labeling_set){
     for(var i=0; i<4; i++){
@@ -131,7 +131,7 @@ function init_labels(someone, labeling_set){
     }
 }
 
-/*init_bot_labels 함수 : 봇이 넘긴 prediction 값을 가지고 레이블링 value가 0인지 1인지 판단한다.*/
+/*[ds]init_bot_labels 함수 : 봇이 넘긴 prediction 값을 가지고 레이블링 value가 0인지 1인지 판단한다.*/
 function init_bot_labels() {
     let cur_emo_idx = parseInt(current_emotion);
     console.log("this is emotion label: ");
@@ -152,14 +152,14 @@ function init_bot_labels() {
 }
 
 
-/* arrayRemove 함수 : 배열의 값을 지우는 함수(js에 따로 없음) */
+/*[ds] arrayRemove 함수 : 배열의 값을 지우는 함수(js에 따로 없음) */
 function arrayRemove(arr, value) {
     return arr.filter((e) => {
         return e != value;
     });
 }
 
-/* ready_btn_handler 함수 : 준비버튼/준비취소버튼 누를 때 이벤트 담당하는 함수. */
+/*[ds] ready_btn_handler 함수 : 준비버튼/준비취소버튼 누를 때 이벤트 담당하는 함수. */
 function ready_btn_handler() {
     ready_btn = document.getElementById('ready_btn');
     var idx = 0;
@@ -207,7 +207,7 @@ function ready_btn_handler() {
     };
 }
 
-/* 메인 함수 : round 진행 전체 로직 작성 */
+/*[ds] 메인 함수 : round 진행 전체 로직 작성 */
 function round() {
     switch ('block') {
         case document.getElementById('lobby').style.display:
@@ -220,7 +220,7 @@ function round() {
             break;
 
         case document.getElementById('round_start').style.display:
-            round_init(); // 이미지 배정받고, 봇 예측. 
+            round_init(); // [ny]이미지 배정받고, 봇 예측. 
             gamestart = true;
             var emotion_names = document.querySelectorAll('.emotion_name'); 
             full_emoji_src = '/static/images/' + emoji_src[current_emotion];
@@ -326,7 +326,7 @@ function round() {
 round();
 
 
-/* show 함수 : 이미지 4개 띄움 */
+/* [ds]show 함수 : 이미지 4개 띄움 */
 function show(name, choice, page_name) {
     var color = [];
     for (var i=0; i<4; i++) {
@@ -359,7 +359,7 @@ function show(name, choice, page_name) {
 }
 
 
-/*labeling 함수 : 이미지 선택 여부에 따라 bool타입으로 저장 */
+/*[ds]labeling 함수 : 이미지 선택 여부에 따라 bool타입으로 저장 */
 function labeling() {
     if (dropouts.includes(username)){
         go_next_page('labeling', 'waiting');
@@ -434,7 +434,7 @@ function labeling() {
     console.log("[ny]저의 레이블링()은 무사히 완료되었습니다!!!");
 }
 
-/* shuffle 함수 : 리스트의 요소들을 섞는 함수, anonymous_order에서 사용 */
+/* [ds]shuffle 함수 : 리스트의 요소들을 섞는 함수, anonymous_order에서 사용 */
 function shuffle(a) {
     var j, x, i;
     for (i = a.length; i; i -= 1) {
@@ -446,7 +446,7 @@ function shuffle(a) {
     return a;
 }
 
-/* range 함수 : start부터 count 만큼 숫자를 1씩 늘려가며 리스트를 만듦, anonymous_order에서 사용 */
+/* [ds]range 함수 : start부터 count 만큼 숫자를 1씩 늘려가며 리스트를 만듦, anonymous_order에서 사용 */
 function range(start, count) {
     let array = [];
     while (count--) {
@@ -455,7 +455,7 @@ function range(start, count) {
     return array;
 }
 
-/* anonymous_order 함수 : 익명 1, 2, 3, 4에 해당하는 이름을 지정하는 딕셔너리를 만들어 소켓과 통신한다. */
+/* [ds]anonymous_order 함수 : 익명 1, 2, 3, 4에 해당하는 이름을 지정하는 딕셔너리를 만들어 소켓과 통신한다. */
 function anonymous_order() {
     var survivor_range = range(1, survivor_count + 1);
     shuffle(survivor_range);
@@ -476,7 +476,7 @@ function anonymous_order() {
     }));
 }
 
-/* glance_content(order)함수 : 라벨링의 결과를 HTML 화면에 보여주는 함수 */
+/*[ds] glance_content(order)함수 : 라벨링의 결과를 HTML 화면에 보여주는 함수 */
 function glance_content(order) {
     var bottom_area = document.getElementById('glance_bottom');
     var real_order = order + 1;
@@ -522,7 +522,7 @@ function glance_content(order) {
 
 }
 
-/* glance 함수 : 시간 간격을 가자고 glance_content를 호출 */
+/*[ds] glance 함수 : 시간 간격을 가자고 glance_content를 호출 */
 function glance() {
     document.getElementById('glance_top').innerHTML = "";
     document.getElementById('glance_content').innerHTML = '<br><br><br><br><br><div class="loading"><div></div></div>';
@@ -543,7 +543,7 @@ function glance() {
     }, 3700);
 }
 
-/* set_anonymous_btn 함수 : find_bot 페이지에서 익명 버튼을 자신 빼고 보여주는 함수 */
+/* [ds]set_anonymous_btn 함수 : find_bot 페이지에서 익명 버튼을 자신 빼고 보여주는 함수 */
 function set_anonymous_btn() {
     for (var i of Object.keys(anonymous_user)) {
         if (anonymous_user[i] == username) {
@@ -563,7 +563,7 @@ function set_anonymous_btn() {
 var i_ga = '';
 var eun_neun = '';
 var eul_leul = '';
-/* set_postposition 함수: 은/는/이/가/을/를 을 익명에 맞추어 지정하는 함수 [ah]나중에 지우기*/
+/*[ds] set_postposition 함수: 은/는/이/가/을/를 을 익명에 맞추어 지정하는 함수 [ah]나중에 지우기*/
 function set_postposition(target_number) {
     if (target_number == 1 || target_number == 3) {
         i_ga = '이';
@@ -576,7 +576,7 @@ function set_postposition(target_number) {
     }
 }
 
-/* game_end 함수: 게임이 끝났는 지 확인하는 함수 */
+/*[ds] game_end 함수: 게임이 끝났는 지 확인하는 함수 */
 function game_end() {
     //    봇을 찾으면 win
     //    사람이 두명 남으면 lose
@@ -646,7 +646,7 @@ function game_end() {
 }
 
 
-/* button_pointing_or_pass 함수: 증거를 지목하고 socket에 보내는 함수 */
+/* [ds]button_pointing_or_pass 함수: 증거를 지목하고 socket에 보내는 함수 */
 function button_pointing_or_pass() {
     var pointed_img_set = [];
     set_anonymous_btn();
@@ -758,7 +758,7 @@ function button_pointing_or_pass() {
     //[ny]15초 지나면 elect 창으로
 }
 
-/* next_point_out_bot 함수: 다음 익명 유저가 봇을 지목할 수 있도록 넘기는 함수 */
+/* [ds]next_point_out_bot 함수: 다음 익명 유저가 봇을 지목할 수 있도록 넘기는 함수 */
 function next_point_out_bot() {
     current_selector_idx = (current_selector_idx+1)%survivor_count;
     current_selector = select_order[current_selector_idx];
@@ -807,7 +807,7 @@ function next_point_out_bot() {
     }
 }
 
-/* vacate_find_bot_content 함수: find_bot 페이지의 content를 비우는 함수 */
+/* [ds]vacate_find_bot_content 함수: find_bot 페이지의 content를 비우는 함수 */
 function vacate_find_bot_content() {
     document.getElementById('anonymous_btns').innerHTML = "";
     document.getElementById('find_bot_img_container').innerHTML = "";
@@ -819,7 +819,7 @@ function vacate_find_bot_content() {
 
 
 
-/* elect 함수: 투표한 뒤 결과를 socket에 전송하는 함수 */
+/* [ds]elect 함수: 투표한 뒤 결과를 socket에 전송하는 함수 */
 function elect(current_selector, current_chosen) {
     // [ny]익명 버튼 보여주기
     vacate_find_bot_content();
@@ -935,7 +935,7 @@ var elect_result = {
     'thumb_down': 0,    // [ny]봇은 무조건 투표
 };
 
-/* show_elect_result 함수: 투표 결과를 보여주는 함수 */
+/*[ds] show_elect_result 함수: 투표 결과를 보여주는 함수 */
 function show_elect_result(current_chosen) {
     document.getElementById('find_bot_timer').innerHTML = "";
     document.getElementById('point_pass_yes_no_area').innerHTML = "";
@@ -995,7 +995,7 @@ function show_elect_result(current_chosen) {
 
 }
 
-/* point_pass 함수: 봇 지목을 포기했을 때 작동되는 함수 */
+/*[ds] point_pass 함수: 봇 지목을 포기했을 때 작동되는 함수 */
 function point_pass() {
     layout3('pass');
 
@@ -1034,7 +1034,7 @@ function point_pass() {
 }
 
 
-/*bot_define_last_mention 함수 : 봇이 최후의 변론 증거로 제출할 우선순위 src를 세팅해두는 함수 */
+/*[ds]bot_define_last_mention 함수 : 봇이 최후의 변론 증거로 제출할 우선순위 src를 세팅해두는 함수 */
 function bot_define_last_mention() {
     /*
     #로직# (@@ 테스트 시 봇이 최후의 변론 너무 못하면 규칙 수정하자. )
@@ -1071,7 +1071,7 @@ function bot_last_mention() {
 
 }
 
-/* ready_last_mention 함수: 최후의 변론 전, 증거와 최후의 변론 사진을 setting하는 함수 */
+/*[ds] ready_last_mention 함수: 최후의 변론 전, 증거와 최후의 변론 사진을 setting하는 함수 */
 function ready_last_mention(current_chosen) {
     var color = 'yellow';
     var ox = '';
@@ -1174,7 +1174,7 @@ function ready_last_mention(current_chosen) {
 
 }
 
-/* last_mention 함수: 최후의 변론을 진행하는 함수 */
+/* [ds]last_mention 함수: 최후의 변론을 진행하는 함수 */
 function last_mention(current_chosen, last_mention_idx) {
     var who = "";
     var color = 'yellow';
@@ -1272,7 +1272,7 @@ function last_mention(current_chosen, last_mention_idx) {
 
 var dropouts = [];
 
-/* show_identity 함수 : 정체를 밝히고 봇 or 사람 죽음에 대해 처리해주는 함수 */
+/* [ds]show_identity 함수 : 정체를 밝히고 봇 or 사람 죽음에 대해 처리해주는 함수 */
 function show_identity(whom){
     notice("The identify of anony "+pointed_info['target_num']+" is..!", 'find_bot', '15px');
     /*[ny]뒤지기(aim이 이리저리 움직이는 거예요) 애니메이션*/
@@ -1342,7 +1342,8 @@ function show_identity(whom){
         }
     },4000);
 }
-/* history 함수 : history 세션 노출시키는 함수 */
+
+/* [ds]history 함수 : history 세션 노출시키는 함수 */
 function history(){
     notice('Helpful Tips!', 'find_bot', '20px');
 
@@ -1362,7 +1363,7 @@ function history(){
 }
 
 
-/* no_mention 함수 : 최후의 변론을 하지 않았을 경우, 곧바로 호출되는 함수 */
+/*[ds] no_mention 함수 : 최후의 변론을 하지 않았을 경우, 곧바로 호출되는 함수 */
 function no_mention(whom) {
     if(username == current_chosen){
         var data = {
@@ -1428,12 +1429,12 @@ function no_mention(whom) {
     }, 4000);
 }
 
-/* getKeyByValue 함수 : dictionary의 value 값으로 key를 찾는 함수 */
+/* [ds]getKeyByValue 함수 : dictionary의 value 값으로 key를 찾는 함수 */
 function getKeyByValue(obj, value) {
     return Object.keys(obj).find(key => obj[key] === value);
 }
 
-/* go_next_round 함수: 다음 라운드로 넘어가게 하는 함수 */
+/* [ds]go_next_round 함수: 다음 라운드로 넘어가게 하는 함수 */
 function go_next_round() {
     document.getElementById('find_bot_img_container').innerHTML = '<br><br><br><br><br><br><span class="next_span">Next</span><span class="space"></span><span class="next_span">Round!</span>';
     document.getElementById('find_bot_img_container').innerHTML += '<br><span class="next_span_info"><span class="space"></span>earned points▼</span>';
@@ -1503,7 +1504,7 @@ function monitor() {
     document.getElementById('point_pass_yes_no_area').innerHTML = "<div id='watching'>Deactivated..</div>"
 }
 
-/* point_out_bot 함수 : find_bot 페이지에서 봇 찾는 함수 */
+/* [ds]point_out_bot 함수 : find_bot 페이지에서 봇 찾는 함수 */
 function point_out_bot(current_selector) {
 
     var flag = false;
