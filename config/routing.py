@@ -1,7 +1,7 @@
 """
 routing for websocket
 
-game/routing.py에 ws_urlpatterns 정의.
+[ny]game/routing.py에 ws_urlpatterns 정의.
 (config/urls.py - game/urls.py 의 관계)
 
 """
@@ -12,7 +12,7 @@ import game.routing
 
 
 application = ProtocolTypeRouter({
-    'websocket': AllowedHostsOriginValidator( #websocket session 구분 위함.
+    'websocket': AllowedHostsOriginValidator( #[ny]websocket session 구분 위함.
         SessionMiddlewareStack(
         URLRouter(
             game.routing.ws_urlpatterns

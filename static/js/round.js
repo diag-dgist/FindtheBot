@@ -1,6 +1,6 @@
 /*
 ####################################################################
-게임 매 라운드 진행을 담당하는 함수들을 모아둔 js 파일.
+[ny]게임 매 라운드 진행을 담당하는 함수들을 모아둔 js 파일.
 
 *round_init()
 *init ()
@@ -20,38 +20,38 @@
 */
 
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("로드됨")
+    console.log("[ny]로드됨")
 });
 
-var memlist = [];   // 게임 시작시 최종적으로 채널에 존재하는 4명의 멤버들
-var survivors = []; // 현재 생존 플레이어들을 저장할 변수
-var select_order = [];  // 플레이어들이 어떤 순서로 봇 지목 순서 가질지 랜덤화한 후 order 저장할 변수
-var all_image_set = {}; // 전체 플레이어들이 할당받은 image set 저장할 변수
+var memlist = [];               // [ny]게임 시작시 최종적으로 채널에 존재하는 4명의 멤버들
+var survivors = [];             // [ny]현재 생존 플레이어들을 저장할 변수
+var select_order = [];          // [ny]플레이어들이 어떤 순서로 봇 지목 순서 가질지 랜덤화한 후 order 저장할 변수
+var all_image_set = {};         // [ny]전체 플레이어들이 할당받은 image set 저장할 변수
 var all_imageid_set = {};
-var all_labeling_set = {};  // 전체 플레이어들이 초기에 선택한 labeling set 저장할 변수
-var my_labeling = [0,0,0,0];   //나의 레이블링
-var my_images = []; //나의 이미지 @@요거 초기화 어디서 할까
-var survivor_count = 0; // 생존 플레이서 수
-var wait_queue = [];    // 레이블링 완료 후 대기 중인 플레이어들을 저장할 변수
+var all_labeling_set = {};      // [ny]전체 플레이어들이 초기에 선택한 labeling set 저장할 변수
+var my_labeling = [0,0,0,0];    // [ny]나의 레이블링
+var my_images = [];             // [ny]나의 이미지 @@요거 초기화 어디서 할까
+var survivor_count = 0;         // [ny]생존 플레이서 수
+var wait_queue = [];            // [ny]레이블링 완료 후 대기 중인 플레이어들을 저장할 변수
 
-var anonymous_user = {};    // 익명 유저 순서, dict
+var anonymous_user = {};        // [ny]익명 유저 순서, dict
 
-var current_round = 1;  //현재 라운드 번호
-var current_selector = '';  // 현재 고르는 사람(find_bot에서 사용)
-var current_selector_idx = 0; // 현재 고르는 사람의 select_order에서의 index
-var current_chosen = '';    // 현재 지목당한 사람
+var current_round = 1;          // [ny]현재 라운드 번호
+var current_selector = '';      // [ny]현재 고르는 사람(find_bot에서 사용)
+var current_selector_idx = 0;   // [ny]현재 고르는 사람의 select_order에서의 index
+var current_chosen = '';        // [ny]현재 지목당한 사람
 
 var current_emotion = 'what is the target emotion in this round?';
-var emotion_order = []; //각 라운드 별 감정 순서
+var emotion_order = [];         // [ny]각 라운드 별 감정 순서
 var emotion_name = { "0": "Neutral", "1": "Happy", "2": "Sad", "3": "Surprise", "4": "Fear", "5": "Disgust", "6": "Anger", "7": "Contempt" };
 var emoji_src = { "0": "neutral.png", "1": "happy.png", "2": "sad.png", "3": "surprise.png", "4": "fear.png", "5": "disgust.png", "6": "angry.png", "7": "contempt.png" };//이모지 로고
 var emotion_instruction = {"0": "Showing no emotion or mood", "1": "feelings of joy, contentment, or excitement","2": "feelings of sorrow, unhappiness or distress","3": "a sudden emotional state to an unexpected event",
 "4": "an emotional state to a perceived threat or danger","5": "an emotional state of revulsion or strong disapproval","6": "an emotional state of displeasure or hostility","7": "feelings of disdain or lack of respect for someone"};
-var bot_prediction = []; //봇의 예측값 담을 리스트
-var priorities = {}; //봇이 최후의 변론 시 제출할 이미지 순서
+var bot_prediction = [];        // [ny]봇의 예측값 담을 리스트
+var priorities = {};            // [ny]봇이 최후의 변론 시 제출할 이미지 순서
 
-var bot_death = false;//봇 사망여부 판별하는 전역변수
-var money_table = [16, 8, 4, 2]; //라운드 별 획득 money
+var bot_death = false;          // [ny]봇 사망여부 판별하는 전역변수
+var money_table = [16, 8, 4, 2];// [ny]라운드 별 획득 money
 var pass_flag = {};
 
 var pointed_info = {
@@ -84,7 +84,7 @@ function round_init() {
         }));
     }
 
-    for(var i=0; i<survivors.length; i++){ // pass_flag 초기화. 
+    for(var i=0; i<survivors.length; i++){  // [ny]pass_flag 초기화. 
         pass_flag[survivors[i]] = 'false';
     }
 
@@ -99,11 +99,11 @@ function init(){
 
 /* sync_userlist 함수 : 소켓에게 userlist를 db에서 비동기적으로 가져오도록 요청. */
 function sync_userlist() {
-    var data = {//consumer에 전달할 데이터들
+    var data = {                //[ny]consumer에 전달할 데이터들
         'username': username,
         'command': 'userlist'
     }
-    socket.send(JSON.stringify({//json포맷으로 데이터를 consumer에 전송.
+    socket.send(JSON.stringify({//[ny]json포맷으로 데이터를 consumer에 전송.
         data
     }));
 }
@@ -124,7 +124,7 @@ function sync_selection() {
 모든 유저들이 어떤 레이블링을 했는지 초기화한다. */
 function init_labels(someone, labeling_set){
     for(var i=0; i<4; i++){
-        if(survivors[i] == someone){//@@survivor
+        if(survivors[i] == someone){        // survivor
             all_labeling_set[someone] = labeling_set;
             break;
         }
@@ -152,7 +152,6 @@ function init_bot_labels() {
 }
 
 
-
 /* arrayRemove 함수 : 배열의 값을 지우는 함수(js에 따로 없음) */
 function arrayRemove(arr, value) {
     return arr.filter((e) => {
@@ -166,9 +165,9 @@ function ready_btn_handler() {
     var idx = 0;
 
     ready_btn.onclick = function () {
-        if (ready_btn.textContent == "READY") { //(1) 준비 버튼 누른다면,
+        if (ready_btn.textContent == "READY") {     // [ny](1) 준비 버튼 누른다면,
             layout2('wait_ready');
-            ready_btn.classList.remove('blink'); //깜빡임 효과 제거
+            ready_btn.classList.remove('blink');    // [ny]깜빡임 효과 제거
             ready_btn.textContent = "UNREADY";
             ready_btn.style.backgroundColor = '#D8D8D8';
             for (var i=0; i<4; i++){
@@ -179,7 +178,7 @@ function ready_btn_handler() {
                 }
             }
 
-            /*준비 눌렀다고 소켓에 쏴주기*/
+            /*[ny]준비 눌렀다고 소켓에 쏴주기*/
             var data = {
                 'username': username,
                 'command': 'btn_ready'
@@ -188,15 +187,15 @@ function ready_btn_handler() {
                 data
             }));
         }
-        else { //(2) 준비취소 버튼 누른다면,
+        else {                                      // [ny](2) 준비취소 버튼 누른다면,
             layout2('click_ready');
-            ready_btn.classList.add('blink'); //깜빡임 효과 추가
+            ready_btn.classList.add('blink');       // [ny]깜빡임 효과 추가
             ready_btn.textContent = "READY";
             ready_btn.style.backgroundColor = '#EBC604';
 
             profiles[idx].style.backgroundColor = "#dddddd";
 
-            /*준비취소 눌렀다고 소켓에 쏴주기*/
+            /*[ny]준비취소 눌렀다고 소켓에 쏴주기*/
             var data = {
                 'username': username,
                 'command': 'btn_notready'
@@ -212,12 +211,12 @@ function ready_btn_handler() {
 function round() {
     switch ('block') {
         case document.getElementById('lobby').style.display:
-            //입장하자마자 sync_userlist() 동작함.
-            init(); // 라운드 별 감정 랜덤화. 
-            init_profile(); //채널에 입장한 유저들 프로필 띄워줌.
+            //[ny]입장하자마자 sync_userlist() 동작함.
+            init();         // [ny]라운드 별 감정 랜덤화. 
+            init_profile(); // [ny]채널에 입장한 유저들 프로필 띄워줌.
             layout1('click_ready', 'lobby');
             layout2('click_ready');
-            ready_btn_handler(); //준비/준비취소 버튼 동작 구현.
+            ready_btn_handler(); // [ny]준비/준비취소 버튼 동작 구현.
             break;
 
         case document.getElementById('round_start').style.display:
@@ -225,19 +224,19 @@ function round() {
             gamestart = true;
             var emotion_names = document.querySelectorAll('.emotion_name'); 
             full_emoji_src = '/static/images/' + emoji_src[current_emotion];
-            document.getElementById('large_emotion').src = full_emoji_src; //이모지 로고 띄워주기.
+            document.getElementById('large_emotion').src = full_emoji_src;      // [ny]이모지 로고 띄워주기.
             emotion_names.forEach((each_emotion_area) => { each_emotion_area.innerText = emotion_name[current_emotion]; });
             document.getElementById('emotion_instruction').innerText = emotion_instruction[current_emotion];
 
             if(current_round == 4){
-                document.getElementById('rn').innerText = "최종";
+                document.getElementById('rn').innerText = "[ny]최종";
             }
             else{
                 document.getElementById('rn').innerText = current_round;
             }
             
             setTimeout(() => {
-                go_next_page('round_start', 'labeling'); //5초 후 labeling 시작.
+                go_next_page('round_start', 'labeling'); // [ny]5초 후 labeling 시작.
                 round();
             }, 5000);
             break;
@@ -245,8 +244,8 @@ function round() {
         case document.getElementById('labeling').style.display:
             document.getElementById('emotion_name').innerText = emotion_name[current_emotion];
             layout1('round_title', 'labeling');
-            layout2('timer'); //타이머 작동.
-            labeling(); //레이블링 구현.
+            layout2('timer');   // [ny]타이머 작동.
+            labeling();         // [ny]레이블링 구현.
             break;
 
         case document.getElementById('waiting').style.display:  
@@ -256,7 +255,7 @@ function round() {
 
             layout1('round_title', 'waiting');  
             layout2('wait_labeling');
-            init_wait(); //레이블링 완료 후 대기중인 유저 프로필 활성화 시켜둠.
+            init_wait(); // [ny]레이블링 완료 후 대기중인 유저 프로필 활성화 시켜둠.
             break;
 
         case document.getElementById('after_selection').style.display:
@@ -264,10 +263,10 @@ function round() {
                 document.getElementById('game_body').classList.remove('turn_grey');
             }
             document.getElementById('game_body').classList.add("turn_black");
-            sync_selection(); // 유저들의 레이블링 결과를 소켓 통해 동기화.
+            sync_selection();               // [ny]유저들의 레이블링 결과를 소켓 통해 동기화.
 
             console.log("these are all labelings!");
-            console.log(all_labeling_set); //모두의 예측값 잘 들어왔는지 테스트. 
+            console.log(all_labeling_set);  // [ny]모두의 예측값 잘 들어왔는지 테스트. 
 
             setTimeout(() => {
                 go_next_page('after_selection', 'glance'); //3초 후 glance page로 전환.
@@ -280,7 +279,7 @@ function round() {
             if(dropouts.includes(username)){
                 document.getElementById('game_body').classList.add('turn_grey');
             }
-            anonymous_order();  // 익명 순서가 정해짐.
+            anonymous_order();  // [ny]익명 순서가 정해짐.
             layout1('round_title', 'glance');
             glance();
             break;
@@ -299,7 +298,7 @@ function round() {
                 chip_area.innerHTML += '<img src="/static/images/chips.png" style="height:20px;"><img src="/static/images/chips.png" style="height:20px;">';
             }
 
-            if(username == memlist[0]){ // db업데이트를 위해 labeling set, image set 정보 전달
+            if(username == memlist[0]){ // [ny]db업데이트를 위해 labeling set, image set 정보 전달
                 gameusers = [...survivors];
                 gameusers.push('봇');
 
@@ -317,7 +316,7 @@ function round() {
             }
             
             layout1('round_title', 'find_bot');
-            notice(current_round + '라운드를 시작합니다.<br>현재 생존자는 ' + survivor_count + '명입니다.', 'find_bot', 'small');
+            notice(current_round + '[ny]라운드를 시작합니다.<br>현재 생존자는 ' + survivor_count + '명입니다.', 'find_bot', 'small');
             current_selector = select_order[current_selector_idx];
             point_out_bot(current_selector);
             break;
@@ -336,7 +335,7 @@ function show(name, choice, page_name) {
       } else if(choice[i]==1) {
         color[i] = '#72DF4B';
       }
-      else if(choice[i]==2){ //증거제출 되었던 이미지라면,
+      else if(choice[i]==2){ //[ny]증거제출 되었던 이미지라면,
         color[i] = '#BBBBBB';
       }
     }
@@ -382,7 +381,7 @@ function labeling() {
         <span><div class="label_images" id="image_4"><img class="img" src="'+my_images[3]+'" loading="lazy" onerror="img_error()"></div></span>';
     
         timer_start(10);
-        //사진 클릭시 색 변환
+        //[ny]사진 클릭시 색 변환
         var done_flag = false; 
         image_btn = document.querySelectorAll('.label_images');
         image_btn.forEach((target) => target.addEventListener("click", () => {
@@ -410,7 +409,7 @@ function labeling() {
         
     
         function update_labeling() {
-            if (done_flag == false) { //labeling_done_btn과 setTimeout에 의해 update_labeling() 중복 실행 방지.
+            if (done_flag == false) {                   // [ny]labeling_done_btn과 setTimeout에 의해 update_labeling() 중복 실행 방지.
                 for (var i = 1; i < 5; i++) {
                     img = document.getElementById('image_' + i);
                     if (img.classList.contains("labeled")) {
@@ -418,7 +417,7 @@ function labeling() {
                     }
                 }
     
-                /*레이블링 끝났다고 소켓에 쏴주기*/ //완료버튼을 눌렀든, 10초가 지났든.
+                /*[ny]레이블링 끝났다고 소켓에 쏴주기*/    //[ny]완료버튼을 눌렀든, 10초가 지났든.
                 var data = {
                     'username' : username,
                     'command' : 'btn_labeling'
@@ -432,7 +431,7 @@ function labeling() {
             }
         }   
     }
-    console.log("저의 레이블링()은 무사히 완료되었습니다!!!");
+    console.log("[ny]저의 레이블링()은 무사히 완료되었습니다!!!");
 }
 
 /* shuffle 함수 : 리스트의 요소들을 섞는 함수, anonymous_order에서 사용 */
@@ -464,9 +463,9 @@ function anonymous_order() {
     survivor_plus_bot.push('봇');
     var i = 1;
     for (var anony_num of survivor_range) {
-        anonymous_user[i++] = survivor_plus_bot[anony_num-1];//@@survivors
+        anonymous_user[i++] = survivor_plus_bot[anony_num-1];                   // survivors
     }
-    select_order = shuffle(arrayRemove(Object.values(anonymous_user), '봇')); // select order 다시 shuffle
+    select_order = shuffle(arrayRemove(Object.values(anonymous_user), '봇'));   // [ny]select order 다시 shuffle
     var data = {
         'command': 'arrange_anonymous_order',
         'select_order': select_order,
@@ -550,7 +549,7 @@ function set_anonymous_btn() {
         if (anonymous_user[i] == username) {
             document.getElementById('anonymous_btns').innerHTML += '<button class="anonymous" id="anonymous_' + i + '" type="button">Me</button>'
         }
-        else if(dropouts.includes(anonymous_user[i])){ //관전자라면
+        else if(dropouts.includes(anonymous_user[i])){      // [ny]관전자라면
             document.getElementById('anonymous_btns').innerHTML += '<button class="anonymous" id="anonymous_' + i + '" type="button">Out</button>'
             document.getElementById('anonymous_'+i).disabled = true;
 
@@ -564,7 +563,7 @@ function set_anonymous_btn() {
 var i_ga = '';
 var eun_neun = '';
 var eul_leul = '';
-/* set_postposition 함수: 은/는/이/가/을/를 을 익명에 맞추어 지정하는 함수 */
+/* set_postposition 함수: 은/는/이/가/을/를 을 익명에 맞추어 지정하는 함수 [ah]나중에 지우기*/
 function set_postposition(target_number) {
     if (target_number == 1 || target_number == 3) {
         i_ga = '이';
@@ -583,7 +582,7 @@ function game_end() {
     //    사람이 두명 남으면 lose
     //    5라운드까지 가면 lose(current_round == 5)
     //    나머진 continue
-    if(bot_death == true){ //승리
+    if(bot_death == true){          // [ny]승리
         if (memlist[0] == username) {
 
             gameusers = [...survivors];
@@ -601,7 +600,7 @@ function game_end() {
         }
         return 'win';
     }
-    else if(survivor_count == 2){ //패배
+    else if(survivor_count == 2){   // [ny]패배
         if (memlist[0] == username) {
 
             gameusers = [...survivors];
@@ -620,7 +619,7 @@ function game_end() {
 
         return 'lose';
     }
-    else if(current_round == 5){ //패배
+    else if(current_round == 5){    // [ny]패배
 
         if (memlist[0] == username) {
 
@@ -654,30 +653,29 @@ function button_pointing_or_pass() {
     timer_start2('find_bot_timer', 15);
     var anonymous_btn = document.querySelectorAll('.anonymous');
     var target_num = 'who?';
-    var idxNum;
     var anonymous_keys = Object.keys(anonymous_user);
     var my_anony_idx = anonymous_keys.find((key)=>anonymous_user[key]==username);
     document.getElementById('anonymous_'+my_anony_idx).disabled = true;
 
     
-    anonymous_btn.forEach((target) => target.addEventListener("click", () => {  // 익명 버튼이 클릭되면
+    anonymous_btn.forEach((target) => target.addEventListener("click", () => {  // [ny]익명 버튼이 클릭되면
         anonymous_btn.forEach((each_btn) => {
-            each_btn.classList.remove("clicked");   // clicked라는 클래스를 추가 -> css를 설정해 둠
+            each_btn.classList.remove("clicked");           // [ny]clicked라는 클래스를 추가 -> css를 설정해 둠
         });
         target.classList.add("clicked");
 
-        target_num = target.id.charAt(target.id.length - 1); //익 1,2,3,4,5 중 하나
+        target_num = target.id.charAt(target.id.length - 1); //[ny]익 1,2,3,4,5 중 하나
         idxNum = parseInt(target_num);
         var target_name = anonymous_user[target_num];
         var target_choice = all_labeling_set[target_name];
 
         show(target_name, target_choice, 'find_bot');
 
-        //이미지 골라진 거에 clicked 클래스 추가 
+        //[ny]이미지 골라진 거에 clicked 클래스 추가 
         pointed_img_set = document.querySelectorAll('.point_images');
 
         var idx=0;
-        pointed_img_set.forEach((pointed)=>{ //증거 제출 된 전적 있는 이미지는 선택 못함.
+        pointed_img_set.forEach((pointed)=>{ //[ny]증거 제출 된 전적 있는 이미지는 선택 못함.
             if(target_choice[idx]==2){
                 pointed.classList.add("nonepoint");
             }
@@ -702,8 +700,8 @@ function button_pointing_or_pass() {
     <button type="button" class="point_pass_yes_no" id="pass">Pass</button>';
 
 
-    var pointed_img_idx;    // 0,1,2,3 중 하나
-    document.getElementById('point_done').addEventListener("click", () => { // 확인 버튼 눌렀을 때
+    var pointed_img_idx;    // [ny]0,1,2,3 중 하나
+    document.getElementById('point_done').addEventListener("click", () => { //[ny] 확인 버튼 눌렀을 때
         var point_flag = false;
         try {
             for (var i = 0; i < 4; i++) {
@@ -733,11 +731,11 @@ function button_pointing_or_pass() {
             }
 
         } catch {
-            console.log("지목 후 확인 필수!!")
+            console.log("[ny]지목 후 확인 필수!!")
         }
     });
 
-    document.getElementById('pass').addEventListener("click", () => { // 패스 버튼 눌렀을 때
+    document.getElementById('pass').addEventListener("click", () => { // [ny]패스 버튼 눌렀을 때
         document.getElementById('pass').style.backgroundColor = "#EBC604";
         clearTimeout(go_elect);
         document.getElementById('pass').disabled = true;
@@ -757,12 +755,12 @@ function button_pointing_or_pass() {
         document.getElementById('pass').click();
     }, 16000);
 
-    //15초 지나면 elect 창으로
+    //[ny]15초 지나면 elect 창으로
 }
 
 /* next_point_out_bot 함수: 다음 익명 유저가 봇을 지목할 수 있도록 넘기는 함수 */
 function next_point_out_bot() {
-    current_selector_idx = (current_selector_idx+1)%survivor_count; //@@@ pass count 수정.
+    current_selector_idx = (current_selector_idx+1)%survivor_count;
     current_selector = select_order[current_selector_idx];
     console.log("next point out bot!!!!!!!");
     while(true){
@@ -786,14 +784,14 @@ function next_point_out_bot() {
     var get_money = 0;
     var get_exp = 200;
     var flag_die = false;
-    var lose_reason = 'die'; // exceed OR die
+    var lose_reason = 'die';        // [ny]exceed OR die
     var now_round = current_round;
-    /*게임 종료 검사*/
+    /*[ny]게임 종료 검사*/
     if (res == 'win') {
         gamestart = false;
         get_money = money_table[current_round - 1];
         if (dropouts.includes(username)) {
-            get_money /= 2; // 관전자는 절반 획득.
+            get_money /= 2;         // [ny]관전자는 절반 획득.
             flag_die = true;
         }
 
@@ -823,25 +821,24 @@ function vacate_find_bot_content() {
 
 /* elect 함수: 투표한 뒤 결과를 socket에 전송하는 함수 */
 function elect(current_selector, current_chosen) {
-    // 익명 버튼 보여주기
+    // [ny]익명 버튼 보여주기
     vacate_find_bot_content();
     set_anonymous_btn();
     if (current_chosen != username) {
         document.getElementById('anonymous_' + pointed_info['target_num']).style.backgroundColor = 'rgb(235, 198, 4)';
     }
-    // // 여기까지 왔으면 pass_count 하나 늘리기
-    // pass_count++; //@@@ 투표는 패스로 치지 않음.
+    // pass_count++; //[ny]투표는 패스로 치지 않음.
 
-    // 증거 보여주는 함수
+    // [ny]증거 보여주는 함수
     function show_evidence(towhom) {
-        if (towhom == current_chosen) { //@@@ 여기 question_markk.png 넣었음.
+        if (towhom == current_chosen) {
             document.getElementById('find_bot_img_container').innerHTML = "\
             <br><br>Evidence<br><div class='point_images' style='margin-top: 5px;'>\
             <img src='/static/images/question_mark.png' style='width:100px;'><br></div>"; 
 
         } else {
             var color = 'yellow';
-            var ox = '선택or미선택';
+            var ox = '';
             if (all_labeling_set[current_chosen][pointed_info['pointed_img_idx']] == 0) {
                 color = 'red';
                 ox = 'Non-selected';
@@ -855,53 +852,45 @@ function elect(current_selector, current_chosen) {
         }
     }
     layout3('pointed');
-    if (current_chosen == username) {           // 내가 지목 당함
-        // notice('익명의 플레이어가 당신을 봇으로 지목했습니다', 'find_bot','small');
+    if (current_chosen == username) {           // [ny]내가 지목 당함
         document.getElementById('game_body').classList.add("warnings");
         document.getElementById('find_bot').classList.add("warnings");
         show_evidence(current_chosen);
         setTimeout(() => {
             notice('Voting', 'find_bot', '20px');
             layout3('wait_elect');
-            // notice('당신에 대한 투표를 진행 중입니다..', 'find_bot', 'small'); //@@멘트 수정해보자
         }, 2000);
     }
-    else if (current_selector == username) {    // 선택한 사람이 나일때
-        // notice('당신은 익명 ' + pointed_info['target_num'] + eul_leul + ' 봇으로 지목했습니다!', 'find_bot', 'small');
+    else if (current_selector == username) {    // [ny]선택한 사람이 나일때
         show_evidence(current_selector);
 
         setTimeout(() => {
             notice('Voting', 'find_bot', '20px');
             layout3('wait_elect');
-            // notice('익명 ' + pointed_info['target_num'] + i_ga + ' 봇으로 의심되는지<br>투표 중입니다..', 'find_bot', 'small');
         }, 2000);
     }
-    else if (dropouts.includes(username)) { // 관전 모드
+    else if (dropouts.includes(username)) {     // [ny]관전 모드
         monitor();
-        // notice('익명의 플레이어가 익명 ' + pointed_info['target_num'] + eul_leul + ' 봇으로 지목했습니다!', 'find_bot', 'small');
         show_evidence(current_selector);
 
         setTimeout(() => {
             notice('Voting', 'find_bot', '20px');
             layout3('wait_elect');            
-            // notice('익명 ' + pointed_info['target_num'] + i_ga + ' 봇으로 의심되는지<br>투표 중입니다..', 'find_bot', 'small');
         }, 2000);
     }
-    else {                                      // 내가 지목 당하지 않음
-        // notice('익명의 플레이어가 익명 ' + pointed_info['target_num'] + eul_leul + ' 봇으로 지목했습니다!', 'find_bot', 'small');
+    else {                                      // [ny]내가 지목 당하지 않음
         show_evidence("I'll vote");
 
         setTimeout(() => {
             var is_thumb_up = 0;
             var is_thumb_down = 0;
-            // notice('익명 ' + pointed_info['target_num'] + i_ga + ' 봇으로 의심받는 중입니다.<br>살릴지 죽일지 투표해주세요!', 'find_bot', 'small');
             notice('Voting', 'find_bot', '20px');
             layout3('elect');
             timer_start2('find_bot_timer', 5);
             document.getElementById('point_pass_yes_no_area').innerHTML = '\
             <button type="button" class="point_pass_yes_no" id="thumb_up"><img src="/static/images/profile.png" style="width:35px;"></button>\
             <button type="button" class="point_pass_yes_no voted" id="thumb_down"><img src="/static/images/bot.png" style="width:36px;"></button>';
-            //thumbs down은 default로 투표 되어 있음.
+            //[ny]thumbs down은 default로 투표 되어 있음.
 
             var thumbs = document.querySelectorAll('.point_pass_yes_no');
             var btn_name = "";
@@ -943,7 +932,7 @@ function elect(current_selector, current_chosen) {
 
 var elect_result = {
     'thumb_up': 0,
-    'thumb_down': 0,    // 봇은 무조건 투표
+    'thumb_down': 0,    // [ny]봇은 무조건 투표
 };
 
 /* show_elect_result 함수: 투표 결과를 보여주는 함수 */
@@ -968,7 +957,7 @@ function show_elect_result(current_chosen) {
         elect_word = 'maybe man';
     }
 
-    if (elect_death_flag == true) { //투표 결과 : 죽이자 라면,
+    if (elect_death_flag == true) { //[ny]투표 결과 : 죽이자 라면,
         thumb_backcolor[1] = '#EBC604';
         document.getElementById('find_bot_img_container').innerHTML += '<p style="font-size:12px;">A majority suspects <b style="color:#EBC604;">it\'s a bot.</p>';
         
@@ -979,7 +968,7 @@ function show_elect_result(current_chosen) {
         thumb_backcolor[0] = '#EBC604';
         document.getElementById('find_bot_img_container').innerHTML += '<p style="font-size:12px;">Avoided suspicion.</p>';
         setTimeout(() => {
-            all_labeling_set[current_chosen][pointed_info['pointed_img_idx']] = 2; //증거제출되었던 건은 2로 변경.
+            all_labeling_set[current_chosen][pointed_info['pointed_img_idx']] = 2; //[ny]증거제출되었던 건은 2로 변경.
             next_point_out_bot();
         }, 2000);
     }
@@ -1014,7 +1003,7 @@ function point_pass() {
     var line1 = document.getElementById('find_bot_img_container');
     var line1Spans = document.querySelectorAll('.pass_span');
 
-    // pass 애니메이션
+    // [ny]pass 애니메이션
     TweenMax.set([line1], {
         x: -15
     })
@@ -1054,12 +1043,12 @@ function bot_define_last_mention() {
     */
     let cur_emo_idx = parseInt(current_emotion);
     abs = {};
-    for (var i = 0; i < 4; i++) { // |(봇의 예측값-0.4)| 를 딕셔너리에 넣어준다. 
+    for (var i = 0; i < 4; i++) {   // [ny]|(봇의 예측값-0.4)| 를 딕셔너리에 넣어준다. 
         diff = Math.abs(bot_prediction[i][cur_emo_idx] - 0.4);
         abs[i] = diff;
     }
 
-    /*dictionary abs sorting*/ //절대값 차 작을수록 잘못 레이블링할 가능성 높음.
+    /*dictionary abs sorting*/      //[ny]절대값 차 작을수록 잘못 레이블링할 가능성 높음.
     priorities = Object.entries(abs).sort((a, b) => a[1] - b[1]);
     console.log("this is sorted dictionary!");
     console.log(priorities);
@@ -1067,13 +1056,13 @@ function bot_define_last_mention() {
 
 /*bot_last_mention 함수: 봇이 최후의 변론 증거 맞추는 함수 */
 function bot_last_mention() {
-    /*우선순위부터 return 하기.*/
+    /*[ny]우선순위부터 return 하기.*/
     for (let element of priorities) {
-        idx = element[0]; //n번째 이미지
-        if (all_labeling_set['봇'][idx] == 2) { //이미 증거 제출 되었었다면,
+        idx = element[0];   //[ny]n번째 이미지
+        if (all_labeling_set['봇'][idx] == 2) { //[ny]이미 증거 제출 되었었다면,
             continue;
         }
-        else { //증거 제출된 적 없었다면,
+        else {                                  //[ny]증거 제출된 적 없었다면,
             console.log("봇이 증거를 제출했습니다.");
             console.log(all_image_set['봇'][idx]);
             return idx;
@@ -1085,7 +1074,7 @@ function bot_last_mention() {
 /* ready_last_mention 함수: 최후의 변론 전, 증거와 최후의 변론 사진을 setting하는 함수 */
 function ready_last_mention(current_chosen) {
     var color = 'yellow';
-    var ox = '선택or미선택';
+    var ox = '';
     if (all_labeling_set[current_chosen][pointed_info['pointed_img_idx']] == 0) {
         color = 'red';
         ox = 'Non-selected';
@@ -1105,14 +1094,13 @@ function ready_last_mention(current_chosen) {
     if (current_chosen == username) {
         document.getElementById('game_body').classList.add("turn_red");
         document.getElementById('find_bot').classList.add("turn_red");
-        // notice('최후의 변론을 준비하세요!', 'find_bot', 'small');
         
         show(current_chosen, all_labeling_set[current_chosen], 'find_bot');
         pointed_img_set = document.querySelectorAll('.point_images');
         timer_start2('find_bot_timer', 6);
         layout3('ready_last_mention');
         var idx=0;
-        pointed_img_set.forEach((pointed)=>{ //증거 제출 된 전적 있는 이미지는 선택 못함.
+        pointed_img_set.forEach((pointed)=>{                //[ny]증거 제출 된 전적 있는 이미지는 선택 못함.
             if(all_labeling_set[current_chosen][idx]==2){
                 pointed.classList.add("nonepoint");
             }
@@ -1174,16 +1162,14 @@ function ready_last_mention(current_chosen) {
             socket.send(JSON.stringify({
                 data
             }));
-        }, 7000); //5초 뒤에 봇이 변론 제출.
-        // notice('익명 ' + pointed_info['target_num'] + i_ga + ' 최후의 변론을<br>준비 중입니다.', 'find_bot', 'small');
+        }, 7000);   // [ny] 5초 뒤에 봇이 변론 제출.
         layout3('wait_last_mention');
-        document.getElementById('last_mention_evidence').src = all_image_set[current_chosen][pointed_info['pointed_img_idx']];  // 증거 src
+        document.getElementById('last_mention_evidence').src = all_image_set[current_chosen][pointed_info['pointed_img_idx']];  // [ny]증거 src
 
     }
     else {
-        // notice('익명 ' + pointed_info['target_num'] + i_ga + ' 최후의 변론을<br>준비 중입니다.', 'find_bot', 'small');
         layout3('wait_last_mention');
-        document.getElementById('last_mention_evidence').src = all_image_set[current_chosen][pointed_info['pointed_img_idx']];  // 증거 src
+        document.getElementById('last_mention_evidence').src = all_image_set[current_chosen][pointed_info['pointed_img_idx']];  // [ny]증거 src
     }
 
 }
@@ -1192,7 +1178,7 @@ function ready_last_mention(current_chosen) {
 function last_mention(current_chosen, last_mention_idx) {
     var who = "";
     var color = 'yellow';
-    layout3("last_mention"); //최후의 변론을 진행합니다!
+    layout3("last_mention"); //[ny]최후의 변론을 진행합니다!
     if (all_labeling_set[current_chosen][pointed_info['pointed_img_idx']] == 0) {
         color = 'red';
     } else {
@@ -1200,7 +1186,6 @@ function last_mention(current_chosen, last_mention_idx) {
     }
     if (current_chosen == username) {
         document.getElementById('find_bot_timer').innerHTML = "";
-        // notice("최후의 변론을 진행합니다.", 'find_bot', 'small');
         document.getElementById('find_bot_img_container').innerHTML = "<br><br>\
         <div class='to_compare'>Evidence<br><div class='point_images' style='margin-top: 5px; background-color: "+ color + ";'>\
         <img id='last_mention_evidence' src='/static/images/question_mark.png' style='width:100px;'></div></div>\
@@ -1211,13 +1196,11 @@ function last_mention(current_chosen, last_mention_idx) {
         
     } else {
         who = "Anonymous " + pointed_info['target_num'] + " ";
-        // notice(who + " 최후의 변론을 진행합니다.", 'find_bot', 'small');
-        document.getElementById('last_mention_image').classList.add("blink"); // @@@
-        // document.getElementById('last_mention_image').src = all_image_set[current_chosen][last_mention_idx];  // 최후의 변론에서 지목당한 사람이 고른 src
+        document.getElementById('last_mention_image').classList.add("blink");
     }
     setTimeout(() => {
-        document.getElementById('last_mention_image').src = all_image_set[current_chosen][last_mention_idx];  // 최후의 변론에서 지목당한 사람이 고른 src
-        document.getElementById('last_mention_evidence').src = all_image_set[current_chosen][pointed_info['pointed_img_idx']];   // 이건 아직 지목 당한 사람이 evidence 사진이 없어서 추가
+        document.getElementById('last_mention_image').src = all_image_set[current_chosen][last_mention_idx];                    // [ny]최후의 변론에서 지목당한 사람이 고른 src
+        document.getElementById('last_mention_evidence').src = all_image_set[current_chosen][pointed_info['pointed_img_idx']];  // [ny]이건 아직 지목 당한 사람이 evidence 사진이 없어서 추가
         
         var img_evidence = document.getElementById('last_mention_evidence');
         var img_last_mention = document.getElementById('last_mention_image');
@@ -1225,9 +1208,6 @@ function last_mention(current_chosen, last_mention_idx) {
         var last_mention_success = 'fail';
         console.log("img_evidence_src: ", img_evidence);
         console.log("img_last_mention_src: ", img_evidence);
-        
-        var img_evidence_id = img_evidence.src.split('/').pop().split('.')[0]; //정답 증거
-        var img_last_mention_id = img_last_mention.src.split('/').pop().split('.')[0]; //지목자가 고른 이미지
 
         if(img_evidence.src == img_last_mention.src){
             last_mention_success = 'success';
@@ -1237,7 +1217,6 @@ function last_mention(current_chosen, last_mention_idx) {
         }
 
         if (img_evidence.src == img_last_mention.src) {
-            // notice(who + " 최후의 변론을 성공하여<br>무사히 생존했습니다!", 'find_bot', 'small');
             layout3('last_mention_success');
             document.getElementById('evidence_img_id').style.backgroundColor = '#EBC604';
             if(current_chosen != username){
@@ -1253,7 +1232,6 @@ function last_mention(current_chosen, last_mention_idx) {
                 next_point_out_bot();
             }, 3000);
         } else {
-            // notice(who + " 최후의 변론에 실패하여<br>죽게 되었습니다.", "find_bot", 'small');
             layout3('last_mention_fail');
             document.getElementById('last_mention_image').classList.add('grayscale');
 
@@ -1267,9 +1245,7 @@ function last_mention(current_chosen, last_mention_idx) {
                     data
                 }));
             }
-
             if(current_chosen != username){
-
                 document.getElementById('last_mention_image').classList.remove('blink');
                 document.getElementById('last_correct').style.color = 'red';
                 document.getElementById('last_correct').innerHTML = 'Mismatch';
@@ -1290,7 +1266,7 @@ function last_mention(current_chosen, last_mention_idx) {
                 }
             }, 3000);
         }
-        all_labeling_set[current_chosen][pointed_info['pointed_img_idx']] = 2; //증거제출 끝났으므로 2로 변경
+        all_labeling_set[current_chosen][pointed_info['pointed_img_idx']] = 2; // [ny]증거제출 끝났으므로 2로 변경
     }, 3000);
 }
 
@@ -1299,7 +1275,7 @@ var dropouts = [];
 /* show_identity 함수 : 정체를 밝히고 봇 or 사람 죽음에 대해 처리해주는 함수 */
 function show_identity(whom){
     notice("The identify of anony "+pointed_info['target_num']+" is..!", 'find_bot', '15px');
-    /*뒤지기 애니메이션*/
+    /*[ny]뒤지기(aim이 이리저리 움직이는 거예요) 애니메이션*/
     document.getElementById('find_bot_img_container').innerHTML = '<img src="/static/images/aim.png" class="detect" style="width: 100px;"></img>';
     
     var identity_result = 'man';
@@ -1308,17 +1284,17 @@ function show_identity(whom){
     }
     
     setTimeout(()=>{
-        if(whom == '봇'){ //정체가 봇이라면,
+        if(whom == '봇'){   //[ny]정체가 봇이라면,
             notice("<span style='color:;color:rgb(255, 51, 5)'>the bot!<span>", 'find_bot', '20px');
             bot_death = true;
-            /*봇 죽음*/
+            /*[ny]봇 죽음*/
             document.getElementById('find_bot_img_container').innerHTML = "<br><br><br><br><br><img src='/static/images/pixel_bot.png' class='blink' style='width:90px'>";
             /**/
             setTimeout(() => {
                 next_point_out_bot();
-            },3500); //they_found_bot 코드 옮겨옴.
+            },3500);        //[ny]they_found_bot 코드 옮겨옴.
         }
-        else{ // 정체가 사람이라면,
+        else{               //[ny]정체가 사람이라면,
             survivors = arrayRemove(survivors, whom);
             select_order = arrayRemove(select_order, whom);
             survivor_count = survivors.length;
@@ -1330,7 +1306,7 @@ function show_identity(whom){
                 pass_count--;
                 pass_flag[whom] = 'die';
             }
-            /*사람 죽음*/
+            /*[ny]사람 죽음*/
             document.getElementById('find_bot_img_container').innerHTML = "<br><br><br><br><br><br><br><br><img id = 'rip_id' src='/static/images/rip.png'>";
             document.getElementById('find_bot_img_container').innerHTML += "<img src='/static/images/ghost.png' id = 'ghost_id' class ='ghost'>"; //margin-left: -50px;
             /**/
@@ -1354,7 +1330,7 @@ function show_identity(whom){
             },4000);
 
             setTimeout(() => {
-                if(whom == username){ //죽은 사람이 나라면,
+                if(whom == username){   //[ny]죽은 사람이 나라면,
                     document.getElementById('game_body').classList.add('turn_grey');
                     document.getElementById('round_start').classList.add('turn_grey');
                     document.getElementById('waiting').classList.add('turn_grey');
@@ -1370,44 +1346,17 @@ function show_identity(whom){
 function history(){
     notice('Helpful Tips!', 'find_bot', '20px');
 
-    if(hint.length == 1){ // 전문가의 응답
+    if(hint.length == 1){   // [ny]전문가의 응답
         document.getElementById('find_bot_img_container').innerHTML = "<br><br>표정 전문가의 의견: <b style='color:#2E64FE;'>" + emotion_name[hint[0]] + "</b>";
         document.getElementById('find_bot_img_container').innerHTML += "<br><br><span><img id='preview' src='"+ all_image_set[anonymous_user[pointed_info['target_num']]][pointed_info['pointed_img_idx']]+"'\
          style='width:120px;'></span>";
         layout3('history_expert');
     }
-    else{ // 플레이어들의 응답
+    else{                   // [ny]플레이어들의 응답
         document.getElementById('find_bot_img_container').innerHTML = "<br><span><img id='preview' src='"+ all_image_set[anonymous_user[pointed_info['target_num']]][pointed_info['pointed_img_idx']]+"'\
          style='width:70px;'></span>";
         document.getElementById('find_bot_img_container').innerHTML += "<canvas id='myChart'></canvas>";
         layout3('history_player');
-        var ctx = document.getElementById('myChart').getContext('2d');
-
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Neu','Hap','Sad','Sur','Fea', 'Dis', 'Ang', 'Con'],  // x축을 emotion의 인덱스로 설정
-                datasets: [{
-                    label: 'Emotion',
-                    data: hint,  // y축을 emotion의 값으로 설정
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',  // 막대 색상 설정
-                    borderColor: 'rgba(75, 192, 192, 1)',  // 막대 테두리 색상 설정
-                    borderWidth: 1  // 막대 테두리 두께 설정
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,  // y축이 0에서 시작하도록 설정
-                        ticks: {
-                            callback: function (value, index, values) {
-                              return value + '%'; // '%' 기호 추가
-                            }
-                          }
-                    }
-                }
-            }
-        });
     }
 
 }
@@ -1426,7 +1375,7 @@ function no_mention(whom) {
         }));
     }
     notice("The identify of anony " + pointed_info['target_num'] + " is..!", 'find_bot', '15px');
-    /*뒤지기 애니메이션*/
+    /*[ny]뒤지기 애니메이션*/
     document.getElementById('find_bot_img_container').innerHTML = '<img src="/static/images/aim.png" class="detect" style="width: 100px;"></img>';
 
     setTimeout(() => {
@@ -1442,7 +1391,7 @@ function no_mention(whom) {
             pass_flag[whom] = 'die';
         }
 
-        /*사람 죽음*/
+        /*[ny]사람 죽음*/
         document.getElementById('find_bot_img_container').innerHTML = "<br><br><br><br><br><br><br><br><img id = 'rip_id' src='/static/images/rip.png'>";
         document.getElementById('find_bot_img_container').innerHTML += "<img src='/static/images/ghost.png' id = 'ghost_id' class ='ghost'>"; //margin-left: -50px;
         /**/
@@ -1467,7 +1416,7 @@ function no_mention(whom) {
         },4000);
         
         setTimeout(() => {
-            if (whom == username) { //죽은 사람이 나라면,
+            if (whom == username) {     //[ny]죽은 사람이 나라면,
                 document.getElementById('game_body').classList.add('turn_grey');
                 document.getElementById('round_start').classList.add('turn_grey');
                 document.getElementById('waiting').classList.add('turn_grey');
@@ -1486,14 +1435,13 @@ function getKeyByValue(obj, value) {
 
 /* go_next_round 함수: 다음 라운드로 넘어가게 하는 함수 */
 function go_next_round() {
-    // document.getElementById('find_bot_img_container').innerHTML = '<br><br><br><br><br><br><span class="next_span_info">난이도▲</span>';
     document.getElementById('find_bot_img_container').innerHTML = '<br><br><br><br><br><br><span class="next_span">Next</span><span class="space"></span><span class="next_span">Round!</span>';
     document.getElementById('find_bot_img_container').innerHTML += '<br><span class="next_span_info"><span class="space"></span>earned points▼</span>';
 
     var line1 = document.getElementById('find_bot_img_container');
     var line1Spans = document.querySelectorAll('.next_span');
 
-        // pass 애니메이션
+        // [ny]pass 애니메이션
         TweenMax.set([line1], {
             x: -15
         })
@@ -1519,9 +1467,8 @@ function go_next_round() {
         )
 
     setTimeout(() => {
-        // 여기가 약간 init 느낌
+        // [ny]init 역할
         vacate_find_bot_content();
-        //current_round++;
         current_emotion = emotion_order[current_round-1];
         pointed_info = {
             'selector': '',
@@ -1542,8 +1489,6 @@ function go_next_round() {
         waits.forEach((each_box) => {
             each_box.style.backgroundColor = '#dddddd';
         });
-
-
         elect_result['thumb_up'] = 0;
         elect_result['thumb_down'] = 0;
         //=============================
@@ -1565,8 +1510,8 @@ function point_out_bot(current_selector) {
     if (pass_count >= survivor_count) {
         current_round++;
         var res = game_end();
-        if(res == 'lose'){ // 라운드 초과해서 질 경우. 
-            /*4라운드 넘어가서 졌을 경우!*/
+        if(res == 'lose'){ // [ny]라운드 초과해서 질 경우. 
+            /*[ny]4라운드 넘어가서 졌을 경우!*/
             gamestart = false;
             var get_money = 0;
             var get_exp = 200;
@@ -1577,7 +1522,6 @@ function point_out_bot(current_selector) {
             window.location.href = '/game/ending/' + '?username=' + username + "&result=" + res + "&money=" + get_money + "&exp=" + get_exp +"&flag=" + flag_die + "&rsn=" + lose_reason + "&rnd=" + now_round;
         }
         else if (res != 'lose' && flag == false) {
-            // notice("모두가 봇 지목을 완료하였으므로, 다음 라운드로 넘어갑니다.", 'find_bot', 'small');
             notice("<span style='color:rgb(7, 102, 7);'>"+(current_round-1)+"End of Round</span>",'find_bot','20px');
             layout3('vacate');
 
@@ -1603,8 +1547,7 @@ function point_out_bot(current_selector) {
         flag = true;
     }
     else {
-        console.log('지금의 지목자는!!!!! ', current_selector, ' 입니다!!!!');
-        // notice('지목', 'find_bot', '20px'); // @@@ 지목
+        console.log('[ny]지금의 지목자는 ', current_selector, ' 입니다!!!!');
 
         if (current_selector == username) {
             notice('Pointing out', 'find_bot', '20px'); 
@@ -1614,7 +1557,7 @@ function point_out_bot(current_selector) {
             notice('Browse!', 'find_bot', '17px'); 
             layout3('wait_pointing');
 
-            /*기다리는 동안 훑어보기*/
+            /*[ny]기다리는 동안 훑어보기*/
             set_anonymous_btn();
             var target_num = 'who?';
             var anonymous_btn = document.querySelectorAll('.anonymous');

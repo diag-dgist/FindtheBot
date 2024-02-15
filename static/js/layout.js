@@ -1,6 +1,6 @@
 /*
 ####################################################################
-front-end 및 layout component 조정을 담당하는 함수들을 모아둔 js 파일.
+[ny]front-end 및 layout component 조정을 담당하는 함수들을 모아둔 js 파일.
 
 *go_next_page()
 *check_ready()
@@ -55,7 +55,7 @@ function check_wait(){
     }
 
     if (all_wait == true){
-        setTimeout(function(){ //3.5초 뒤 화면 전환
+        setTimeout(function(){      //[ny]3.5초 뒤 화면 전환
             go_next_page('waiting','after_selection');
             round();
         }, 3500);
@@ -73,7 +73,7 @@ function change_to_ready(someone){
         }
     }
 
-    check_ready(); //전원 준비 완료 했는지 체크.
+    check_ready();      //[ny]전원 준비 완료 했는지 체크.
 }
 
 /* change_to_notready 함수 : 준비취소버튼을 누른 someone의 프로필 비활성화. */
@@ -112,7 +112,7 @@ function profile_out(someone){
         if(profiles_name[i].innerText == someone){
             profiles_name[i].innerHTML = '&nbsp;';
             profiles_info[i].innerHTML = '&nbsp;';
-            profiles[i].style.backgroundColor = "#dddddd";//someone이 퇴장할 때 프로필도 비활성화.
+            profiles[i].style.backgroundColor = "#dddddd";  //[ny]someone이 퇴장할 때 프로필도 비활성화.
             break;
         }
     }
@@ -121,11 +121,8 @@ function profile_out(someone){
 /*입장 전부터 채널에 접속해있던 플레이어들의 프로필과 준비상태를 띄워주는 함수*/ 
 function init_profile(){
     var rank_color = ['black', 'red', 'orange','green', 'black', 'black'];
-    console.log("@@@전체 players는 ", players);
     for (var i=0; i<players.length; i++){
-        console.log("@@@init_profile실행: players 누구: ", players[i]);
         if(players[i] != username){
-            console.log("@@if문 걸림!!! 누구:", players[i]);
             profiles_name[i].innerText = players[i];
             if(Object.keys(rankings).includes(players[i])){
                 var my_rank = rankings[players[i]];
@@ -134,8 +131,8 @@ function init_profile(){
             else{
                 profiles_info[i].innerHTML = '&nbsp;';
             }
-            if(ready[i] == true){ //만약 이전에 접속한 플레이어가 준비 중이었다면,
-                profiles[i].style.backgroundColor = "#EBC604"; //프로필도 준비상태로 활성화.
+            if(ready[i] == true){                               //[ny]만약 이전에 접속한 플레이어가 준비 중이었다면,
+                profiles[i].style.backgroundColor = "#EBC604";  //[ny]프로필도 준비상태로 활성화.
             }
         }
     }
@@ -144,18 +141,18 @@ function init_profile(){
 /* init_wait 함수 : 이전부터 대기 중이었던 플레이어들의 프로필 전부 띄워주는 함수 */
 function init_wait(){
     for (var i=0; i<4; i++){
-        waits_name[i].innerText = memlist[i]; //memlist 순서대로 비활성화 프로필 초기화한다.
+        waits_name[i].innerText = memlist[i];   //[ny]memlist 순서대로 비활성화 프로필 초기화한다.
     }
     for (var i=0; i<4; i++){
         for (var j=0; j<4; j++){
-            if(waits_name[i].innerText == wait_queue[j]){ //만약 wait_queue에 있는 플레이어가 비활성화 프로필의 플레이어 이름과 같다면,
+            if(waits_name[i].innerText == wait_queue[j]){               //[ny]만약 wait_queue에 있는 플레이어가 비활성화 프로필의 플레이어 이름과 같다면,
                 if(dropouts.includes(wait_queue[j])){
                     waits[i].style.backgroundColor = '#B6B3B3';
-                    console.log("이 사람 죽어있어요");
+                    console.log("이 사람 죽어있어요  [ah]????없앨지 나중에 판단");
                     document.getElementById("tombstone_"+(i+1)).src = '/static/images/profile_grave.png';
                 }
                 else{
-                    waits[i].style.backgroundColor = "rgb(235, 198, 4)"; //프로필 활성화 (불켜주기)
+                    waits[i].style.backgroundColor = "rgb(235, 198, 4)"; //[ny]프로필 활성화 (불켜주기)
                 }
                 break;
             }
@@ -165,22 +162,22 @@ function init_wait(){
 
 /* profile_wait 함수 : 레이블링 끝내고 대기하는 플레이어 someone을 대기 프로필에 추가로 띄워주는 함수 */
 function profile_wait(someone){
-    wait_queue.push(someone); //wait_queue에 파라미터 someone을 추가한다.
+    wait_queue.push(someone);                   //[ny]wait_queue에 파라미터 someone을 추가한다.
     for (var i=0; i<4; i++){
-        if(waits_name[i].innerText == someone){ //비활성화 대기 프로필의 플레이어와 someone이 같은 사람이라면,
+        if(waits_name[i].innerText == someone){             //[ny]비활성화 대기 프로필의 플레이어와 someone이 같은 사람이라면,
             if(dropouts.includes(someone)){
                 console.log("이 사람 죽어있어요");
                 waits[i].style.backgroundColor = '#B6B3B3';
                 document.getElementById("tombstone_"+(i+1)).src = '/static/images/profile_grave.png';
             }
             else{
-                waits[i].style.backgroundColor = "#EBC604"; //프로필 활성화 (불켜주기)
+                waits[i].style.backgroundColor = "#EBC604"; //[ny]프로필 활성화 (불켜주기)
             }
             break;
         }
     }
 
-    check_wait(); // 전원 레이블링 완료했는지 체크한다.
+    check_wait(); // [ny]전원 레이블링 완료했는지 체크한다.
 }
 
 /* timer_start 함수 : top에 타이머 추가 */
@@ -194,7 +191,6 @@ function timer_start(time) {
     var full_width = 262;
     var now_width = 262;
     var interval = setInterval(frame, 1000); 
-
 
     function frame() {
         if (now_width <= 0) {
@@ -218,14 +214,13 @@ function timer_start(time) {
     }
 }
 
-/* timer_start2 함수 : find_bot 페이지의 타이머, 나중에 timer_start랑 parameter 조정해서 합치기*/
+/* timer_start2 함수 : find_bot 페이지의 타이머, 나중에 timer_start랑 parameter 조정해서 합치기 [ah] 사용하는 함수인지 확인하기!!*/
 function timer_start2(position, time) {
     document.getElementById(position).innerHTML = '<div id="timers2"><img src="/static/images/stopwatch.png" width="22px" height="22px">&emsp;<div id="Bar2"><div id="timeBar2"></div></div></div>';
     var timebar = document.getElementById("timeBar2");
     var full_time = time;
     var full_width = 180;
     var now_width = 180;
-    //여기 위까지만 if문으로 만들면 괜찮을 듯 ㅇㅇ
     var interval = setInterval(frame, 1000);
     function frame() {
         if (now_width <= 0) {
@@ -248,12 +243,12 @@ function notice(message, page_name, font_size) {
         img_src = '/static/images/magnifying_glass.png';
     }
 
-    if(message == 'Pointing out'){ // @@@ 지목하는 단계라면,
+    if(message == 'Pointing out'){ // [ny] 지목하는 단계라면,
         var add_msg = "▶pass : <b style='color:#2E64FE'>"+pass_count + "</b> / " + survivor_count;
         notice_area.innerHTML = "<div class='notice'>\
         <img id='alert' src= "+ img_src + ">\
         <div id='"+ page_name +"_box' class='notice_back shadow'>\<span style='font-size:" +font_size + "' class='channel_blink'>\
-        "+ message +"</span><span style='font-size:11px; color: grey;'>&nbsp;&nbsp;&nbsp;"+add_msg +"</span></div></div>"; //@@@ 몇 명 중 몇 명 지목인지. 
+        "+ message +"</span><span style='font-size:11px; color: grey;'>&nbsp;&nbsp;&nbsp;"+add_msg +"</span></div></div>"; //[ny] 몇 명 중 몇 명 지목인지. e.g. 1/4 
     }
     else if(message == 'Browse!'){
         var add_msg = "▶pass : <b style='color:#2E64FE'>"+pass_count + "</b> / " + survivor_count;
@@ -305,7 +300,7 @@ function layout1(param, page_name) {
             let people_numbers = document.createElement('th');
             people_numbers.innerHTML = survivor_count;
             let bot_number = document.createElement('th');
-            bot_number.innerHTML = "1"; // bot은 항상 1(0이면 게임 종료)
+            bot_number.innerHTML = "1"; // [ny]bot은 항상 1(0이면 게임 종료)
 
             row_1.appendChild(people_numbers);
             row_1.appendChild(bot_number);
@@ -371,13 +366,13 @@ function layout3(mode){
         case 'pointed':
             var cur_chosen = anonymous_user[pointed_info['target_num']];
             var cur_selector = pointed_info['selector'];
-            if(cur_chosen == username){ // 내가 지목당했을 경우
+            if(cur_chosen == username){         // [ny]내가 지목당했을 경우
                 caption.innerHTML = 'Someone has pointed you out as a bot.';
             }
-            else if(cur_selector == username){ //내가 지목자일 경우
+            else if(cur_selector == username){  // [ny]내가 지목자일 경우
                 caption.innerHTML = 'You have pointed out anony'+ pointed_info['target_num']+' as a bot.';
             }
-            else{ //내가 관전자 or 지목당하지 않았을 경우
+            else{                               // [ny]내가 관전자 or 지목당하지 않았을 경우
                 caption.innerHTML ='Someone has pointed out anony '+pointed_info['target_num']+' as a bot.';
             }
             break;
@@ -391,7 +386,7 @@ function layout3(mode){
             if(cur_chosen == username){
                 caption.innerHTML = 'Voting on you is underway..';
             }
-            else{ //내가 지목자거나 관전자일 경우
+            else{                               // [ny]내가 지목자거나 관전자일 경우
                 caption.innerHTML ='Voting on anony ' + pointed_info['target_num']+' is underway..';
             }
             break;
@@ -412,7 +407,6 @@ function layout3(mode){
             caption.innerHTML = 'Find the evidence and defend yourself!';
             break;
         case 'wait_last_mention':
-            // caption.display = 'block';
             caption.innerHTML = "Awaiting the last defense from anony "+ pointed_info['target_num'];
             caption.classList.add('caption_blink');
             break;
@@ -431,7 +425,7 @@ function layout3(mode){
             }
             break;
         case 'history':
-            caption.innerHTML = "표정 전문가는 이 이미지를 기쁨이라고 생각합니다.";
+            caption.innerHTML = "[ny]표정 전문가는 이 이미지를 기쁨이라고 생각합니다.";
             break;
         case 'last_mention_success':
             var current_chosen = anonymous_user[pointed_info['target_num']];
@@ -455,7 +449,7 @@ function layout3(mode){
             caption.innerHTML = "<b style='color:#2E64FE;'>The other players in Find the Bot! </b>have interpreted<br>the evidence in the following way.";
             break;
         case 'history_expert':
-            caption.innerHTML = "<b style='color:#2E64FE;'>표정 전문가 1인</b>은 방금 지목당한 표정을 이렇게 해석했습니다.";
+            caption.innerHTML = "<b style='color:#2E64FE;'>[ny]표정 전문가 1인</b>은 방금 지목당한 표정을 이렇게 해석했습니다.";
             break;
     }
 }

@@ -17,6 +17,6 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls), #admin에서 DB 관리 위함
-    path('game/', include('game.urls')), #game/ url은 전부 game/urls.py에서 관리
+    path('admin/', admin.site.urls),        #[ny]admin에서 DB 관리 위함
+    path('game/', include('game.urls')),    #[ny]game/ url은 전부 game/urls.py에서 관리
 ]

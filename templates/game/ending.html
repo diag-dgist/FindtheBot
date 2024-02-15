@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/animation.css">
     <style>
-        /* 아이콘 움직이는 애니메이션 */
+        /* [ny]아이콘 움직이는 애니메이션 */
         .result_ani {
             font-size: 5em;
             animation: motion 0.7s
-                /* 속도 */
+                /* [ny]속도 */
                 linear 0s
-                /* 처음부터 끝까지 일정 속도로 진행 */
+                /* [ny]처음부터 끝까지 일정 속도로 진행 */
                 infinite alternate;
             animation-delay: 1s;
         }
@@ -23,16 +23,14 @@
             0% {
                 margin-top: 0px;
             }
-    
-            /* 처음 위치 */
+            /* [ny]처음 위치 */
             100% {
                 margin-top: 10px;
             }
-    
-            /* 마지막 위치 */
+            /* [ny]마지막 위치 */
         }
     
-        /*progress bar animation*/
+        /* progress bar animation*/
         .row {
             padding: 4em 3em;
         }
@@ -130,7 +128,7 @@
 </head>
 
 <body style="background-color: white;">
-    <!--find robot page e.g. 익명의 누군가가 봇을 지목 중입니다.../투표해주세요/최후의 변론을 진행합니다/봇을 지목하세요-->
+    <!--[ny]find robot page e.g. 익명의 누군가가 봇을 지목 중입니다.../투표해주세요/최후의 변론을 진행합니다/봇을 지목하세요-->
     <div class="page" id="ending" style="background-color: white;">
         <div class="title" id="ending_title"></div>
         <div class="top" id="ending_top">
@@ -178,7 +176,7 @@
     var flag_die = '{{ flag_die }}';
     var now_round = '{{ now_round }}';
     var lose_reason = '{{ lose_reason }}';
-    var bonus_table = [8, 4, 2, 1]; //라운드별 보너스 배수
+    var bonus_table = [8, 4, 2, 1]; //[ny]라운드별 보너스 배수
 
     var exp_total = 200;
     var money_total = 0;
@@ -188,7 +186,7 @@
     document.getElementById('warning_image').style.display = 'none';
     document.getElementById('ending_bottom').style.display = "none";
 
-    if (result == 'win') { // 사람이 승리했다면,
+    if (result == 'win') { // [ny]사람이 승리했다면,
         document.getElementById('ending_content').innerHTML += "<div id='win' class='shadow'>VICTORY</div>";
         document.getElementById('ending_result').innerHTML = 'GAME WIN!';
         document.getElementById('result_icon').src = '/static/images/game_win.png';
@@ -205,9 +203,8 @@
             document.getElementById('rating_table').style.display = "block";
         }, 3500);
         document.getElementById('ending_reason').innerHTML = "<br>You have successfully found the bot!";
-        // document.getElementById('ending_bonus').innerHTML = '<br><br><br><img src="/static/images/gift.png" style="width: 15px;"> <b style="font-size:14px">' +now_round+ '</b> <b style="color:black">라운드 보너스 </b><b style="font-size:13px;">' + bonus_table[now_round-1]+' 배</b>';
 
-        /*보너스 주기*/
+        /*[ny]보너스 주기*/
         document.getElementById('exp_bonus').innerHTML = '<b style="font-size: 11px; color: #2E64FE"></b>';
         document.getElementById('money_bonus').innerHTML = '<b style="font-size: 11px; color: #2E64FE">X '+ bonus_table[now_round-1]+'</b>';
         money_total = 2 * bonus_table[now_round-1];
@@ -232,7 +229,7 @@
         }, 1000);
     }, 8000);
     }
-    else { //봇이 승리했다면,
+    else { //[ny]봇이 승리했다면,
         document.getElementById('ending_content').innerHTML += "<div id='lose' class='shadow'>LOSE</div>";
         document.getElementById('ending_result').innerHTML = 'GAME OVER';
         document.getElementById('result_icon').src = '/static/images/game_over.png';
@@ -273,10 +270,6 @@
         }, 1000);
     }, 4500);
     }
-    
-
-    
-
 
     function observer_penalty() {
         document.getElementById('money_bonus').classList.add("line_through");
