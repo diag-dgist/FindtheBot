@@ -1,5 +1,4 @@
 from django.db import models
-import json
 
 class Member(models.Model):
     '''Table 설명

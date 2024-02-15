@@ -6,11 +6,8 @@ views config.
 """
 from django.shortcuts import render,redirect
 from django.contrib import messages
-from .models import Member, Channel_1, Channel_2, Channel_3, Channel_4, Entries
+from .models import Member, Channel_1, Channel_2, Channel_3, Channel_4
 import json
-import subprocess
-import csv
-from django.http import HttpResponse
 
 def index(request):
     """

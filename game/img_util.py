@@ -5,9 +5,7 @@
 
 import numpy as np
 import random as rnd
-from PIL import Image
 from scipy import ndimage
-import game.rect_util
 
 def compute_norm_mat(base_width, base_height): 
     # normalization matrix used in image pre-processing 
