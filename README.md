@@ -123,3 +123,61 @@ http://localhost:8000/admin/
 <h3>👨‍👩‍👧‍👦 External server ver. </h3>
 
 <h4>Step 0. Configurations </h4>
+
+If you want to release the game online and allow external users to access and play it througth the game's URL on their own devices, please modify only the following section in the `/static/channels.js` after <ins>completing your web server setup</ins>.
+
+```javascript
+// Server:
+let socket = new WebSocket('wss://[your web server address]' + room_number+ '/' +username+ '/' +teamid );
+// Local:
+//let socket = new WebSocket('ws://127.0.0.1:8000/ws/game/' + room_number+ '/' +username+ '/' +teamid );
+```
+
+<h4>Step 1. Running the codes </h4>
+
+If the setup on the web server is complete as you did with the local version, run the code on the web server.
+
+```
+python manage.py runserver
+```
+
+Then, anyone can access the web-based game `Find the Bot!` through the web URL.
+
+<br><br><br>
+<h3>🗂️ Codes </h3>
+
+```
+config
+├── asgi.py        # ASGI configuration for asynchronous web app
+├── routing.py     # defining WebSocket routing configurations
+├── settings.py    # settings for the Django project
+├── urls.py        # maps URLs to Django views for HHTP requests
+└── wsgi.py        # WSGI configuration
+
+game
+├── migrations     #
+├── migrations     #
+├── migrations     #
+├── migrations     #
+├── migrations     #
+├── migrations     #
+├── migrations     #
+├── migrations     #
+├── migrations     # 
+└── package.py     #
+
+static
+├── font2img.py   # 
+└── package.py    #
+
+templates
+├── font2img.py   # 
+└── package.py    # 
+
+```
+
+<br><br><br>
+
+<h2>⭐ Acknowledgments</h2>
+
+Code derived and rehashed from:
