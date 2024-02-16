@@ -148,31 +148,37 @@ Then, anyone can access the web-based game `Find the Bot!` through the web URL.
 
 ```
 config
-├── asgi.py        # ASGI configuration for asynchronous web app
-├── routing.py     # defining WebSocket routing configurations
-├── settings.py    # settings for the Django project
-├── urls.py        # maps URLs to Django views for HHTP requests
-└── wsgi.py        # WSGI configuration
+├── asgi.py            # ASGI configuration for asynchronous web app
+├── routing.py         # defining WebSocket routing configurations
+├── settings.py        # settings for the Django project
+├── urls.py            # maps URLs to Django apps
+└── wsgi.py            # WSGI configuration
 
 game
-├── migrations     #
-├── migrations     #
-├── migrations     #
-├── migrations     #
-├── migrations     #
-├── migrations     #
-├── migrations     #
-├── migrations     #
-├── migrations     # 
-└── package.py     #
+├── migrations         # migration files for DB schema changes
+├── admin.py           # configuring the Django admin interface
+├── consumers.py       # handling Websocket connections 
+├── models.py          # defining the data models
+├── create_objects.py  # declaration of Entries model objects
+├── routing.py         # managing Websocket routes for consumer connections
+├── urls.py            # maps URLs to Django views
+├── views.py           # logic and control flow for handling requests
+└── _util.py           # files for running pretrained DCNN model (the bot)
 
 static
-├── font2img.py   # 
-└── package.py    #
+├── css                # css files for styling and animations
+├── images             # image files used in the game
+├── js                 # JavaScript files for client-side functionality
+├── bot.model          # a pretrained DCNN model for the bot 
+└── sampling_300.csv   # a CSV file for sampling facial expression images in the game
 
 templates
-├── font2img.py   # 
-└── package.py    # 
+├── index.html         # login page
+├── info.html          # user profile page
+├── tutorial.html      # tutorial page
+├── channels.html      # joining game channels page
+├── game.html          # main game playing page
+└── ending.html        # end of game page
 
 ```
 
@@ -181,3 +187,15 @@ templates
 <h2>⭐ Acknowledgments</h2>
 
 Code derived and rehashed from:
+* <a href="https://github.com/Microsoft/FERPlus">DCNN model</a> for facial emotion recognition (the bot)
+* In-the-wild facial emotion recognition image datasets (<a href="https://ieeexplore.ieee.org/abstract/document/8013713">AffectNet</a>, <a href="https://dl.acm.org/doi/abs/10.1145/2993148.2993165">FER+</a>)
+
+<br><br>
+🧀Special thanks to <a href="https://github.com/arter97">arter97</a> for assistance with server setup and development contributions. 
+
+<br><br><br>
+
+<h2>📞 Contact</h2>
+
+If you have any questions or would like to hear more about this project, please feel free to shoot us an eamil at: [diddustjs98@dgist.ac.kr](mailto:diddustjs98@dgist.ac.kr) !
+
