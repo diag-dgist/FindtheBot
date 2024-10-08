@@ -3,16 +3,16 @@
     <img src="https://github.com/yeonsunYang/FindtheBot/blob/main/mainlogo.gif?raw=true" width="400">
    <br> 
    This is the official repository for our <b>CHI 2024 paper</b>:<br>
-    <a href="">Find the Bot!: Gamifying Facial Emotion Recognition for Both Human Training and Machine Learning Data Collection </a><i>(To appear)</i>
+    <a href="https://dl.acm.org/doi/10.1145/3613904.3642880">Find the Bot!: Gamifying Facial Emotion Recognition for Both Human Training and Machine Learning Data Collection </a>
 </div><br><br><br>
 
    ```
-@inproceedings{yang2024findbot,
+@inproceedings{yang2024find,
   title={Find the Bot!: Gamifying Facial Emotion Recognition for Both Human Training and Machine Learning Data Collection},
-  author={Yang, Yeonsun and Shin, Ahyeon and Kim, Nayoung and Woo, Huidam and Chung, John Joon Young and Song, Jean Y.},
-  booktitle={Proceedings of the ACM/SIGCHI Conference on Human Factors in Computing Systems},
-  year={2024},
-  note={Conditionally accepted}
+  author={Yang, Yeonsun and Shin, Ahyeon and Kim, Nayoung and Woo, Huidam and Chung, John Joon Young and Song, Jean Y},
+  booktitle={Proceedings of the CHI Conference on Human Factors in Computing Systems},
+  pages={1--20},
+  year={2024}
 }
  ```
 <br>
@@ -198,4 +198,15 @@ Code derived and rehashed from:
 <h2>📞 Contact</h2>
 
 If you have any questions or would like to hear more about this project, please feel free to shoot us an eamil at: [diddustjs98@dgist.ac.kr](mailto:diddustjs98@dgist.ac.kr) or [ahyeon@dgist.ac.kr](mailto:ahyeon@dgist.ac.kr) !
+
+<br><br><br><hr>
+<p align="left">
+  <a href="https://eecs.dgist.ac.kr/eng/index.php#Home">
+    <img src="https://github.com/yeonsunYang/FindtheBot/blob/main/DGIST_EECS.png?raw=true" alt="DGIST EECS logo" width="130"/>
+  </a>
+   <span>&nbsp;&nbsp;</span>
+  <a href="https://diag.kr/">
+    <img src="https://github.com/yeonsunYang/FindtheBot/blob/main/DIAG.png?raw=true" alt="DIAG LAB logo" width="130"/>
+  </a>
+</p>
 
